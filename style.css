@@ -1,0 +1,340 @@
+@font-face {
+    font-family: 'DS-Digital';
+    src: local('DS-Digital'), url(digital.ttf) format('truetype');
+    unicode-range: U+0030—003A;
+}
+* {
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+body {
+    background: black;
+    color: aqua;
+    font-family: monospace;
+    font-size: 1.2em;
+    -webkit-user-select: none;
+    user-select: none;
+}
+header,
+article,
+aside,
+#gameTimer,
+#autoAimButton,
+#bulb {
+    padding: 10px;
+    position: fixed;
+    overflow: scroll;
+}
+#tuning,
+#autonomousSelection {
+    z-index: 100;
+}
+#main {
+    top: 0;
+    left: 50vw;
+    height: 100vh;
+    width: 35vw;
+}
+svg * {
+    stroke: aqua;
+    stroke-width: 2;
+    transform-origin: center;
+}
+#gyro {
+    width: 175px;
+    height: 175px;
+    border: solid 2px aqua;
+    border-radius: 50%;
+    z-index: 50;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+#gyroArm {
+    transform-origin: bottom;
+}
+#gyroButton {
+    z-index: 100;
+    margin-top: 10px;
+    margin-left: 7vw;
+}
+#robotDiagram {
+    position: absolute;
+    bottom: 1px;
+    right: 1vw;
+}
+.winch {
+    transition: .5s;
+}
+.winch.forward {
+    transform: rotate(-45deg);
+}
+.winch.back {
+    transform: rotate(45deg);
+}
+.winch.forward.open {
+    transform: rotate(-5deg);
+}
+.winch.back.open {
+    transform: rotate(5deg);
+}
+header {
+    width: 18vw;
+    height: 20vh;
+    top: 0;
+    left: 18vw;
+    color: aqua;
+}
+#bulb {
+    width: 8vw;
+    height: 20vh;
+    left: 45vw;
+    top: 0;
+}
+#bulb svg * {
+    fill: aqua;
+}
+#bulb svg.active * {
+    fill: yellow;
+    stroke: none;
+}
+#autoAimButton {
+    position: fixed;
+    width: 8vw;
+    height: 20vh;
+    left: 38vw;
+    top: 0;
+}
+#autoAimButton svg {
+    fill: aqua;
+    width: 70px;
+}
+#autoAimButton svg.active {
+    fill: red;
+    animation: 5s rotate infinite linear;
+}
+@-webkit-keyframes rotate {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes rotate {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.camera {
+    position: fixed;
+    z-index: 0;
+    top: 20vh;
+    left: 0;
+    width: 50vw;
+    overflow: hidden;
+    height: 80vh;
+    background: url(img/static.gif);
+    padding: 0;
+}
+.camera img {
+    width: 50vw;
+    height: 80vh;
+}
+.camera img.flipped {
+    transform: rotate(90deg);
+    width: 80vh;
+}
+#driveAngle {
+    display: none;
+    background: black;
+    left: 50vw;
+    bottom: 0;
+    font-size: 3em;
+    position: fixed;
+    z-index: 100;
+}
+nav ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+nav li {
+    position: relative;
+    display: block;
+    float: left;
+}
+button {
+    display: block;
+    position: relative;
+    padding: 7px 8px;
+    text-decoration: none;
+    border: solid 1px aqua;
+    background: 0;
+    font-size: .7em;
+    color: aqua;
+}
+nav button,
+#tuning button {
+    display: inline-block;
+}
+#tuning button {
+    margin-right: -10px;
+}
+button:hover,
+button:focus,
+nav .active {
+    text-decoration: none;
+    background-color: #007480;
+    outline: 0;
+}
+aside {
+    right: 0;
+    top: 0;
+    width: 15vw;
+    height: 100vh;
+}
+#gameTimer {
+    padding: .6vh 1vw;
+    font-family: 'DS-Digital', monospace;
+    display: block;
+    height: 20vh;
+    width: 18vw;
+    top: 0;
+    left: 0;
+    font-size: 8.5vmax;
+    line-height: .78;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.autoButton {
+    width: 150px;
+    height: 150px;
+    border: solid 4px aqua;
+}
+#encoder {
+    margin-top: 50px;
+    font-size: .8em;
+}
+#encoderSlider {
+    width: 100%;
+}
+#lowBarImg {
+    transform: translateY(50px);
+    height: 100px;
+    width: 100px;
+    display: block;
+    background-color: lightgrey;
+}
+.encoderLimitSwitchSpan {
+    color: red;
+}
+#tuning {
+    background: black;
+    top: 20vh;
+    left: 0;
+    width: 50vw;
+    height: 80vh;
+    display: none;
+}
+.bool-slider {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 800;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    height: 35px;
+    width: 100px;
+    border-radius: 25px;
+}
+.bool-slider.true .inset {
+    background-color: #007880;
+}
+.bool-slider.true .inset .control {
+    float: left;
+}
+.bool-slider.true .inset .control:after {
+    content: 'On';
+    position: relative;
+    right: -135%;
+    top: 20%;
+}
+.bool-slider.false .inset {
+    background-color: #6e2e09;
+    background-image: none;
+}
+.bool-slider.false .inset .control {
+    float: right;
+}
+.bool-slider.false .inset .control:before {
+    content: 'Off';
+    position: relative;
+    left: -100%;
+    top: 20%;
+}
+.bool-slider .inset {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.bool-slider .inset .control {
+    width: 40%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+}
+.bool-slider .inset .control:hover {
+    cursor: pointer;
+}
+.bool-slider.disabled {
+    color: #ccc;
+}
+.bool-slider.disabled .inset {
+    background-color: #f5f5f5;
+}
+.bool-slider.disabled .control {
+    cursor: default;
+}
+#autonomousSelection {
+    width: 50vw;
+    height: 100vh;
+    background: black;
+    top: 0;
+    right: 0;
+    display: none;
+}
+.arrow-up,
+.arrow-down {
+    content: '';
+    width: 0;
+    height: 0;
+    border: 25px solid transparent;
+    margin: 0 auto;
+    display: block;
+}
+.arrow-up {
+    border-bottom-color: red;
+}
+.arrow-down {
+    border-top-color: red;
+}
+.selectionToggleBox {
+    height: 100px;
+    width: 100px;
+    display: block;
+    background-color: lightgrey;
+}
+.attackerState {
+    height: 100px;
+    width: 100px;
+}
+.fieldSelector {
+    display: inline-block;
+    margin-left: -5px;
+}
+.obstacleSelector {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 100px;
+}
+.robotSelector {
+    display: block;
+    width: 100px;
+    height: 100px;
+}

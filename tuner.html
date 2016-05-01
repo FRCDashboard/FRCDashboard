@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <title>Camera tuner</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/simple-slider.css">
+    <link rel="stylesheet" href="/tuner.css">
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/simple-slider.min.js"></script>
+    <script src="/networktables/networktables.js"></script>
+    <script src="/networktables/jquery_ext.js"></script>
+    <script src="/networktables/camera.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+  			<div class="col-md-6">
+				<h2>Camera tuner</h2>
+				<hr>
+
+				<div class="row">
+					<div class="col-md-6">
+						<input id="enabled" type="checkbox"> Processing enabled<br/>
+						<input id="logging_enabled" type="checkbox"> Logging enabled<br/>
+						<input id="draw_targets" type="checkbox"> Draw Targets<br/>
+						<input id="draw_thresh" type="checkbox"> Draw Threshold<br/>
+					</div>
+					<div class="col-md-6">
+						Present: <span id="present"></span><br>
+						Angle: <span id="target_angle"></span><br>
+						Height: <span id="target_height"></span><br>
+						LogError: <span id="logging_error"></span>
+					</div>
+				</div>
+
+				<hr/>
+
+				<!-- TODO: create these via javascript -->
+
+				<div class="row">
+					<div class="col-md-1"><input id="draw_hue" type="checkbox"></div>
+					<div class="col-md-1">HUE_P</div>
+					<div class="col-md-10"><input id="hue_p" type="text" data-slider="true" data-slider-range="0,255" data-slider-step="1"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-1">HUE_N</div>
+					<div class="col-md-10"><input id="hue_n" type="text" data-slider="true" data-slider-range="0,255" data-slider-step="1"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-1"><input id="draw_sat" type="checkbox"></div>
+					<div class="col-md-1">SAT_P</div>
+					<div class="col-md-10"><input id="sat_p" type="text" data-slider="true" data-slider-range="0,255" data-slider-step="1"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-1">SAT_N</div>
+					<div class="col-md-10"><input id="sat_n" type="text" data-slider="true" data-slider-range="0,255" data-slider-step="1"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-1"><input id="draw_val" type="checkbox"></div>
+					<div class="col-md-1">VAL_P</div>
+					<div class="col-md-10"><input id="val_p" type="text" data-slider="true" data-slider-range="0,255" data-slider-step="1"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-1">VAL_N</div>
+					<div class="col-md-10"><input id="val_n" type="text" data-slider="true" data-slider-range="0,255" data-slider-step="1"></div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div id="robocam"></div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+"use strict";
+
+// networktables stuff
+
+
+function onRobotConnection(connected) {
+	$('#robotstate').text(connected ? "Connected!" : "Disconnected");
+}
+
+$(document).ready(function(){
+    // sets a function that will be called when the robot connects/disconnects
+	NetworkTables.addRobotConnectionListener(onRobotConnection, true);
+
+	// slider setup + config
+	$("[data-slider]")
+	    .each(function () {
+	      var input = $(this);
+	      $("<span>")
+	        .addClass("output")
+	        .insertAfter($(this));
+	    })
+	    .bind("slider:ready slider:changed", function (event, data) {
+	      $(this)
+	        .nextAll(".output:first")
+	          .html(data.value);
+	      
+	    }).bind("change", function(event) {
+	    	if (event.trigger != "setValue") {
+	    		NetworkTables.setValue('/camera/thresholds/' + this.id, event.value);
+	    	}
+	    });
+
+	$("input:checkbox")
+		.each(function() {
+			$(this).nt_toggle('/camera/' + this.id);
+		});
+
+	NetworkTables.addGlobalListener(function(k, v) {
+		switch (k) {
+			case "/components/autoaim/present":
+				$('#present').text(v);
+				$('#target_angle').toggle(v);
+				$('#target_height').toggle(v);
+				break;
+			case "/components/autoaim/target_angle":
+				$('#target_angle').text(v);
+				break;
+			case "/components/autoaim/target_height":
+				$('#target_height').text(v);
+				break;
+			case "/camera/logging_error":
+				$('#logging_error').text(v ? "true" : "false");
+				break;
+		}
+
+		if (k.startsWith('/camera/thresholds/')) {
+			$('#' + k.substring(19)).simpleSlider('setValue', v);
+		}
+
+	}, true);
+
+	// setup camera
+	loadCameraOnConnect({
+        container: '#robocam', 			// where to put the img tag
+        proto: null,                    // optional, defaults to http://
+        host: null,                     // optional, if null will use robot's autodetected IP address
+        port: 5802,                     // webserver port
+        image_url: '/?action=stream',   // mjpg stream of camera
+        data_url: '/program.json',      // used to test if connection is up
+        wait_img: null,                 // optional img to show when not connected, can use SVG instead
+        error_img: null,                // optional img to show when error connecting, can use SVG instead
+        attrs: {                        // optional: attributes set on svg or img element
+            width: 640,                     // optional, stretches image to this width
+            height: 480,                    // optional, stretches image to this width
+        }
+    });
+});
+
+</script>
+</body>
+</html>
