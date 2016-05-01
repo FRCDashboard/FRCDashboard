@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <title>1418 DriverStation</title>
+    <title>FRC DriverStation</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,55 +19,25 @@
                 <li>
                     <button id="tuningButton">Tuning</button>
                 </li>
-                <li>
-                    <button id="autonomousButton">Auton</button>
-                </li>
             </ul>
         </nav>
     </header>
-    <div id="bulb" state="false">
-        <svg width="64px" height="64px" viewBox="0 0 495.25 495.25">
-            <path d="M247.602,0C159.289,0,87.436,71.862,87.436,160.193c0,56.324,29.285,107.875,77.094,136.87v22.071      c0,18.044,14.676,32.718,32.732,32.718h100.713c18.037,0,32.711-14.674,32.711-32.718v-22.081      c47.828-28.983,77.129-80.528,77.129-136.86C407.814,71.862,335.945,0,247.602,0z M306.355,272.621      c-5.477,2.875-8.913,8.549-8.913,14.731v30.935h-33.2v-96.965l47.531-47.528c6.496-6.492,6.496-17.011,0-23.506      c-6.488-6.491-17.018-6.491-23.503,0l-40.658,40.642l-40.627-40.642c-6.494-6.491-17.016-6.491-23.512,0      c-6.494,6.495-6.494,17.015,0,23.506l47.518,47.528v96.965h-33.215v-30.925c0-6.186-3.443-11.859-8.91-14.725      c-42.063-22.021-68.182-65.106-68.182-112.444c0-69.995,56.93-126.944,126.916-126.944c70.019,0,126.972,56.949,126.972,126.944 C374.572,207.53,348.432,250.609,306.355,272.621z" />
-            <path d="M305.381,418.769H189.875c-9.188,0-16.627,7.444-16.627,16.625c0,9.183,7.439,16.625,16.627,16.625h22.564v8.053      c0,19.431,15.744,35.179,35.174,35.179c19.438,0,35.186-15.748,35.186-35.179v-8.053h22.584c9.188,0,16.621-7.443,16.621-16.625 C322.002,426.214,314.568,418.769,305.381,418.769z" />
-            <path d="M305.381,368.896H189.875c-9.188,0-16.627,7.443-16.627,16.625s7.439,16.625,16.627,16.625h115.506      c9.188,0,16.621-7.443,16.621-16.625C322.002,376.341,314.568,368.896,305.381,368.896z" />
-        </svg>
-    </div>
-    <div id="autoAimButton">
-        <svg viewBox="0 0 1000 1000">
-            <path d="M937.7,447.7h-33.2c-4.7-36.6-14.3-72.2-28.8-106.4c-20.5-48.5-50-92.2-87.4-129.6c-37.4-37.4-81-66.8-129.6-87.4c-34.2-14.4-69.8-24-106.4-28.7V62.3c0-28.9-23.4-52.3-52.3-52.3c-28.9,0-52.3,23.4-52.3,52.3v33.2c-36.6,4.7-72.2,14.3-106.4,28.7c-48.5,20.5-92.2,50-129.6,87.4c-37.4,37.4-66.8,81-87.4,129.6c-14.4,34.2-24,69.8-28.7,106.4H62.3C33.4,447.7,10,471.1,10,500s23.4,52.3,52.3,52.3h33.2c4.7,36.6,14.3,72.2,28.7,106.4c20.5,48.5,50,92.2,87.4,129.6c37.4,37.4,81,66.8,129.6,87.4c34.2,14.4,69.8,24,106.4,28.8v33.2c0,28.9,23.4,52.3,52.3,52.3c28.9,0,52.3-23.4,52.3-52.3v-33.2c36.6-4.7,72.2-14.3,106.4-28.8c48.5-20.5,92.2-50,129.6-87.4c37.4-37.4,66.8-81,87.4-129.6c14.4-34.2,24-69.8,28.8-106.4h33.2c28.9,0,52.3-23.4,52.3-52.3C990,471.1,966.6,447.7,937.7,447.7z M773.2,552.3h25.5c-10.6,61.1-39.6,117.4-84.4,162.1c-44.7,44.7-101,73.8-162.1,84.4v-25.5c0-28.9-23.4-52.3-52.3-52.3c-28.9,0-52.3,23.4-52.3,52.3v25.5c-61.1-10.6-117.4-39.6-162.1-84.4c-44.7-44.7-73.8-101-84.4-162.1h25.5c28.9,0,52.3-23.4,52.3-52.3c0-28.9-23.4-52.3-52.3-52.3h-25.5c10.6-61.1,39.6-117.4,84.4-162.1c44.7-44.7,101-73.8,162.1-84.4v25.5c0,28.9,23.4,52.3,52.3,52.3c28.9,0,52.3-23.4,52.3-52.3v-25.5c61.1,10.6,117.4,39.6,162.1,84.4c44.7,44.7,73.8,101,84.4,162.1h-25.5c-28.9,0-52.3,23.4-52.3,52.3S744.3,552.3,773.2,552.3z" />
-        </svg>
-    </div>
-    <div id="driveAngle">XXº</div>
     <div class="camera">
         <img src="http://10.14.18.2:5800/?action=stream">
     </div>
     <div id="gameTimer">2:15</div>
     <article id="main">
         <svg id="gyro" z-index="10" pointer-events="">
-            <circle id="gyroCircle" cx="85" cy="85" r="50" stroke="aqua" stroke-width="3" />
-            <rect id="gyroArm" x="80" y="5" width="10" height="80" stroke="aqua" stroke-width="3" />
-            <text id="gyroLabel" x="50" y="30" fill="aqua" font-size="25">0º</text>
+            <circle id="gyroCircle" cx="85" cy="85" r="50" stroke="black" stroke-width="3" />
+            <rect id="gyroArm" x="80" y="5" width="10" height="80" stroke="black" stroke-width="3" />
+            <text id="gyroLabel" x="50" y="30" fill="black" font-size="25">0º</text>
         </svg>
         <button id="gyroButton">Reset Gyro</button>
         <svg id="robotDiagram" width="332" height="450">
-            <rect class="winch back" x="200" y="340" width="70" height="8" />
-            <rect class="winch back" x="200" y="295" width="70" height="8" />
-            <rect class="winch back" x="200" y="250" width="70" height="8" />
-            <rect class="winch back" x="200" y="205" width="70" height="8" />
-            <rect class="winch back" x="225" y="170" width="40" height="8" />
-            <rect class="winch forward" x="200" y="340" width="70" height="8" />
-            <rect class="winch forward" x="200" y="295" width="70" height="8" />
-            <rect class="winch forward" x="200" y="250" width="70" height="8" />
-            <rect class="winch forward" x="200" y="205" width="70" height="8" />
-            <rect class="winch forward" x="200" y="160" width="70" height="8" />
-            <rect class="winch back" x="250" y="145" width="30" height="8" />
             <rect x="75" y="360" width="230" height="40" />
             <rect x="85" y="370" width="210" height="40" />
             <rect id="robotArm" x="5" y="375" width="80" height="10" />
-            <line x1="100" y1="415" x2="180" y2="420" />
-            <line x1="180" y1="420" x2="260" y2="415" />
             <circle cx="100" cy="410" r="25" />
-            <circle cx="180" cy="410" r="25" />
             <circle cx="260" cy="410" r="25" />
             <rect x="60" y="380" width="250" height="30" />
             <circle id="ball" cx="50" cy="410" r="20" visibility="hidden" />
@@ -83,54 +53,6 @@
         <h1>Dashboard</h1>
         <div class="settings" id="settingsContainerDiv"></div>
         <button id="set">Set</button>
-    </article>
-    <article id="autonomousSelection">
-        <div class="fieldSelector">
-            <div class="obstacleSelector">
-                <img src="/img/lowbar.png" id="lowBarImg">
-            </div>
-            <div class="robotSelector">
-                <img class="attackerState">
-            </div>
-        </div>
-        <div class="fieldSelector">
-            <div class="obstacleSelector">
-                <div class="defenseSelector"></div>
-            </div>
-            <div class="robotSelector">
-                <img class="attackerState">
-            </div>
-        </div>
-        <div class="fieldSelector">
-            <div class="obstacleSelector">
-                <div class="defenseSelector"></div>
-            </div>
-            <div class="robotSelector">
-                <img class="attackerState">
-            </div>
-        </div>
-        <div class="fieldSelector">
-            <div class="obstacleSelector">
-                <div class="defenseSelector"></div>
-            </div>
-            <div class="robotSelector">
-                <img class="attackerState">
-            </div>
-        </div>
-        <div class="fieldSelector">
-            <div class="obstacleSelector">
-                <div class="defenseSelector"></div>
-            </div>
-            <div class="robotSelector">
-                <img class="attackerState">
-            </div>
-        </div>
-
-        <form>
-            <select id="autonomousOptionSelect">
-                <option>Robot disconnected</option>
-            </select>
-        </form>
     </article>
     <aside>
         <div id="autoButtons">

@@ -12,7 +12,7 @@ var currentSeconds = 135,
 	gyroVal = 0,
 	gyroDiff = 0,
 	visualGyroVal = 0,
-    ladderUpVis = false,
+	ladderUpVis = false,
 	defenseAutoNames = [
 		['A0', 'A1'],
 		['E0', 'E0'],
@@ -68,17 +68,15 @@ $(document).ready(function() {
 			$('.autoButton').not(document.getElementById($thisButton.attr('id'))).each(function() {
 				NetworkTables.setValue('/SmartDashboard/' + $thisButton.attr('id'), false);
 			});
-		} else {}
+		}
 		NetworkTables.setValue('/SmartDashboard/' + $thisButton.attr('id'), activeState); //onclick set the things id to true
 
 	});
 	var encoderSlider = $('#encoderSlider'),
-		min = encoderSlider.attr('min'),
-		max = encoderSlider.attr('max'),
 		dataList = $('#stepList'),
 		tickDistance = 50,
-		numberOfTicks = (parseInt(max) - parseInt(min)) / tickDistance,
-		newVal = parseInt(min);
+		numberOfTicks = (parseInt(encoderSlider.attr('max')) - parseInt(encoderSlider.attr('min'))) / tickDistance,
+		newVal = parseInt(encoderSlider.attr('min'));
 	for (i = 0; i < numberOfTicks; i++) {
 		dataList.append('<option>' + newVal + '</option>');
 		newVal += tickDistance;
@@ -283,7 +281,7 @@ function onValueChanged(key, value, isNew) {
 					thisButton.attr('src', '/img/' + thisButton.attr('baseSrc') + '.png');
 					thisButton.css({
 						'pointer-events': 'auto',
-						'border-color': 'aqua',
+						'border-color': 'black',
 					});
 					NetworkTables.setValue('/SmartDashboard/' + thisButton.attr('id'), false);
 				}); //then set everything else that isn't true and make it red, and set their activeState to false,
@@ -307,48 +305,22 @@ function onValueChanged(key, value, isNew) {
 					});
 					$button.css({
 						'pointer-events': 'none',
-						'border-color': 'aqua'
+						'border-color': 'black'
 					});
 
 				} else if (isButtonActive === false) { //if they are all false then set the current border to cyan
 					$button.attr('src', '/img/' + $button.attr('baseSrc') + '.png');
 					$button.css({
 						'pointer-events': 'auto',
-						'border-color': 'aqua'
+						'border-color': 'black'
 					});
 				}
 				//if the thing is not true, check to see if something else is true, if something else is true, then make it red, else make it cyan
 			}
 			break;
-		case '/SmartDashboard/Drive | backCamera':
-			if (value === true) {
-				$('.camera img').attr('src', 'http://10.14.18.2:5801/?action=stream');
-                $('.camera img').addClass('flipped');
-			} else {
-				$('.camera img').attr('src', 'http://10.14.18.2:5800/?action=stream');
-                $('.camera img').removeClass('flipped');
-			}
-			break;
-        case '/SmartDashboard/Drive/autoAim':
-            if (value) {
-                $('#driveAngle').show();
-            } else {
-                $('#driveAngle').hide();
-            }
-            break;
-        case '/components/autoAim/target_angle':
-            $('#driveAngle').innerHTML = value + 'º';
-            if (Math.abs(value) < 10) {
-                $('#driveAngle').css('color', 'green');
-            } else if (Math.abs(value < 30)) {
-                $('#driveAngle').css('color', 'yellow');
-            } else {
-                $('#driveAngle').css('color', 'red');
-            }
-            break;
 		case '/SmartDashboard/startTheTimer':
 			if (value) {
-				document.getElementById('gameTimer').style.color = 'aqua';
+				document.getElementById('gameTimer').style.color = 'black';
 				timerVar = setInterval(function() {
 					currentSeconds--;
 					var currentMinutes = parseInt(currentSeconds / 60);
@@ -377,7 +349,7 @@ function onValueChanged(key, value, isNew) {
 				value = 1200;
 			} else if (value < 0) {
 				value = 0;
-			} else {}
+			}
 			$('#encoderSlider').val(value);
 			$('#encoderValueDisplaySpan').text('Encoder Val: ' + value);
 			break;
@@ -624,39 +596,25 @@ $('#set').click(function() {
 
 $('#teleopButton').click(function() {
 	$('#tuning').hide();
-	$('#autonomousSelection').hide();
 	$(this).addClass('active');
 	$('#tuningButton').removeClass('active');
-	$('#autonomousButton').removeClass('active');
 });
 $('#tuningButton').click(function() {
 	$('#tuning').show();
-	$('#autonomousSelection').hide();
 	$('#teleopButton').removeClass('active');
-	$(this).addClass('active');
-	$('#autonomousButton').removeClass('active');
-});
-$('#autonomousButton').click(function() {
-	$('#tuning').hide();
-	$('#autonomousSelection').show();
-	$('#teleopButton').removeClass('active');
-	$('#tuningButton').removeClass('active');
 	$(this).addClass('active');
 });
 
 $('#robotDiagram').click(function() {
 	if (ladderUpVis) {
-        $('#robotDiagram *').css('stroke', 'aqua');
-        $('.winch').hide();
-        ladderUpVis = false;
+		$('#robotDiagram *').css('stroke', 'black');
+		$('.winch').hide();
+		ladderUpVis = false;
 	} else {
-        $('#robotDiagram *').css('stroke', 'red');
-        $('.winch').show();
-        ladderUpVis = true;
+		$('#robotDiagram *').css('stroke', 'red');
+		$('.winch').show();
+		ladderUpVis = true;
 	}
-});
-$('.camera').click(function() {
-    NetworkTables.setValue('/SmartDashboard/Drive | backCamera', !NetworkTables.getValue('/SmartDashboard/Drive | backCamera'));
 });
 $('#gyroButton').click(function() {
 	gyroDiff = gyroVal;
@@ -672,16 +630,9 @@ $('#gyroButton').click(function() {
 	$('#gyroLabel').text(visualGyroVal + 'º');
 });
 $('#bulb').click(function() {
-    if ($('#bulb').attr('state') == 'true') {
-        NetworkTables.setValue('/SmartDashboard/LightBulb', false);
-    } else {
-        NetworkTables.setValue('/SmartDashboard/LightBulb', true);
-    }
-});
-$('#autoAimButton').mousedown(function() {
-    NetworkTables.setValue('/SmartDashboard/Drive/autoAim', true);
-    $('#autoAimButton svg').attr('class', 'active');
-}).mouseup(function() {
-    NetworkTables.setValue('/SmartDashboard/Drive/autoAim', false);
-    $('#autoAimButton svg').attr('class', '');
+	if ($('#bulb').attr('state') == 'true') {
+		NetworkTables.setValue('/SmartDashboard/LightBulb', false);
+	} else {
+		NetworkTables.setValue('/SmartDashboard/LightBulb', true);
+	}
 });

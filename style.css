@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'DS-Digital';
-    src: local('DS-Digital'), url(digital.ttf) format('truetype');
-    unicode-range: U+0030—003A;
-}
 * {
     box-sizing: border-box;
 }
@@ -10,8 +5,6 @@
     display: none;
 }
 body {
-    background: black;
-    color: aqua;
     font-family: monospace;
     font-size: 1.2em;
     -webkit-user-select: none;
@@ -38,14 +31,15 @@ aside,
     width: 35vw;
 }
 svg * {
-    stroke: aqua;
+    stroke: black;
+    fill: white;
     stroke-width: 2;
     transform-origin: center;
 }
 #gyro {
     width: 175px;
     height: 175px;
-    border: solid 2px aqua;
+    border: solid 2px black;
     border-radius: 50%;
     z-index: 50;
     margin-left: 30px;
@@ -64,63 +58,12 @@ svg * {
     bottom: 1px;
     right: 1vw;
 }
-.winch {
-    transition: .5s;
-}
-.winch.forward {
-    transform: rotate(-45deg);
-}
-.winch.back {
-    transform: rotate(45deg);
-}
-.winch.forward.open {
-    transform: rotate(-5deg);
-}
-.winch.back.open {
-    transform: rotate(5deg);
-}
 header {
     width: 18vw;
     height: 20vh;
     top: 0;
     left: 18vw;
-    color: aqua;
-}
-#bulb {
-    width: 8vw;
-    height: 20vh;
-    left: 45vw;
-    top: 0;
-}
-#bulb svg * {
-    fill: aqua;
-}
-#bulb svg.active * {
-    fill: yellow;
-    stroke: none;
-}
-#autoAimButton {
-    position: fixed;
-    width: 8vw;
-    height: 20vh;
-    left: 38vw;
-    top: 0;
-}
-#autoAimButton svg {
-    fill: aqua;
-    width: 70px;
-}
-#autoAimButton svg.active {
-    fill: red;
-    animation: 5s rotate infinite linear;
-}
-@-webkit-keyframes rotate {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-@keyframes rotate {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    color: black;
 }
 .camera {
     position: fixed;
@@ -137,19 +80,6 @@ header {
     width: 50vw;
     height: 80vh;
 }
-.camera img.flipped {
-    transform: rotate(90deg);
-    width: 80vh;
-}
-#driveAngle {
-    display: none;
-    background: black;
-    left: 50vw;
-    bottom: 0;
-    font-size: 3em;
-    position: fixed;
-    z-index: 100;
-}
 nav ul {
     padding-left: 0;
     margin-bottom: 0;
@@ -165,10 +95,10 @@ button {
     position: relative;
     padding: 7px 8px;
     text-decoration: none;
-    border: solid 1px aqua;
+    border: solid 1px black;
     background: 0;
     font-size: .7em;
-    color: aqua;
+    color: black;
 }
 nav button,
 #tuning button {
@@ -206,7 +136,7 @@ aside {
 .autoButton {
     width: 150px;
     height: 150px;
-    border: solid 4px aqua;
+    border: solid 4px black;
 }
 #encoder {
     margin-top: 50px;
