@@ -13,15 +13,12 @@ body {
 header,
 article,
 aside,
-#gameTimer,
-#autoAimButton,
-#bulb {
+#timer {
     padding: 10px;
     position: fixed;
     overflow: scroll;
 }
-#tuning,
-#autonomousSelection {
+#tuning {
     z-index: 100;
 }
 #main {
@@ -57,6 +54,9 @@ svg * {
     position: absolute;
     bottom: 1px;
     right: 1vw;
+}
+#robotArm {
+    transform-origin: right;
 }
 header {
     width: 18vw;
@@ -120,7 +120,7 @@ aside {
     width: 15vw;
     height: 100vh;
 }
-#gameTimer {
+#timer {
     padding: .6vh 1vw;
     font-family: 'DS-Digital', monospace;
     display: block;
@@ -133,10 +133,13 @@ aside {
     -webkit-user-select: none;
     user-select: none;
 }
-.autoButton {
+.functionButton {
     width: 150px;
     height: 150px;
     border: solid 4px black;
+}
+.functionButton.active {
+    border-color: #ff5111;
 }
 #encoder {
     margin-top: 50px;
@@ -145,18 +148,10 @@ aside {
 #encoderSlider {
     width: 100%;
 }
-#lowBarImg {
-    transform: translateY(50px);
-    height: 100px;
-    width: 100px;
-    display: block;
-    background-color: lightgrey;
-}
-.encoderLimitSwitchSpan {
+.encoderLimitSwitch {
     color: red;
 }
 #tuning {
-    background: black;
     top: 20vh;
     left: 0;
     width: 50vw;

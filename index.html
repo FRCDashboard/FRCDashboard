@@ -9,30 +9,20 @@
 
 <body>
     <header>
-        Robot:
-        <span id="robotstate">Unknown state</span>
-        <nav>
-            <ul>
-                <li>
-                    <button id="teleopButton" class="active">Teleop</button>
-                </li>
-                <li>
-                    <button id="tuningButton">Tuning</button>
-                </li>
-            </ul>
-        </nav>
+        <!-- Tells whether robot is connected to UI. -->
+        <p>Robot: <span id="robotstate">Unknown state</span></p>
+        <button id="tuningButton">Tuning</button>
     </header>
     <div class="camera">
         <img src="http://10.14.18.2:5800/?action=stream">
     </div>
-    <div id="gameTimer">2:15</div>
+    <div id="timer">2:15</div>
     <article id="main">
         <svg id="gyro" z-index="10" pointer-events="">
             <circle id="gyroCircle" cx="85" cy="85" r="50" stroke="black" stroke-width="3" />
             <rect id="gyroArm" x="80" y="5" width="10" height="80" stroke="black" stroke-width="3" />
             <text id="gyroLabel" x="50" y="30" fill="black" font-size="25">0º</text>
         </svg>
-        <button id="gyroButton">Reset Gyro</button>
         <svg id="robotDiagram" width="332" height="450">
             <rect x="75" y="360" width="230" height="40" />
             <rect x="85" y="370" width="210" height="40" />
@@ -51,24 +41,23 @@
         <button id="setButton">Set</button>
         <button id="get">Get</button>
         <h1>Dashboard</h1>
-        <div class="settings" id="settingsContainerDiv"></div>
         <button id="set">Set</button>
     </article>
     <aside>
-        <div id="autoButtons">
-            <img id="gateButton" class="autoButton" src="/img/gate.png" baseSrc="gate" activeState="false">
-            <img id="chevyButton" class="autoButton" src="/img/cheval.png" baseSrc="cheval" activeState="false">
-            <img id="ladderButton" class="autoButton" src="/img/ladder.png" baseSrc="ladder" activeState="false">
+        <div id="functionButtons">
+            <img id="gateButton" class="functionButton" src="/img/gate.png" name="gate">
+            <img id="chevyButton" class="functionButton" src="/img/cheval.png" name="cheval">
+            <img id="ladderButton" class="functionButton" src="/img/ladder.png" name="ladder">
         </div>
         <div id="encoder">
             <input id="encoderSlider" type="range" min="0" max="1200" value="770" step="25" list="stepList">
             <datalist id="stepList"></datalist>
             <br>
-            <span id="encoderValueDisplaySpan">Arm Encoder Value: 200</span>
+            <span id="encoderValueDisplay">Arm Encoder Value: 200</span>
             <br>
-            <span class="encoderLimitSwitchSpan" id="forwardEncoderSpan">Forward Enc:False</span>
+            <span class="encoderLimitSwitch" id="forwardEncoder">Forward Enc:False</span>
             <br>
-            <span class="encoderLimitSwitchSpan" id="reverseEncoderSpan">Reverse Enc:False</span>
+            <span class="encoderLimitSwitch" id="reverseEncoder">Reverse Enc:False</span>
         </div>
     </aside>
     <script src="js/jquery.js"></script>
