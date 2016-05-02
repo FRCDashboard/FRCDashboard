@@ -8,6 +8,7 @@ var ui = {
 		label: document.getElementById('gyroLabel')
 	},
 	encoder: {
+        container: document.getElementById('encoder'),
 		valDisplay: document.getElementById('encoderValDisplay'),
 		slider: document.getElementById('encoderSlider'),
 		forward: document.getElementById('forwardEncoder'),
@@ -16,7 +17,7 @@ var ui = {
 	robotDiagram: {
 		arm: document.getElementById('robotArm')
 	},
-	functionButtons: document.getElementsByClassName('functionButton'),
+	functionButtons: document.getElementsByClassName('functionButton')
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -28,7 +29,7 @@ NetworkTables.addGlobalListener(onValueChanged, true);
 
 
 function onRobotConnection(connected) {
-	console.log('Robot connected: ' + connected);
+	console.log(connected ? 'Robot connected!' : 'Robot disconnected.');
 	ui.robotState.innerHTML = connected ? 'Robot connected!' : 'Robot disconnected';
 }
 
@@ -144,26 +145,15 @@ function onValueChanged(key, value, isNew) {
 
 // The rest of the doc is listeners for UI elements being clicked on
 functionButtons.addEventListener('click', function() {
-	console.log(this.active);
+	console.log(this);
 	isActive = this.active == 'true' ? true : false;
 	for (i = 0; i < functionButtons.length; i++) {
-		functionButtons[i].className = '';
+		functionButtons[i].active = false;
 	}
 	NetworkTables.setValue('/SmartDashboard/' + this.id, isActive);
 });
 
-var encoderSlider = $('#encoderSlider'),
-	min = encoderSlider.attr('min'),
-	max = encoderSlider.attr('max'),
-	dataList = $('#stepList'),
-	tickDistance = 50,
-	numberOfTicks = (parseInt(max) - parseInt(min)) / tickDistance,
-	newVal = parseInt(min);
-for (i = 0; i < numberOfTicks; i++) {
-	dataList.append('<option>' + newVal + '</option>');
-	newVal += tickDistance;
-}
-$('#encoder').hide().show(0); //element refresh
+ui.encoder.container.hide().show(0); //element refresh
 $('#encoderSlider').change(function() {
 	var encoderVal = $('#encoderSlider').val();
 	$('#encoderValueDisplaySpan').text('Arm Encoder Value:' + encoderVal);

@@ -58,12 +58,17 @@ Open Chrome and go to:
 
 ## Addons
 
-
+There are several prebuilt addons for DriverStationJS:
+* [Gyro](htts://github.com/driverstationjs-gyro)
+* [Camera Tuner](htts://github.com/driverstationjs-cameratuner)
+* More coming soon!
 
 ## Authors
 
-* [Leon Tan](https://github.com/lleontan), UI Lead
-* [Erik Boesen](https://github.com/ErikBoesen), design & code
+* [Erik Boesen](https://github.com/ErikBoesen)
+
+### Other authors
+* [Leon Tan](https://github.com/lleontan), lead of original 1418 UI team
 * [Tim Winters](https://github.com/Twinters007), code
 
-Special Thanks to [Dustin Spicuzza](https://github.com/virtuald), mentor and head of the [RobotPy](http://github.com/robotpy) project.
+Special Thanks to [Dustin Spicuzza](https://github.com/virtuald), 1418 mentor and head of the [RobotPy](http://github.com/robotpy) project.
