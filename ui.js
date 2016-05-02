@@ -16,7 +16,7 @@ var ui = {
 	robotDiagram: {
 		arm: document.getElementById('robotArm')
 	},
-	functionButton: document.getElementsByClassName('functionButton'),
+	functionButtons: document.getElementsByClassName('functionButton'),
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -47,7 +47,7 @@ function onValueChanged(key, value, isNew) {
 	switch (key) {
 		case '/SmartDashboard/NavX | Yaw': // Gyro rotation
 			ui.gyro.val = value;
-			if (gyro.val < 0) { // Corrects for negative values
+			if (ui.gyro.val < 0) { // Corrects for negative values
 				ui.gyro.val += 360;
 			}
 			ui.gyro.arm.style.transform = 'rotate(' + ui.gyro.val + 'deg)';
@@ -95,12 +95,12 @@ function onValueChanged(key, value, isNew) {
 			// When this NetworkTables variable is true, the timer will start.
 			// You shouldn't need to touch this code, but it's documented anyway in case you do.
 		case '/SmartDashboard/timeRunning':
-            var s = 135;
+			var s = 135;
 			if (value) {
 				// Make sure timer is reset to black when it starts
 				ui.timer.style.color = 'black';
 				// Function below adjusts time left every second
-				countdown = setInterval(function() {
+				var countdown = setInterval(function() {
 					s--; // Subtract one second
 					// Minutes (m) is equal to the total seconds divided by sixty with the decimal removed.
 					var m = Math.floor(s / 60);
@@ -141,3 +141,32 @@ function onValueChanged(key, value, isNew) {
 			break;
 	}
 }
+
+// The rest of the doc is listeners for UI elements being clicked on
+functionButtons.addEventListener('click', function() {
+	console.log(this.active);
+	isActive = this.active == 'true' ? true : false;
+	for (i = 0; i < functionButtons.length; i++) {
+		functionButtons[i].className = '';
+	}
+	NetworkTables.setValue('/SmartDashboard/' + this.id, isActive);
+});
+
+var encoderSlider = $('#encoderSlider'),
+	min = encoderSlider.attr('min'),
+	max = encoderSlider.attr('max'),
+	dataList = $('#stepList'),
+	tickDistance = 50,
+	numberOfTicks = (parseInt(max) - parseInt(min)) / tickDistance,
+	newVal = parseInt(min);
+for (i = 0; i < numberOfTicks; i++) {
+	dataList.append('<option>' + newVal + '</option>');
+	newVal += tickDistance;
+}
+$('#encoder').hide().show(0); //element refresh
+$('#encoderSlider').change(function() {
+	var encoderVal = $('#encoderSlider').val();
+	$('#encoderValueDisplaySpan').text('Arm Encoder Value:' + encoderVal);
+	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(encoderVal));
+
+});

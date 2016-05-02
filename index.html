@@ -13,9 +13,10 @@
         <p>Robot: <span id="robotState">Unknown state</span></p>
     </header>
     <div class="camera">
-        <!-- Depending on what other robot systems you're using, you may have to mess with this a little -->
+        <!-- Depending on what other robot systems you're using, you may have to mess with this a little. -->
         <img src="http://10.14.18.2:5800/?action=stream">
     </div>
+    <!-- Clock that shows up in top left -->
     <div id="timer">2:15</div>
     <article id="main">
         <svg id="gyro" z-index="10" pointer-events="">
@@ -35,13 +36,12 @@
     </article>
     <aside>
         <div id="functionButtons">
-            <img id="gateButton" class="functionButton" src="/img/gate.png" name="gate">
-            <img id="chevyButton" class="functionButton" src="/img/cheval.png" name="cheval">
-            <img id="ladderButton" class="functionButton" src="/img/ladder.png" name="ladder">
+            <img id="gateButton" class="functionButton" src="/img/gate.png" name="gate" active="false">
+            <img id="chevyButton" class="functionButton" src="/img/cheval.png" name="cheval" active="false">
+            <img id="ladderButton" class="functionButton" src="/img/ladder.png" name="ladder" active="false">
         </div>
         <div id="encoder">
-            <input id="encoderSlider" type="range" min="0" max="1200" value="770" step="25" list="stepList">
-            <datalist id="stepList"></datalist>
+            <input id="encoderSlider" type="range" min="0" max="1200" value="770">
             <div id="encoderValDisplay">Arm Encoder Value: 200</div>
             <div class="encoderLimitSwitch" id="forwardEncoder">Forward Enc:False</div>
             <div class="encoderLimitSwitch" id="reverseEncoder">Reverse Enc:False</div>

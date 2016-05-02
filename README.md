@@ -26,7 +26,7 @@ If, however, you still wish to view or utilize the team's original code, it can 
 
 ## Setting up
 
-
+* For the camera to work, you must change the source in `index.html` to the IP of your live camera feed. This may take some tweaking.
 
 ## Running the code
 
@@ -55,6 +55,9 @@ Run this command:
 Open Chrome and go to:
 
     http://localhost:8888
+
+## Addons
+
 
 
 ## Authors

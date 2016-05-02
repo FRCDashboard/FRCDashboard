@@ -42,11 +42,6 @@ svg * {
 #gyroArm {
     transform-origin: bottom;
 }
-#gyroButton {
-    z-index: 100;
-    margin-top: 10px;
-    margin-left: 7vw;
-}
 #robotDiagram {
     position: absolute;
     bottom: 1px;
@@ -88,7 +83,7 @@ aside {
     font-family: 'DS-Digital', monospace;
     display: block;
     height: 20vh;
-    width: 18vw;
+    width: 25vw;
     top: 0;
     left: 0;
     font-size: 8.5vmax;
@@ -96,12 +91,12 @@ aside {
     -webkit-user-select: none;
     user-select: none;
 }
-.functionButton {
+#functionButtons img {
     width: 150px;
     height: 150px;
     border: solid 4px black;
 }
-.functionButton.active {
+#functionButtons img.active {
     border-color: #ff5111;
 }
 #encoder {
