@@ -11,9 +11,9 @@
     <header>
         <!-- Tells whether robot is connected to UI. -->
         <p>Robot: <span id="robotState">Unknown state</span></p>
-        <button id="tuningButton">Tuning</button>
     </header>
     <div class="camera">
+        <!-- Depending on what other robot systems you're using, you may have to mess with this a little -->
         <img src="http://10.14.18.2:5800/?action=stream">
     </div>
     <div id="timer">2:15</div>
@@ -32,16 +32,6 @@
             <rect x="60" y="380" width="250" height="30" />
             <circle id="ball" cx="50" cy="410" r="20" visibility="hidden" />
         </svg>
-    </article>
-    <article id="tuning">
-        <form>
-            <input type="text" placeholder="Name" name="name" id="name">
-            <input type="text" placeholder="Value" name="value" id="value">
-        </form>
-        <button id="setButton">Set</button>
-        <button id="get">Get</button>
-        <h1>Dashboard</h1>
-        <div id="varList"></div>
     </article>
     <aside>
         <div id="functionButtons">

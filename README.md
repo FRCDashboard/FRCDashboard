@@ -6,8 +6,7 @@ DriverStationJS is an extendable, web-browser-based driverstation for FIRST Robo
 
 * Completely legal for competition as it doesn't replace existing DriverStation functionality
 * Touchscreen web browser interface provides richer control interface for secondary robot operator
-* Lots of code commenting to help add your robot's functions
-* Tuning section to directly manipulate values
+* Lots of code commenting to help you easily understand code and add your robot's functions
 * Inbuilt camera streaming system
 
 Technologies used:
@@ -20,10 +19,14 @@ Technologies used:
 
 This version of the code was created to serve as a boilerplate for other teams' UIs, and to be team-ambiguous.  
 
-If, however, you still wish to view or utilize the team's original code, it can be found [here](/frc1418/2016-UI) (2016 code). Be warned that it is very outdated and poorly coded and is not recommended.
+If, however, you still wish to view or utilize the team's original code, it can be found [here](/frc1418/2016-UI) (2016 code). Be warned that although it has some useful features which this code doesn't have yet, it is very outdated and poorly coded and is not recommended.
 
 [2015 UI](/frc1418/2015-ui) (NOT Recommended!)  
 [2014 code](/frc1418/2014) (All our 2014 robot code, including the UI, lumped together in one confusing repository. Please, please don't use this one.)
+
+## Setting up
+
+
 
 ## Running the code
 

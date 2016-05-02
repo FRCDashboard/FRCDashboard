@@ -1,7 +1,3 @@
-// Create values
-var s = 135,
-	displayInTuning = ['/SmartDashboard/'];
-
 // Define UI elements
 var ui = {
 	timer: document.getElementById('timer'),
@@ -21,9 +17,6 @@ var ui = {
 		arm: document.getElementById('robotArm')
 	},
 	functionButton: document.getElementsByClassName('functionButton'),
-	tuning: {
-		varList: document.getElementById('varList')
-	}
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -102,6 +95,7 @@ function onValueChanged(key, value, isNew) {
 			// When this NetworkTables variable is true, the timer will start.
 			// You shouldn't need to touch this code, but it's documented anyway in case you do.
 		case '/SmartDashboard/timeRunning':
+            var s = 135;
 			if (value) {
 				// Make sure timer is reset to black when it starts
 				ui.timer.style.color = 'black';
@@ -130,7 +124,6 @@ function onValueChanged(key, value, isNew) {
 					ui.timer.innerHTML = m + ':' + visualS;
 				}, 1000);
 			} else {
-				ui.timer.innerHTML = '2:15';
 				s = 135;
 			}
 			NetworkTables.setValue('/SmartDashboard/timeRunning', false);
@@ -147,121 +140,4 @@ function onValueChanged(key, value, isNew) {
 			ui.encoder.valDisplay.innerHTML = 'Encoder Val: ' + value;
 			break;
 	}
-	// This section manages the Tuning section of the UI.
-	// The tuning section allows direct manipulation of all NetworkTables variables.
-	if (isNew) {
-		// Is the starting of the key's name /SmartDashboard/?
-		if (key.substring(0, displayInTuning[i].length) === displayInTuning) {
-			// Generate new div with name = name of NetworkTables value
-			var div = document.createElement('div').attr('name', propName);
-
-			var allOfTheDivs = $('#varList').first().children('[type]');
-			if (allOfTheDivs.length === 0) {
-				div.appendTo('#varList');
-			} //comment
-			else {
-				//run through all of the things, if the string is greater than this elements propane, insert it after it, it should keep hitting false until true then break
-				var noneFound = true; //if it is the highest in the array append it to #varList
-				var processedDivName = propName.toLowerCase();
-				allOfTheDivs.not(div).each(function() {
-					var thisPropname = $(this).attr('name').toLowerCase();
-					for (a = 0; a < processedDivName.length; a++) {
-						if (processedDivName.charCodeAt(a) == thisPropname.charCodeAt(a)) {
-
-						} else if (processedDivName.charCodeAt(a) < thisPropname.charCodeAt(a)) { //if processedDivName is greater, keep going, if not, then insert vefore
-							div.insertBefore($(this));
-							noneFound = false;
-							return false;
-						} else {
-							break;
-						}
-					}
-				});
-				if (noneFound === true) {
-					div.appendTo('#varList');
-				}
-			}
-			$('<p></p>').text(propName).appendTo(div);
-			if (value === true || value === false) {
-				div.attr('type', 'boolean');
-				var boolSlider = $('<div class="bool-slider ' + value +
-					'" id="tuning' + hashCode(key) + '" tableValue="' + key + '"></div>');
-				var innerInset = $('<div class="inset"></div>');
-				innerInset.append('<div class="control"></div>')
-					.click(function() {
-						if (boolSlider.hasClass('true')) {
-							NetworkTables.setValue(key, false);
-						} else {
-							NetworkTables.setValue(key, true);
-						}
-					});
-				innerInset.appendTo(boolSlider);
-				boolSlider.appendTo(div);
-			} else if (!isNaN(value)) {
-				if (!isNaN(value)) {
-					div.attr('type', 'int');
-
-					$('<input type="number">')
-						.keypress(function(e) {
-							var key = e.which;
-							if (key == 13) // the enter key code
-							{
-								NetworkTables.setValue($(this).attr('tableValue'), parseFloat($(this).val())); //get the key, and set the current value
-							}
-						})
-						.attr('id', 'tuning' + hashCode(key))
-						.attr('tableValue', key)
-						.attr('value', value)
-						.appendTo(div);
-				}
-			} else {
-				div.attr('type', 'string');
-
-				$('<input type="text">')
-					.keypress(function(e) {
-						var key = e.which;
-						if (key == 13) // the enter key code
-						{
-							NetworkTables.setValue($(this).attr('tableValue'), $(this).val()); //get the key, and set the current value
-						}
-					})
-					.attr('id', 'tuning' + hashCode(key))
-					.attr('value', value)
-					.attr('tableValue', key)
-					.appendTo(div);
-			}
-		}
-	} else {
-		var $tuningDiv = $('#tuning' + hashCode(key));
-
-		if (value === true || value === false) {
-			if ($tuningDiv.hasClass('true')) {
-				$tuningDiv.addClass('false').removeClass('true');
-			} else {
-				$tuningDiv.addClass('true').removeClass('false');
-			}
-		} else {
-			$tuningDiv.val(value);
-		}
-	}
 }
-document.getElementById('setButton').onclick = function() {
-	var setValue = document.getElementById('value').value;
-	if (setValue == 'true') { // ¯\_(ツ)_/¯
-		NetworkTables.setValue(document.getElementById('name').value, true);
-	} else if (setValue == 'false') {
-		NetworkTables.setValue(document.getElementById('name').value, false);
-	} else {
-		NetworkTables.setValue(document.getElementById('name').value,
-			document.getElementById('value').value);
-	}
-};
-document.getElementById('get').onclick = function() {
-	document.getElementById('value').value = NetworkTables.getValue(document.getElementById('name').value);
-};
-
-document.getElementById('tuningButton').click(function() {
-	$('#tuning').show();
-	$('#teleopButton').removeClass('active');
-	$(this).addClass('active');
-});
