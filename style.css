@@ -152,17 +152,17 @@ aside {
     color: red;
 }
 #tuning {
+    background: white;
     top: 20vh;
     left: 0;
     width: 50vw;
     height: 80vh;
-    display: none;
+    display: block;
 }
 .bool-slider {
-    color: #FFF;
+    color: white;
     font-size: 18px;
     font-weight: 800;
-    font-family: Helvetica, Verdana, Arial, sans-serif;
     height: 35px;
     width: 100px;
     border-radius: 25px;
@@ -214,52 +214,4 @@ aside {
 }
 .bool-slider.disabled .control {
     cursor: default;
-}
-#autonomousSelection {
-    width: 50vw;
-    height: 100vh;
-    background: black;
-    top: 0;
-    right: 0;
-    display: none;
-}
-.arrow-up,
-.arrow-down {
-    content: '';
-    width: 0;
-    height: 0;
-    border: 25px solid transparent;
-    margin: 0 auto;
-    display: block;
-}
-.arrow-up {
-    border-bottom-color: red;
-}
-.arrow-down {
-    border-top-color: red;
-}
-.selectionToggleBox {
-    height: 100px;
-    width: 100px;
-    display: block;
-    background-color: lightgrey;
-}
-.attackerState {
-    height: 100px;
-    width: 100px;
-}
-.fieldSelector {
-    display: inline-block;
-    margin-left: -5px;
-}
-.obstacleSelector {
-    display: block;
-    width: 100px;
-    height: 100px;
-    margin-bottom: 100px;
-}
-.robotSelector {
-    display: block;
-    width: 100px;
-    height: 100px;
 }

@@ -64,9 +64,9 @@ for (i = 0; i < numberOfTicks; i++) {
 }
 $('#encoder').hide().show(0); //element refresh
 $('#encoderSlider').change(function() {
-	var encoderVal = $('#encoderSlider').val();
-	$('#encoderValueDisplay').text('Arm Encoder Value:' + encoderVal);
-	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(encoderVal));
+	var encoderValDisplay = $('#encoderSlider').val();
+	$('#encoderValDisplay').text('Arm Encoder Value:' + encoderValDisplay);
+	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(encoderValDisplay));
 });
 
 //for every of the 5 attacking positions give the image the attacking toggleswitchcyclethroughimagesthing
@@ -302,7 +302,7 @@ function onValueChanged(key, value, isNew) {
 				value = 0;
 			}
 			$('#encoderSlider').val(value);
-			$('#encoderValueDisplay').text('Encoder Val: ' + value);
+			$('#encoderValDisplay').text('Encoder Val: ' + value);
 			break;
 	}
 	if (isNew) {

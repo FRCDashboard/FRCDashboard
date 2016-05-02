@@ -10,7 +10,7 @@
 <body>
     <header>
         <!-- Tells whether robot is connected to UI. -->
-        <p>Robot: <span id="robotstate">Unknown state</span></p>
+        <p>Robot: <span id="robotState">Unknown state</span></p>
         <button id="tuningButton">Tuning</button>
     </header>
     <div class="camera">
@@ -41,7 +41,7 @@
         <button id="setButton">Set</button>
         <button id="get">Get</button>
         <h1>Dashboard</h1>
-        <button id="set">Set</button>
+        <div id="varList"></div>
     </article>
     <aside>
         <div id="functionButtons">
@@ -52,15 +52,11 @@
         <div id="encoder">
             <input id="encoderSlider" type="range" min="0" max="1200" value="770" step="25" list="stepList">
             <datalist id="stepList"></datalist>
-            <br>
-            <span id="encoderValueDisplay">Arm Encoder Value: 200</span>
-            <br>
-            <span class="encoderLimitSwitch" id="forwardEncoder">Forward Enc:False</span>
-            <br>
-            <span class="encoderLimitSwitch" id="reverseEncoder">Reverse Enc:False</span>
+            <div id="encoderValDisplay">Arm Encoder Value: 200</div>
+            <div class="encoderLimitSwitch" id="forwardEncoder">Forward Enc:False</div>
+            <div class="encoderLimitSwitch" id="reverseEncoder">Reverse Enc:False</div>
         </div>
     </aside>
-    <script src="js/jquery.js"></script>
     <script src="/networktables/networktables.js"></script>
     <script src="ui.js"></script>
 </body>

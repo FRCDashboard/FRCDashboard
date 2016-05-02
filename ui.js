@@ -1,8 +1,10 @@
 // Create values
-var currentSeconds = 135;
+var s = 135,
+	displayInTuning = ['/SmartDashboard/'];
 
 // Define UI elements
 var ui = {
+	timer: document.getElementById('timer'),
 	robotState: document.getElementById('robotState'),
 	gyro: {
 		val: 0,
@@ -10,13 +12,18 @@ var ui = {
 		label: document.getElementById('gyroLabel')
 	},
 	encoder: {
+		valDisplay: document.getElementById('encoderValDisplay'),
+		slider: document.getElementById('encoderSlider'),
 		forward: document.getElementById('forwardEncoder'),
 		reverse: document.getElementById('reverseEncoder')
 	},
 	robotDiagram: {
 		arm: document.getElementById('robotArm')
 	},
-	functionButton: getElementsByClassName('functionButton')
+	functionButton: document.getElementsByClassName('functionButton'),
+	tuning: {
+		varList: document.getElementById('varList')
+	}
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -29,7 +36,7 @@ NetworkTables.addGlobalListener(onValueChanged, true);
 
 function onRobotConnection(connected) {
 	console.log('Robot connected: ' + connected);
-	ui.robotState.text(connected ? 'Robot connected!' : 'Robot disconnected');
+	ui.robotState.innerHTML = connected ? 'Robot connected!' : 'Robot disconnected';
 }
 
 function onValueChanged(key, value, isNew) {
@@ -64,7 +71,7 @@ function onValueChanged(key, value, isNew) {
 			// The following case is an example, for a robot with an arm at the front.
 			// Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
 		case '/SmartDashboard/Arm | Encoder':
-			// 0 is all the way back, 1200 is 45 degrees foreward. We don't want it going past that.
+			// 0 is all the way back, 1200 is 45 degrees forward. We don't want it going past that.
 			if (value > 1140) {
 				value = 1140;
 			} else if (value < 0) {
@@ -92,69 +99,73 @@ function onValueChanged(key, value, isNew) {
 				button.classList.remove('active');
 			}
 			break;
-		case '/SmartDashboard/startTheTimer':
+			// When this NetworkTables variable is true, the timer will start.
+			// You shouldn't need to touch this code, but it's documented anyway in case you do.
+		case '/SmartDashboard/timeRunning':
 			if (value) {
-				document.getElementById('timer').style.color = 'black';
-				timerVar = setInterval(function() {
-					currentSeconds--;
-					var currentMinutes = parseInt(currentSeconds / 60);
-					var actualSeconds = (currentSeconds % 60);
+				// Make sure timer is reset to black when it starts
+				ui.timer.style.color = 'black';
+				// Function below adjusts time left every second
+				countdown = setInterval(function() {
+					s--; // Subtract one second
+					// Minutes (m) is equal to the total seconds divided by sixty with the decimal removed.
+					var m = Math.floor(s / 60);
+					// Create seconds number that will actually be displayed after minutes are subtracted
+					var visualS = (s % 60);
 
-					actualSeconds = actualSeconds < 10 ? '0' + actualSeconds : actualSeconds;
+					// Add leading zero if seconds is one digit long, for proper time formatting.
+					visualS = visualS < 10 ? '0' + visualS : visualS;
 
-					if (currentSeconds < 0) {
-						window.clearTimeout(timerVar);
+					if (s < 0) {
+						// Stop countdown when timer reaches zero
+						window.clearTimeout(countdown);
 						return;
-					} else if (currentSeconds <= 15) {
-						document.getElementById('timer').style.color = (currentSeconds % 2 === 0) ? '#FF3030' : 'white';
-					} else if (currentSeconds <= 30) {
-						document.getElementById('timer').style.color = '#FF3030';
+					} else if (s <= 15) {
+						// Flash timer if less than 15 seconds left
+						ui.timer.style.color = (s % 2 === 0) ? '#FF3030' : 'transparent';
+					} else if (s <= 30) {
+						// Solid red timer when less than 30 seconds left.
+						ui.timer.style.color = '#FF3030';
 					}
-					document.getElementById('timer').innerHTML = currentMinutes + ':' + actualSeconds;
+					ui.timer.innerHTML = m + ':' + visualS;
 				}, 1000);
 			} else {
-				document.getElementById('timer').innerHTML = '2:15';
-				currentSeconds = 135;
+				ui.timer.innerHTML = '2:15';
+				s = 135;
 			}
-			NetworkTables.setValue('/SmartDashboard/startTheTimer', false);
+			NetworkTables.setValue('/SmartDashboard/timeRunning', false);
 			break;
 		case '/SmartDashboard/Arm | Middle':
+			// 0 and 1200 are the encoder's min and max values, we don't want it going past that.
 			if (value > 1200) {
 				value = 1200;
 			} else if (value < 0) {
 				value = 0;
 			}
-			$('#encoderSlider').val(value);
-			$('#encoderValueDisplay').text('Encoder Val: ' + value);
+			// Set slider and number display to new encoder value
+			ui.encoder.slider.value = value;
+			ui.encoder.valDisplay.innerHTML = 'Encoder Val: ' + value;
 			break;
 	}
+	// This section manages the Tuning section of the UI.
+	// The tuning section allows direct manipulation of all NetworkTables variables.
 	if (isNew) {
-		/*iterate through each value in displayInTuning, if the key starts
-		 with the current value of displayInTuning display it, if not then do nothing */
-		var displayInTuningLength = displayInTuning.length;
-		var addToTuning = false;
-		for (j = 0; j < displayInTuningLength; j++) {
-			var currentString = displayInTuning[j];
-			if (key.substring(0, currentString.length) == currentString) {
-				addToTuning = true;
-				break;
-			}
-		}
-		if (addToTuning) {
-			var div = $('<div></div>').attr('propName', propName); //.appendTo($('.settings'));
-			var allOfTheDivs = $('.settings').first().children('[type]');
-			var allOfTheDivsLength = allOfTheDivs.length;
-			if (allOfTheDivsLength === 0) {
-				div.appendTo('.settings');
+		// Is the starting of the key's name /SmartDashboard/?
+		if (key.substring(0, displayInTuning[i].length) === displayInTuning) {
+			// Generate new div with name = name of NetworkTables value
+			var div = document.createElement('div').attr('name', propName);
+
+			var allOfTheDivs = $('#varList').first().children('[type]');
+			if (allOfTheDivs.length === 0) {
+				div.appendTo('#varList');
 			} //comment
 			else {
-				//run through all of the crap, if the string is greater than this elements propane, insert it after it, it should keep hitting false until true then break
-				var noneFound = true; //if it is the highest in the array append it to .settings
+				//run through all of the things, if the string is greater than this elements propane, insert it after it, it should keep hitting false until true then break
+				var noneFound = true; //if it is the highest in the array append it to #varList
 				var processedDivName = propName.toLowerCase();
-				var processedDivNameLength = processedDivName.length;
 				allOfTheDivs.not(div).each(function() {
-					var thisPropname = $(this).attr('propName').toLowerCase();
-					for (a = 0; a < processedDivNameLength; a++) {
+					var thisPropname = $(this).attr('name').toLowerCase();
+					for (a = 0; a < processedDivName.length; a++) {
 						if (processedDivName.charCodeAt(a) == thisPropname.charCodeAt(a)) {
 
 						} else if (processedDivName.charCodeAt(a) < thisPropname.charCodeAt(a)) { //if processedDivName is greater, keep going, if not, then insert vefore
@@ -166,11 +177,8 @@ function onValueChanged(key, value, isNew) {
 						}
 					}
 				});
-				/*for(a=0;a<allOfTheDivsLength;a++){
-					var
-				}*/
 				if (noneFound === true) {
-					div.appendTo('.settings');
+					div.appendTo('#varList');
 				}
 			}
 			$('<p></p>').text(propName).appendTo(div);
@@ -237,16 +245,23 @@ function onValueChanged(key, value, isNew) {
 		}
 	}
 }
-$('#set').click(function() {
-	var childInputs = $('#settingsContainerDiv input');
-	childInputs.each(function(a) {
-		var thisChild = $(this);
-		var s;
-		if ($.isNumeric(thisChild.val())) {
-			s = parseInt(thisChild.val());
-		} else {
-			s = thisChild.val();
-		}
-		NetworkTables.setValue(thisChild.attr('tableValue'), s); //need to change id back into a string
-	});
+document.getElementById('setButton').onclick = function() {
+	var setValue = document.getElementById('value').value;
+	if (setValue == 'true') { // ¯\_(ツ)_/¯
+		NetworkTables.setValue(document.getElementById('name').value, true);
+	} else if (setValue == 'false') {
+		NetworkTables.setValue(document.getElementById('name').value, false);
+	} else {
+		NetworkTables.setValue(document.getElementById('name').value,
+			document.getElementById('value').value);
+	}
+};
+document.getElementById('get').onclick = function() {
+	document.getElementById('value').value = NetworkTables.getValue(document.getElementById('name').value);
+};
+
+document.getElementById('tuningButton').click(function() {
+	$('#tuning').show();
+	$('#teleopButton').removeClass('active');
+	$(this).addClass('active');
 });
