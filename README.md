@@ -1,13 +1,11 @@
-# FRC Driver Station
-
-## Introduction
+# FRC Dashboard
 
 FRC Dashboard is an extendable, web-browser-based dashboard for FIRST Robotics Competition (FRC).
 
 * Completely legal for competition as it works alongside standard DriverStation
 * Touchscreen web browser interface provides richer control interface for secondary robot operator
 * Lots of code commenting to help you easily understand code and add your robot's functions
-* Inbuilt camera streaming system
+* Inbuilt camera streaming system, gyroscope, encoder control, and example buttons
 
 Technologies used:
 * NetworkTables
@@ -65,3 +63,8 @@ There are several prebuilt addons for FRC Dashboard:
 ### Other authors
 * [Leon Tan](https://github.com/lleontan), lead of original 1418 UI team, coder of first iteration of UI and pynetworktables2js
 * [Dustin Spicuzza](https://github.com/virtuald), 1418 mentor and head of the [RobotPy](http://github.com/robotpy) project.
+
+## License
+
+© 2016 [Erik Boesen](https://github.com/ErikBoesen), [Leon Tan](https://github.com/lleontan), [Dustin Spicuzza](https://github.com/virtuald).  
+This software is licensed under the Apache 2.0 license. Basically, you can do whatever you want, as long as you give credit to the original source, and keep the license with it.
