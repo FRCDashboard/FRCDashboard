@@ -2,7 +2,7 @@
 
 ## Introduction
 
-DriverStationJS is an extendable, web-browser-based driverstation for FIRST Robotics Competition (FRC).
+FRC Dashboard is an extendable, web-browser-based dashboard for FIRST Robotics Competition (FRC).
 
 * Completely legal for competition as it works alongside standard DriverStation
 * Touchscreen web browser interface provides richer control interface for secondary robot operator
@@ -20,7 +20,7 @@ Technologies used:
 ## Setting up
 
 * For the camera to work, you must change the source in `index.html` to the IP of your live camera feed. This may take some tweaking.
-* It is recommended that you close the top panel of the standard FRC DriverStation to make room for a sized-down Chrome window.
+* It is recommended that you close the top panel of the FRC DriverStation to make room for a sized-down Chrome window.
 
 ## Running the code
 
@@ -36,7 +36,7 @@ Make sure you have pynetworktables2 installed:
 
 Run this command:
 
-    python3 driverStationServer.py
+    python3 dashboardServer.py
 
 ### Connect to the robot
 
@@ -52,10 +52,10 @@ Open Chrome and go to:
 
 ## Addons
 
-There are several prebuilt addons for DriverStationJS:
-* [Gyro](https://github.com/driverstationjs-gyro)
-* [Camera Tuner](https://github.com/driverstationjs-cameratuner)
-* [Tuning](https://github.com/driverstationjs-tuning)
+There are several prebuilt addons for FRC Dashboard:
+* [Gyro](https://github.com/frcdashboard-gyro)
+* [Camera Tuner](https://github.com/frcdashboard-cameratuner)
+* [Tuning](https://github.com/frcdashboard-tuning)
 * More coming soon!
 
 ## Authors
