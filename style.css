@@ -91,12 +91,12 @@ aside {
     -webkit-user-select: none;
     user-select: none;
 }
-.functionButton {
+#ladderButton {
     width: 150px;
     height: 150px;
     border: solid 4px black;
 }
-.functionButton.active {
+#ladderButton.active {
     border-color: #ff5111;
 }
 #encoder {

@@ -13,8 +13,10 @@
         <div id="robotState">Unknown state</div>
     </header>
     <div class="camera">
-        <!-- Depending on what other robot systems you're using, you may have to mess with this a little. -->
-        <img src="http://10.14.18.2:5800/?action=stream">
+        <!-- Depending on what other robot systems you're using, you may have to mess with this a little.
+            The src attribute should link to a live-updating image from the camera feed. Other methods may
+            require some modification. -->
+        <img src="">
     </div>
     <!-- Clock that shows up in top left -->
     <div id="timer">2:15</div>
@@ -35,16 +37,12 @@
         </svg>
     </article>
     <aside>
-        <div id="functionButtons">
-            <img id="gateButton" class="functionButton" src="/img/gate.png" name="gate" active="false">
-            <img id="chevyButton" class="functionButton" src="/img/cheval.png" name="cheval" active="false">
-            <img id="ladderButton" class="functionButton" src="/img/ladder.png" name="ladder" active="false">
-        </div>
+        <img id="ladderButton" src="/img/ladder.png" name="ladder" active="false">
         <div id="encoder">
             <input id="encoderSlider" type="range" min="0" max="1200" value="770">
-            <div id="encoderValDisplay">Arm Encoder Value: 200</div>
-            <div class="encoderLimitSwitch" id="forwardEncoder">Forward Enc:False</div>
-            <div class="encoderLimitSwitch" id="reverseEncoder">Reverse Enc:False</div>
+            <div id="encoderValDisplay">Arm Encoder Value: ?</div>
+            <div class="encoderLimitSwitch" id="forwardEncoder">Forward Encoder: ?</div>
+            <div class="encoderLimitSwitch" id="reverseEncoder">Reverse Encoder: ?</div>
         </div>
     </aside>
     <script src="/networktables/networktables.js"></script>

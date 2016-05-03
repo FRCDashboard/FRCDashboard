@@ -2,9 +2,9 @@
 
 ## Introduction
 
-DriverStationJS is an extendable, web-browser-based driverstation for FIRST Robotics Competition.
+DriverStationJS is an extendable, web-browser-based driverstation for FIRST Robotics Competition (FRC).
 
-* Completely legal for competition as it doesn't replace existing DriverStation functionality
+* Completely legal for competition as it works alongside standard DriverStation
 * Touchscreen web browser interface provides richer control interface for secondary robot operator
 * Lots of code commenting to help you easily understand code and add your robot's functions
 * Inbuilt camera streaming system
@@ -15,18 +15,12 @@ Technologies used:
 
 ## Background
 
-[FRC Team 1418 Vae Victis](https://github.com/frc1418) used an earlier version of this code in practice and competition throughout 2014, 2015, and 2016.  
-
-This version of the code was created to serve as a boilerplate for other teams' UIs, and to be team-ambiguous.  
-
-If, however, you still wish to view or utilize the team's original code, it can be found [here](/frc1418/2016-UI) (2016 code). Be warned that although it has some useful features which this code doesn't have yet, it is very outdated and poorly coded and is not recommended.
-
-[2015 UI](/frc1418/2015-ui) (NOT Recommended!)  
-[2014 code](/frc1418/2014) (All our 2014 robot code, including the UI, lumped together in one confusing repository. Please, please don't use this one.)
+[FRC Team 1418 Vae Victis](https://github.com/frc1418) used an earlier version of this code in practice and competition throughout 2014, 2015, and 2016.
 
 ## Setting up
 
 * For the camera to work, you must change the source in `index.html` to the IP of your live camera feed. This may take some tweaking.
+* It is recommended that you close the top panel of the standard FRC DriverStation to make room for a sized-down Chrome window.
 
 ## Running the code
 
@@ -59,8 +53,9 @@ Open Chrome and go to:
 ## Addons
 
 There are several prebuilt addons for DriverStationJS:
-* [Gyro](htts://github.com/driverstationjs-gyro)
-* [Camera Tuner](htts://github.com/driverstationjs-cameratuner)
+* [Gyro](https://github.com/driverstationjs-gyro)
+* [Camera Tuner](https://github.com/driverstationjs-cameratuner)
+* [Tuning](https://github.com/driverstationjs-tuning)
 * More coming soon!
 
 ## Authors
@@ -68,7 +63,5 @@ There are several prebuilt addons for DriverStationJS:
 * [Erik Boesen](https://github.com/ErikBoesen)
 
 ### Other authors
-* [Leon Tan](https://github.com/lleontan), lead of original 1418 UI team
-* [Tim Winters](https://github.com/Twinters007), code
-
-Special Thanks to [Dustin Spicuzza](https://github.com/virtuald), 1418 mentor and head of the [RobotPy](http://github.com/robotpy) project.
+* [Leon Tan](https://github.com/lleontan), lead of original 1418 UI team, coder of first iteration of UI and pynetworktables2js
+* [Dustin Spicuzza](https://github.com/virtuald), 1418 mentor and head of the [RobotPy](http://github.com/robotpy) project.

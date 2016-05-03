@@ -17,7 +17,7 @@ var ui = {
 	robotDiagram: {
 		arm: document.getElementById('robotArm')
 	},
-	functionButtons: document.getElementsByClassName('functionButton')
+	ladderButton: document.getElementById('ladderButton')
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -77,24 +77,17 @@ function onValueChanged(key, value, isNew) {
 			// Rotate the arm in diagram to match real arm
 			ui.robotDiagram.arm.style.transform = 'rotate(' + armAngle + ')';
 			break;
-			// These buttons are examples of a button to perform a function on the robot.
-			// You'll need to write your own robot code to do these functions or any others.
-			// These are just placeholders which we used in 2016.
-		case '/SmartDashboard/chevyButton':
-		case '/SmartDashboard/gateButton':
+        // This button is just an example of triggering an event on the robot by clicking a button.
 		case '/SmartDashboard/ladderButton':
-			// Figure out which of the above buttons should be active
-			var button = document.getElementById(propName);
-
 			if (value) { // If function is active:
 				// Add active class to button.
-				button.classList.add('active');
+				ui.ladderButton.className = 'active';
 			} else {
-				button.classList.remove('active');
+				ui.ladderButton.className = '';
 			}
 			break;
-			// When this NetworkTables variable is true, the timer will start.
-			// You shouldn't need to touch this code, but it's documented anyway in case you do.
+		// When this NetworkTables variable is true, the timer will start.
+		// You shouldn't need to touch this code, but it's documented anyway in case you do.
 		case '/SmartDashboard/timeRunning':
 			var s = 135;
 			if (value) {
@@ -144,19 +137,12 @@ function onValueChanged(key, value, isNew) {
 }
 
 // The rest of the doc is listeners for UI elements being clicked on
-functionButtons.addEventListener('click', function() {
-	console.log(this);
-	isActive = this.active == 'true' ? true : false;
-	for (i = 0; i < functionButtons.length; i++) {
-		functionButtons[i].active = false;
-	}
-	NetworkTables.setValue('/SmartDashboard/' + this.id, isActive);
+ui.ladderButton.addEventListener('click', function() {
+    // Set NetworkTables values to the opposite of whether button has active class.
+	NetworkTables.setValue('/SmartDashboard/' + this.id, this.className != 'active');
 });
 
-ui.encoder.container.hide().show(0); //element refresh
-$('#encoderSlider').change(function() {
-	var encoderVal = $('#encoderSlider').val();
-	$('#encoderValueDisplaySpan').text('Arm Encoder Value:' + encoderVal);
-	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(encoderVal));
-
+// Get value of encoder slider when it's adjusted
+ui.encoder.slider.addEventListener('click', function() {
+	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(ui.encoder.slider.value));
 });
