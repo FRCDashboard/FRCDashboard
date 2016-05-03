@@ -4,8 +4,11 @@ var ui = {
 	robotState: document.getElementById('robotState'),
 	gyro: {
 		val: 0,
+        offset: 0,
+        visualVal: 0,
 		arm: document.getElementById('gyroArm'),
-		label: document.getElementById('gyroLabel')
+		number: document.getElementById('gyroNumber'),
+        button: document.getElementById('gyroButton')
 	},
 	encoder: {
         container: document.getElementById('encoder'),
@@ -29,14 +32,12 @@ NetworkTables.addGlobalListener(onValueChanged, true);
 
 
 function onRobotConnection(connected) {
-	console.log(connected ? 'Robot connected!' : 'Robot disconnected.');
-	ui.robotState.innerHTML = connected ? 'Robot connected!' : 'Robot disconnected';
+    state = connected ? 'Robot connected!' : 'Robot disconnected.';
+    console.log(state);
+	ui.robotState.innerHTML = state;
 }
 
 function onValueChanged(key, value, isNew) {
-	// Removes "/SmartDashboard/" from start of property name
-	var propName = key.substring(16, key.length);
-
 	// Sometimes, NetworkTables will pass strings instead of bools. This corrects for that.
 	if (value == 'true') {
 		value = true;
@@ -44,22 +45,23 @@ function onValueChanged(key, value, isNew) {
 		value = false;
 	}
 
-	// This switch statement updates the UI for modified NetworkTables variables.
+	// This switch statement chooses which UI element to update when a NetworkTables variable changes.
 	switch (key) {
-		case '/SmartDashboard/NavX | Yaw': // Gyro rotation
+		case '/SmartDashboard/Drive/NavX | Yaw': // Gyro rotation
 			ui.gyro.val = value;
-			if (ui.gyro.val < 0) { // Corrects for negative values
-				ui.gyro.val += 360;
+            ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
+			if (ui.gyro.visualVal < 0) { // Corrects for negative values
+				ui.gyro.visualVal += 360;
 			}
-			ui.gyro.arm.style.transform = 'rotate(' + ui.gyro.val + 'deg)';
-			ui.gyro.label.text(ui.gyro.val + 'º');
+			ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
+			ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 			break;
 		case '/SmartDashboard/Arm | Forward Limit Switch':
-			ui.encoder.forward.text('Forward Encoder:' + value);
+			ui.encoder.forward.innerHTML = 'Forward Encoder:' + value;
 			ui.encoder.forward.style.color = value ? 'green' : 'red';
 			break;
 		case '/SmartDashboard/Arm | Reverse Limit Switch':
-			ui.encoder.forward.text('Reverse Encoder:' + value);
+			ui.encoder.forward.innerHTML = 'Reverse Encoder:' + value;
 			ui.encoder.reverse.style.color = value ? 'green' : 'red';
 			break;
 			// The following case is an example, for a robot with an arm at the front.
@@ -82,7 +84,8 @@ function onValueChanged(key, value, isNew) {
 			if (value) { // If function is active:
 				// Add active class to button.
 				ui.ladderButton.className = 'active';
-			} else {
+			} else { // Otherwise
+                // Take it off
 				ui.ladderButton.className = '';
 			}
 			break;
@@ -145,4 +148,9 @@ ui.ladderButton.addEventListener('click', function() {
 // Get value of encoder slider when it's adjusted
 ui.encoder.slider.addEventListener('click', function() {
 	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(ui.encoder.slider.value));
+});
+
+ui.gyro.button.addEventListener('click', function() {
+	ui.gyro.offset = ui.gyro.val;
+    onValueChanged('/SmartDashboard/Drive/NavX | Yaw', ui.gyro.val);
 });

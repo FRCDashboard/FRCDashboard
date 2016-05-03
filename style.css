@@ -1,14 +1,28 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 ::-webkit-scrollbar {
     display: none;
 }
 body {
-    font-family: monospace;
-    font-size: 1.2em;
+    font: 1.2em monospace;
     -webkit-user-select: none;
     user-select: none;
+}
+button {
+    border: solid 1px black;
+    background: none;
+    font-size: .8em;
+    padding: .5em;
+    cursor: pointer;
+}
+button:focus {
+    outline: 0;
+}
+button:active {
+    background: #eee;
 }
 header,
 article,
@@ -18,7 +32,7 @@ aside,
     position: fixed;
     overflow: scroll;
 }
-#main {
+article {
     top: 0;
     left: 50vw;
     height: 100vh;
@@ -29,6 +43,9 @@ svg * {
     fill: white;
     stroke-width: 2;
     transform-origin: center;
+}
+text {
+    
 }
 #gyro {
     width: 175px;
@@ -59,14 +76,12 @@ header {
 }
 .camera {
     position: fixed;
-    z-index: 0;
-    top: 20vh;
+    bottom: 0;
     left: 0;
     width: 50vw;
     overflow: hidden;
     height: 80vh;
-    background: url(img/static.gif);
-    padding: 0;
+    background:
 }
 .camera img {
     width: 50vw;
@@ -79,15 +94,13 @@ aside {
     height: 100vh;
 }
 #timer {
-    padding: .6vh 1vw;
-    font-family: 'DS-Digital', monospace;
     display: block;
     height: 20vh;
     width: 25vw;
     top: 0;
     left: 0;
-    font-size: 8.5vmax;
-    line-height: .78;
+    font-size: 20vh;
+    line-height: .7;
     -webkit-user-select: none;
     user-select: none;
 }

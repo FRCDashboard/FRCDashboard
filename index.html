@@ -20,12 +20,14 @@
     </div>
     <!-- Clock that shows up in top left -->
     <div id="timer">2:15</div>
-    <article id="main">
-        <svg id="gyro" z-index="10" pointer-events="">
+    <!-- The main body of the UI, by default contains the gyro monitor and the robot diagram -->
+    <article>
+        <svg id="gyro" z-index="10">
             <circle id="gyroCircle" cx="85" cy="85" r="50" stroke="black" stroke-width="3" />
             <rect id="gyroArm" x="80" y="5" width="10" height="80" stroke="black" stroke-width="3" />
-            <text id="gyroLabel" x="50" y="30" fill="black" font-size="25">0º</text>
+            <text id="gyroNumber" x="65" y="115" fill="black" font-size="25">0º</text>
         </svg>
+        <button id="gyroButton">Reset Gyro</button>
         <svg id="robotDiagram" width="332" height="450">
             <rect x="75" y="360" width="230" height="40" />
             <rect x="85" y="370" width="210" height="40" />
@@ -37,7 +39,8 @@
         </svg>
     </article>
     <aside>
-        <img id="ladderButton" src="/img/ladder.png" name="ladder" active="false">
+        <!-- Example button for winch -->
+        <img id="ladderButton" src="/img/ladder.png">
         <div id="encoder">
             <input id="encoderSlider" type="range" min="0" max="1200" value="770">
             <div id="encoderValDisplay">Arm Encoder Value: ?</div>

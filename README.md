@@ -4,16 +4,17 @@ FRC Dashboard is an extendable, web-browser-based dashboard for FIRST Robotics C
 
 * Completely legal for competition as it works alongside standard DriverStation
 * Touchscreen web browser interface provides richer control interface for secondary robot operator
+  * While it's designed for touchscreens, can work without
 * Lots of code commenting to help you easily understand code and add your robot's functions
 * Inbuilt camera streaming system, gyroscope, encoder control, and example buttons
 
 Technologies used:
 * NetworkTables
-* [pynetworktables2js](https://github.com/robotpy/pynetworktables2js)
+* [pynetworktables2js](/robotpy/pynetworktables2js)
 
 ## Background
 
-[FRC Team 1418 Vae Victis](https://github.com/frc1418) used an earlier version of this code in practice and competition throughout 2014, 2015, and 2016.
+[FRC Team 1418 Vae Victis](/frc1418) used an earlier version of this code in practice and competition throughout 2014, 2015, and 2016.
 
 ## Setting up
 
@@ -30,19 +31,13 @@ Make sure you have pynetworktables2 installed:
 
     pip3 install pynetworktables2js
 
-### Connect to a local simulation
+### Start the dashboard server
 
 Run this command:
 
     python3 dashboardServer.py
 
-### Connect to the robot
-
-Run this command:
-
-    python3 driverStationClientV1.py --host=roborio-1418-frc.local
-
-### View the output
+### Open dashboard
 
 Open Chrome and go to:
 
@@ -51,20 +46,20 @@ Open Chrome and go to:
 ## Addons
 
 There are several prebuilt addons for FRC Dashboard:
-* [Gyro](https://github.com/frcdashboard-gyro)
-* [Camera Tuner](https://github.com/frcdashboard-cameratuner)
-* [Tuning](https://github.com/frcdashboard-tuning)
+* [Gyro](/FRCDashboard/FRCDashboard-Gyro)
+* [Camera Tuner](/FRCDashboard/FRCDashboard-CameraTuner)
+* [Tuning](/FRCDashboard/FRCDashboard-Tuning)
 * More coming soon!
 
 ## Authors
 
-* [Erik Boesen](https://github.com/ErikBoesen)
+* [Erik Boesen](/ErikBoesen)
 
 ### Other authors
-* [Leon Tan](https://github.com/lleontan), lead of original 1418 UI team, coder of first iteration of UI and pynetworktables2js
-* [Dustin Spicuzza](https://github.com/virtuald), 1418 mentor and head of the [RobotPy](http://github.com/robotpy) project.
+* [Leon Tan](/lleontan), lead of original 1418 UI team, coder of first iteration of UI and pynetworktables2js
+* [Dustin Spicuzza](/virtuald), 1418 mentor and head of the [RobotPy](/robotpy) project.
 
 ## License
 
-© 2016 [Erik Boesen](https://github.com/ErikBoesen), [Leon Tan](https://github.com/lleontan), [Dustin Spicuzza](https://github.com/virtuald).  
+© 2016 [Erik Boesen](/ErikBoesen), [Leon Tan](/lleontan), [Dustin Spicuzza](/virtuald).  
 This software is licensed under the Apache 2.0 license. Basically, you can do whatever you want, as long as you give credit to the original source, and keep the license with it.
