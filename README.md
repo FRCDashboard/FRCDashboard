@@ -6,15 +6,16 @@ FRC Dashboard is an extendable, web-browser-based dashboard for FIRST Robotics C
 * Touchscreen web browser interface provides richer control interface for secondary robot operator
   * While it's designed for touchscreens, can work without
 * Lots of code commenting to help you easily understand code and add your robot's functions
-* Inbuilt camera streaming system, gyroscope, encoder control, and example buttons
+* Inbuilt camera streaming system, SVG gyroscope, encoder control, and example buttons
+* SVG of a robot which you can modify for your own purposes
 
 Technologies used:
 * NetworkTables
-* [pynetworktables2js](/robotpy/pynetworktables2js)
+* [pynetworktables2js](https://github.com/robotpy/pynetworktables2js)
 
 ## Background
 
-[FRC Team 1418 Vae Victis](/frc1418) used an earlier version of this code in practice and competition throughout 2014, 2015, and 2016.
+[FRC Team 1418 Vae Victis](https://github.com/frc1418) used an earlier version of this code in practice and competition throughout 2014, 2015, and 2016.
 
 ## Setting up
 
@@ -46,20 +47,20 @@ Open Chrome and go to:
 ## Addons
 
 There are several prebuilt addons for FRC Dashboard:
-* [Gyro](/FRCDashboard/FRCDashboard-Gyro)
-* [Camera Tuner](/FRCDashboard/FRCDashboard-CameraTuner)
-* [Tuning](/FRCDashboard/FRCDashboard-Tuning)
+* [Gyro](https://github.com/FRCDashboard/FRCDashboard-Gyro)
+* [Camera Tuner](https://github.com/FRCDashboard/FRCDashboard-CameraTuner)
+* [Tuning](https://github.com/FRCDashboard/FRCDashboard-Tuning)
 * More coming soon!
 
 ## Authors
 
-* [Erik Boesen](/ErikBoesen)
+* [Erik Boesen](https://github.com/ErikBoesen)
 
 ### Other authors
-* [Leon Tan](/lleontan), lead of original 1418 UI team, coder of first iteration of UI and pynetworktables2js
-* [Dustin Spicuzza](/virtuald), 1418 mentor and head of the [RobotPy](/robotpy) project.
+* [Leon Tan](https://github.com/lleontan), lead of original 1418 UI team, coder of first iteration of UI and pynetworktables2js
+* [Dustin Spicuzza](https://github.com/virtuald), 1418 mentor and head of the [RobotPy](https://github.com/robotpy) project.
 
 ## License
 
-© 2016 [Erik Boesen](/ErikBoesen), [Leon Tan](/lleontan), [Dustin Spicuzza](/virtuald).  
+© 2016 [Erik Boesen](https://github.com/ErikBoesen), [Leon Tan](https://github.com/lleontan), [Dustin Spicuzza](@virtuald).  
 This software is licensed under the Apache 2.0 license. Basically, you can do whatever you want, as long as you give credit to the original source, and keep the license with it.
