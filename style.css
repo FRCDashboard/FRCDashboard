@@ -45,7 +45,8 @@ svg * {
     transform-origin: center;
 }
 text {
-    
+    font-size: 25px;
+    text-anchor: middle;
 }
 #gyro {
     width: 175px;

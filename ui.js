@@ -3,6 +3,7 @@ var ui = {
 	timer: document.getElementById('timer'),
 	robotState: document.getElementById('robotState'),
 	gyro: {
+        container: document.getElementById('gyro'),
 		val: 0,
         offset: 0,
         visualVal: 0,
@@ -150,7 +151,7 @@ ui.encoder.slider.addEventListener('click', function() {
 	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(ui.encoder.slider.value));
 });
 
-ui.gyro.button.addEventListener('click', function() {
+ui.gyro.container.addEventListener('click', function() {
 	ui.gyro.offset = ui.gyro.val;
     onValueChanged('/SmartDashboard/Drive/NavX | Yaw', ui.gyro.val);
 });
