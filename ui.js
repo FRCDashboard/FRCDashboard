@@ -3,16 +3,16 @@ var ui = {
 	timer: document.getElementById('timer'),
 	robotState: document.getElementById('robotState'),
 	gyro: {
-        container: document.getElementById('gyro'),
+		container: document.getElementById('gyro'),
 		val: 0,
-        offset: 0,
-        visualVal: 0,
+		offset: 0,
+		visualVal: 0,
 		arm: document.getElementById('gyroArm'),
 		number: document.getElementById('gyroNumber'),
-        button: document.getElementById('gyroButton')
+		button: document.getElementById('gyroButton')
 	},
 	encoder: {
-        container: document.getElementById('encoder'),
+		container: document.getElementById('encoder'),
 		valDisplay: document.getElementById('encoderValDisplay'),
 		slider: document.getElementById('encoderSlider'),
 		forward: document.getElementById('forwardEncoder'),
@@ -33,8 +33,8 @@ NetworkTables.addGlobalListener(onValueChanged, true);
 
 
 function onRobotConnection(connected) {
-    state = connected ? 'Robot connected!' : 'Robot disconnected.';
-    console.log(state);
+	state = connected ? 'Robot connected!' : 'Robot disconnected.';
+	console.log(state);
 	ui.robotState.innerHTML = state;
 }
 
@@ -50,12 +50,23 @@ function onValueChanged(key, value, isNew) {
 	switch (key) {
 		case '/SmartDashboard/Drive/NavX | Yaw': // Gyro rotation
 			ui.gyro.val = value;
-            ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
+			ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
 			if (ui.gyro.visualVal < 0) { // Corrects for negative values
 				ui.gyro.visualVal += 360;
 			}
 			ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
 			ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
+			break;
+		case '/SmartDashboard/Arm | Middle':
+			// 0 and 1200 are the encoder's min and max values, we don't want it going past that.
+			if (value > 1200) {
+				value = 1200;
+			} else if (value < 0) {
+				value = 0;
+			}
+			// Set slider and number display to new encoder value
+			ui.encoder.slider.value = value;
+			ui.encoder.valDisplay.innerHTML = 'Encoder Val: ' + value;
 			break;
 		case '/SmartDashboard/Arm | Forward Limit Switch':
 			ui.encoder.forward.innerHTML = 'Forward Encoder:' + value;
@@ -80,18 +91,18 @@ function onValueChanged(key, value, isNew) {
 			// Rotate the arm in diagram to match real arm
 			ui.robotDiagram.arm.style.transform = 'rotate(' + armAngle + ')';
 			break;
-        // This button is just an example of triggering an event on the robot by clicking a button.
+			// This button is just an example of triggering an event on the robot by clicking a button.
 		case '/SmartDashboard/ladderButton':
 			if (value) { // If function is active:
 				// Add active class to button.
 				ui.ladderButton.className = 'active';
 			} else { // Otherwise
-                // Take it off
+				// Take it off
 				ui.ladderButton.className = '';
 			}
 			break;
-		// When this NetworkTables variable is true, the timer will start.
-		// You shouldn't need to touch this code, but it's documented anyway in case you do.
+			// When this NetworkTables variable is true, the timer will start.
+			// You shouldn't need to touch this code, but it's documented anyway in case you do.
 		case '/SmartDashboard/timeRunning':
 			var s = 135;
 			if (value) {
@@ -126,23 +137,12 @@ function onValueChanged(key, value, isNew) {
 			}
 			NetworkTables.setValue('/SmartDashboard/timeRunning', false);
 			break;
-		case '/SmartDashboard/Arm | Middle':
-			// 0 and 1200 are the encoder's min and max values, we don't want it going past that.
-			if (value > 1200) {
-				value = 1200;
-			} else if (value < 0) {
-				value = 0;
-			}
-			// Set slider and number display to new encoder value
-			ui.encoder.slider.value = value;
-			ui.encoder.valDisplay.innerHTML = 'Encoder Val: ' + value;
-			break;
 	}
 }
 
 // The rest of the doc is listeners for UI elements being clicked on
 ui.ladderButton.addEventListener('click', function() {
-    // Set NetworkTables values to the opposite of whether button has active class.
+	// Set NetworkTables values to the opposite of whether button has active class.
 	NetworkTables.setValue('/SmartDashboard/' + this.id, this.className != 'active');
 });
 
@@ -153,5 +153,5 @@ ui.encoder.slider.addEventListener('click', function() {
 
 ui.gyro.container.addEventListener('click', function() {
 	ui.gyro.offset = ui.gyro.val;
-    onValueChanged('/SmartDashboard/Drive/NavX | Yaw', ui.gyro.val);
+	onValueChanged('/SmartDashboard/Drive/NavX | Yaw', ui.gyro.val);
 });

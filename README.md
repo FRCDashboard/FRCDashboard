@@ -3,11 +3,11 @@
 FRC Dashboard is an extendable, web-browser-based dashboard for FIRST Robotics Competition (FRC).
 
 * Completely legal for competition as it works alongside standard DriverStation
-* Touchscreen web browser interface provides richer control interface for secondary robot operator
-  * While it's designed for touchscreens, can work without
+* Web browser interface provides richer control interface for secondary robot operator
+  * Works with or without touchscreen
 * Lots of code commenting to help you easily understand code and add your robot's functions
 * Inbuilt camera streaming system, SVG gyroscope, encoder control, and example buttons
-* SVG of a robot which you can modify for your own purposes
+* Moving SVG of a robot which you can modify for your own purposes
 
 Technologies used:
 * NetworkTables
@@ -19,7 +19,7 @@ Technologies used:
 
 ## Setting up
 
-* For the camera to work, you must change the source in `index.html` to the IP of your live camera feed. This may take some tweaking.
+* For the camera to work, you must change the source in `index.html` to the IP of your live camera feed. This may take some tweaking depending on how your camera stream works. We use and recommend [MJPG Streamer](https://github.com/jacksonliam/mjpg-streamer).
 * It is recommended that you close the top panel of the FRC DriverStation to make room for a sized-down Chrome window.
 
 ## Running the code
@@ -44,6 +44,8 @@ Open Chrome and go to:
 
     http://localhost:8888
 
+If you're on Windows, you can open `launch.bat`, which will start the server and open Chrome.
+
 ## Addons
 
 There are several prebuilt addons for FRC Dashboard:
@@ -62,5 +64,5 @@ There are several prebuilt addons for FRC Dashboard:
 
 ## License
 
-© 2016 [Erik Boesen](https://github.com/ErikBoesen), [Leon Tan](https://github.com/lleontan), [Dustin Spicuzza](@virtuald).  
+© 2016 [Erik Boesen](https://github.com/ErikBoesen), [Leon Tan](https://github.com/lleontan), [Dustin Spicuzza](https://github.com/virtuald).  
 This software is licensed under the Apache 2.0 license. Basically, you can do whatever you want, as long as you give credit to the original source, and keep the license with it.
