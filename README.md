@@ -2,6 +2,8 @@
 
 FRC Dashboard is an extendable, web-browser-based dashboard for FIRST Robotics Competition (FRC).
 
+__Contributions are VERY welcome! Please feel free to open a pull request or issue with improvements or a new feature.__
+
 * Completely legal for competition as it works alongside standard DriverStation
 * Web browser interface provides richer control interface for secondary robot operator
   * Works with or without touchscreen
@@ -26,7 +28,7 @@ Technologies used:
 
 ### Requirements
 
-python 3 must be installed!
+Python 3 must be installed!
 
 Make sure you have pynetworktables2 installed:
 
@@ -64,5 +66,4 @@ There are several prebuilt addons for FRC Dashboard:
 
 ## License
 
-© 2016 [Erik Boesen](https://github.com/ErikBoesen), [Leon Tan](https://github.com/lleontan), [Dustin Spicuzza](https://github.com/virtuald).  
 This software is licensed under the Apache 2.0 license. Basically, you can do whatever you want, as long as you give credit to the original source, and keep the license with it.

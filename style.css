@@ -9,7 +9,9 @@
 body {
     font: 1.2em monospace;
     -webkit-user-select: none;
-    user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 button {
     border: solid 1px black;
@@ -17,17 +19,17 @@ button {
     font-size: .7em;
     padding: .5em;
     cursor: pointer;
-}
-button:focus {
     outline: 0;
 }
 button:active {
     background: #eee;
 }
+/* Major parts of interface. */
 header,
 article,
 aside,
-#timer {
+#timer,
+#tuning {
     padding: 10px;
     position: fixed;
     overflow: scroll;
@@ -42,7 +44,9 @@ svg * {
     stroke: black;
     fill: white;
     stroke-width: 2;
-    transform-origin: center;
+    -webkit-transform-origin: center;
+        -ms-transform-origin: center;
+            transform-origin: center;
 }
 text {
     font-size: 25px;
@@ -57,7 +61,9 @@ text {
     margin-top: 15px;
 }
 #gyroArm {
-    transform-origin: bottom;
+    -webkit-transform-origin: bottom;
+        -ms-transform-origin: bottom;
+            transform-origin: bottom;
 }
 #robotDiagram {
     position: absolute;
@@ -65,7 +71,9 @@ text {
     right: 1vw;
 }
 #robotArm {
-    transform-origin: right;
+    -webkit-transform-origin: right;
+        -ms-transform-origin: right;
+            transform-origin: right;
 }
 header {
     width: 25vw;
@@ -101,7 +109,9 @@ aside {
     font-size: 20vh;
     line-height: .7;
     -webkit-user-select: none;
-    user-select: none;
+    -moz-user-select: none;
+     -ms-user-select: none;
+         user-select: none;
 }
 #ladderButton {
     width: 150px;
@@ -120,4 +130,17 @@ aside {
 }
 .encoderLimitSwitch {
     color: red;
+}
+#tuning {
+    background: white;
+    width: 50vw;
+    height: 80vh;
+    bottom: 0;
+    left: 0;
+}
+#tuning div {
+    margin: 20px 0;
+}
+#tuning p {
+    margin-bottom: 10px;
 }

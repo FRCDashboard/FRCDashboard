@@ -21,7 +21,11 @@ var ui = {
 	robotDiagram: {
 		arm: document.getElementById('robotArm')
 	},
-	ladderButton: document.getElementById('ladderButton')
+	ladderButton: document.getElementById('ladderButton'),
+	tuning: {
+		list: document.getElementById('tuning'),
+		button: document.getElementById('tuningButton')
+	}
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -101,9 +105,9 @@ function onValueChanged(key, value, isNew) {
 				ui.ladderButton.className = '';
 			}
 			break;
+		case '/SmartDashboard/timeRunning':
 			// When this NetworkTables variable is true, the timer will start.
 			// You shouldn't need to touch this code, but it's documented anyway in case you do.
-		case '/SmartDashboard/timeRunning':
 			var s = 135;
 			if (value) {
 				// Make sure timer is reset to black when it starts
@@ -135,23 +139,89 @@ function onValueChanged(key, value, isNew) {
 			} else {
 				s = 135;
 			}
-			NetworkTables.setValue('/SmartDashboard/timeRunning', false);
+			NetworkTables.setValue(key, false);
 			break;
+	}
+
+	var propName = key.substring(16, key.length);
+	// Check if value is new, starts with /SmartDashboard/, and doesn't have a spot on the list yet
+	if (isNew && value && document.getElementsByName(propName).length === 0) {
+		if (key.substring(0, 16) === '/SmartDashboard/') {
+			// Make a new div for this value
+			var div = document.createElement('div'); // Make div
+			ui.tuning.list.appendChild(div); // Add the div to the page
+
+			var p = document.createElement('p'); // Make a <p> to display the name of the property
+			p.innerHTML = propName; // Make content of <p> have the name of the NetworkTables value
+			div.appendChild(p); // Put <p> in div
+
+			var input = document.createElement('input'); // Create input
+			input.name = propName; // Make its name property be the name of the NetworkTables value
+			input.value = value; // Set
+			// The following statement figures out which data type the variable is.
+			// If it's a boolean, it will make the input be a checkbox. If it's a number,
+			// it will make it a number chooser with up and down arrows in the box. Otherwise, it will make it a textbox.
+			if (value === true || value === false) { // Is it a boolean value?
+				input.type = 'checkbox';
+                input.checked = value; // value property doesn't work on checkboxes, we'll need to use the checked property instead
+			} else if (!isNaN(value)) { // Is the value not not a number? Great!
+				input.type = 'number';
+			} else { // Just use a text if there's no better manipulation method
+				input.type = 'text';
+			}
+			input.onchange = function() {
+                switch (input.type) {
+                    case 'checkbox':
+                        NetworkTables.setValue(key, input.checked);
+                        break;
+                    case 'number':
+                        NetworkTables.setValue(key, parseInt(input.value));
+                        break;
+                    case 'text':
+                        NetworkTables.setValue(key, input.value);
+                        break;
+                }
+
+                console.log(NetworkTables.getValue(key));
+			};
+			div.appendChild(input);
+		}
+	} else {
+		var oldInput = document.getElementsByName(propName)[0];
+		if (oldInput) {
+			if (oldInput.type === 'checkbox') {
+				oldInput.checked = value;
+			} else {
+				oldInput.value = value;
+			}
+		}
 	}
 }
 
 // The rest of the doc is listeners for UI elements being clicked on
-ui.ladderButton.addEventListener('click', function() {
+ui.ladderButton.onclick = function() {
 	// Set NetworkTables values to the opposite of whether button has active class.
 	NetworkTables.setValue('/SmartDashboard/' + this.id, this.className != 'active');
-});
+};
 
 // Get value of encoder slider when it's adjusted
-ui.encoder.slider.addEventListener('click', function() {
+ui.encoder.slider.onclick = function() {
 	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(ui.encoder.slider.value));
-});
+};
 
-ui.gyro.container.addEventListener('click', function() {
+// Reset gyro value to 0 on click
+ui.gyro.container.onclick = function() {
+	// Store previous gyro val, will now be subtracted from val for callibration
 	ui.gyro.offset = ui.gyro.val;
+	// Trigger the gyro to recalculate value.
 	onValueChanged('/SmartDashboard/Drive/NavX | Yaw', ui.gyro.val);
-});
+};
+
+// Open tuning section when button is clicked
+ui.tuning.button.onclick = function() {
+	if (ui.tuning.list.style.display === 'none') {
+		ui.tuning.list.style.display = 'block';
+	} else {
+		ui.tuning.list.style.display = 'none';
+	}
+};
