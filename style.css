@@ -82,15 +82,10 @@ header {
     left: 25vw;
     color: black;
 }
-.camera {
+#camera {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 50vw;
-    overflow: hidden;
-    height: 80vh;
-}
-.camera img {
     width: 50vw;
     height: 80vh;
 }
@@ -137,6 +132,7 @@ aside {
     height: 80vh;
     bottom: 0;
     left: 0;
+    display: none;
 }
 #tuning div {
     margin: 20px 0;

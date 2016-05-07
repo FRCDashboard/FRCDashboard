@@ -1,6 +1,6 @@
 # FRC Dashboard
 
-FRC Dashboard is an extendable, web-browser-based dashboard for FIRST Robotics Competition (FRC).
+FRC Dashboard is an extendable, fully customizable, web-based dashboard for FIRST Robotics Competition (FRC).
 
 __Contributions are VERY welcome! Please feel free to open a pull request or issue with improvements or a new feature.__
 
@@ -9,7 +9,7 @@ __Contributions are VERY welcome! Please feel free to open a pull request or iss
   * Works with or without touchscreen
 * Lots of code commenting to help you easily understand code and add your robot's functions
 * Inbuilt camera streaming system, SVG gyroscope, encoder control, and example buttons
-* Moving SVG of a robot which you can modify for your own purposes
+* Lots of addons to easily create new dashboard widgets for your own use!
 
 Technologies used:
 * NetworkTables
@@ -51,9 +51,10 @@ If you're on Windows, you can open `launch.bat`, which will start the server and
 ## Addons
 
 There are several prebuilt addons for FRC Dashboard:
-* [Gyro](https://github.com/FRCDashboard/FRCDashboard-Gyro)
-* [Camera Tuner](https://github.com/FRCDashboard/FRCDashboard-CameraTuner)
-* [Tuning](https://github.com/FRCDashboard/FRCDashboard-Tuning)
+* [MultiCamera](https://github.com/FRCDashboard/addon-MultiCamera) - Toggle between multiple camera views, great if your robot has multiple cameras.
+* [Tuning](https://github.com/FRCDashboard/addon-Tuning) - Easily modify NetworkTables variables directly. _Included by default_
+* [Gyro](https://github.com/FRCDashboard/addon-Gyro) - gyroscope widget to help orient your robot. _Included by default._
+* [Encoder Slider](https://github.com/FRCDashboard/addon-EncoderSlider) - Slider to change encoder value. Can be easily repurposed to modify any NetworkTables value. _Included by default._
 * More coming soon!
 
 ## Authors
