@@ -1,4 +1,4 @@
-# FRC Dashboard
+# ![Logo](img/logo.png) FRC Dashboard
 
 FRC Dashboard is an extendable, fully customizable, web-based dashboard for FIRST Robotics Competition (FRC).
 
@@ -10,14 +10,6 @@ __Contributions are VERY welcome! Please feel free to open a pull request or iss
 * Lots of code commenting to help you easily understand code and add your robot's functions
 * Inbuilt camera streaming system, SVG gyroscope, encoder control, and example buttons
 * Lots of addons to easily create new dashboard widgets for your own use!
-
-Technologies used:
-* NetworkTables
-* [pynetworktables2js](https://github.com/robotpy/pynetworktables2js)
-
-## Background
-
-[FRC Team 1418 Vae Victis](https://github.com/frc1418) used an earlier version of this code in practice and competition throughout 2014, 2015, and 2016.
 
 ## Setting up
 
@@ -59,10 +51,13 @@ There are several prebuilt addons for FRC Dashboard:
 
 ## Authors
 
-* [Erik Boesen](https://github.com/ErikBoesen)
+This library is maintained by [Erik Boesen](https://github.com/ErikBoesen).
 
 ### Other authors
-* [Leon Tan](https://github.com/lleontan), lead of original 1418 UI team, coder of first iteration of UI and pynetworktables2js
+
+[FRC Team 1418 Vae Victis](https://github.com/frc1418) used an earlier version of this code in practice and competition throughout 2014, 2015, and 2016.
+
+* [Leon Tan](https://github.com/lleontan) led the original 1418 UI team and coded the first iteration of the UI and pynetworktables2js
 * [Dustin Spicuzza](https://github.com/virtuald), 1418 mentor and head of the [RobotPy](https://github.com/robotpy) project.
 
 ## License

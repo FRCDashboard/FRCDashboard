@@ -21,7 +21,7 @@ var ui = {
 	robotDiagram: {
 		arm: document.getElementById('robotArm')
 	},
-	ladderButton: document.getElementById('ladderButton'),
+	exampleButton: document.getElementById('exampleButton'),
 	tuning: {
 		list: document.getElementById('tuning'),
 		button: document.getElementById('tuningButton')
@@ -96,13 +96,13 @@ function onValueChanged(key, value, isNew) {
 			ui.robotDiagram.arm.style.transform = 'rotate(' + armAngle + ')';
 			break;
 			// This button is just an example of triggering an event on the robot by clicking a button.
-		case '/SmartDashboard/ladderButton':
+		case '/SmartDashboard/exampleButton':
 			if (value) { // If function is active:
 				// Add active class to button.
-				ui.ladderButton.className = 'active';
+				ui.exampleButton.className = 'active';
 			} else { // Otherwise
 				// Take it off
-				ui.ladderButton.className = '';
+				ui.exampleButton.className = '';
 			}
 			break;
 		case '/SmartDashboard/timeRunning':
@@ -205,7 +205,7 @@ function onValueChanged(key, value, isNew) {
 }
 
 // The rest of the doc is listeners for UI elements being clicked on
-ui.ladderButton.onclick = function() {
+ui.exampleButton.onclick = function() {
 	// Set NetworkTables values to the opposite of whether button has active class.
 	NetworkTables.setValue('/SmartDashboard/' + this.id, this.className != 'active');
 };

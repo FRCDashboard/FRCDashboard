@@ -108,12 +108,12 @@ aside {
      -ms-user-select: none;
          user-select: none;
 }
-#ladderButton {
+#exampleButton {
     width: 150px;
     height: 150px;
     border: solid 4px black;
 }
-#ladderButton.active {
+#exampleButton.active {
     border-color: #ff5111;
 }
 #encoder {
