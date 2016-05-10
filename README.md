@@ -1,6 +1,6 @@
-# ![Logo](img/logo.png) FRC Dashboard
+# FRC Dashboard ![Logo](img/logo.png)
 
-FRC Dashboard is an extendable, fully customizable, web-based dashboard for FIRST Robotics Competition (FRC).
+FRC Dashboard is a fully customizable web-based dashboard for FIRST Robotics Competition (FRC).
 
 __Contributions are VERY welcome! Please feel free to open a pull request or issue with improvements or a new feature.__
 

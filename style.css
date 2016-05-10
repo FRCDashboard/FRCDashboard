@@ -51,6 +51,7 @@ svg * {
 text {
     font-size: 25px;
     text-anchor: middle;
+    fill: black;
 }
 #gyro {
     width: 175px;
@@ -132,7 +133,6 @@ aside {
     height: 80vh;
     bottom: 0;
     left: 0;
-    display: none;
 }
 #tuning div {
     margin: 20px 0;
