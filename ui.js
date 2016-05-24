@@ -25,7 +25,8 @@ var ui = {
 	tuning: {
 		list: document.getElementById('tuning'),
 		button: document.getElementById('tuningButton')
-	}
+	},
+	autoSelect: document.getElementById('autoSelect')
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -37,7 +38,7 @@ NetworkTables.addGlobalListener(onValueChanged, true);
 
 
 function onRobotConnection(connected) {
-	state = connected ? 'Robot connected!' : 'Robot disconnected.';
+	var state = connected ? 'Robot connected!' : 'Robot disconnected.';
 	console.log(state);
 	ui.robotState.innerHTML = state;
 }
@@ -125,7 +126,7 @@ function onValueChanged(key, value, isNew) {
 
 					if (s < 0) {
 						// Stop countdown when timer reaches zero
-						window.clearTimeout(countdown);
+						clearTimeout(countdown);
 						return;
 					} else if (s <= 15) {
 						// Flash timer if less than 15 seconds left
@@ -141,6 +142,23 @@ function onValueChanged(key, value, isNew) {
 			}
 			NetworkTables.setValue(key, false);
 			break;
+		case '/SmartDashboard/Autonomous Mode/options': // Load list of prewritten autonomous modes
+			// Clear previous list
+			while (ui.autoSelect.firstChild) {
+				ui.autoSelect.removeChild(ui.autoSelect.firstChild);
+			}
+			// Make an option for each autonomous mode and put it in the selector
+			for (i = 0; i < value.length; i++) {
+				var option = document.createElement('option');
+				option.innerHTML = value[i];
+				ui.autoSelect.appendChild(option);
+			}
+			// Set value to the already-selected mode. If there is none, nothing will happen.
+			ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
+			break;
+        case '/SmartDashboard/Autonomous Mode/selected':
+            ui.autoSelect.value = value;
+            break;
 	}
 
 	var propName = key.substring(16, key.length);
@@ -177,20 +195,20 @@ function onValueChanged(key, value, isNew) {
 						NetworkTables.setValue(key, input.checked);
 						break;
 					case 'number':
-                        // For number values, send value of input as an int.
+						// For number values, send value of input as an int.
 						NetworkTables.setValue(key, parseInt(input.value));
 						break;
 					case 'text':
-                        // For normal text values, just send the value.
+						// For normal text values, just send the value.
 						NetworkTables.setValue(key, input.value);
 						break;
 				}
 			};
-            // Put the input into the div.
+			// Put the input into the div.
 			div.appendChild(input);
 		}
 	} else { // If the value is new
-        // Find already-existing input for changing this variable
+		// Find already-existing input for changing this variable
 		var oldInput = document.getElementsByName(propName)[0];
 		if (oldInput) { // If there is one (there should be, unless something is wrong)
 			if (oldInput.type === 'checkbox') { // Figure out what data type it is and update it in the list
@@ -199,8 +217,8 @@ function onValueChanged(key, value, isNew) {
 				oldInput.value = value;
 			}
 		} else {
-            console.log('Error: Non-new variable ' + propName + ' not present in tuning list!');
-        }
+			console.log('Error: Non-new variable ' + propName + ' not present in tuning list!');
+		}
 	}
 }
 
@@ -230,4 +248,9 @@ ui.tuning.button.onclick = function() {
 	} else {
 		ui.tuning.list.style.display = 'none';
 	}
+};
+
+// Update NetworkTables when autonomous selector is changed
+ui.autoSelect.onchange = function() {
+	NetworkTables.setValue('/SmartDashboard/Autonomous Mode/selected', this.value);
 };
