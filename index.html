@@ -17,16 +17,23 @@
         The src attribute should link to a live-updating image from the camera feed. Other methods may
         require some modification. -->
     <img src="" id="camera">
-    <div id="tuning" style="display: none;"></div>
+    <div id="tuning" style="display: none;">
+        <input type="text" placeholder="Property" id="name">
+        <input type="text" placeholder="Value" id="value">
+        <button id="set">Set</button>
+        <button id="get">Get</button>
+    </div>
     <!-- Clock that shows up in top left -->
     <div id="timer">2:15</div>
     <!-- The main body of the UI, by default contains the gyro monitor and the robot diagram -->
     <article>
+        <!-- Gyroscope -->
         <svg id="gyro">
             <circle cx="85" cy="85" r="50" />
             <rect id="gyroArm" x="80" y="5" width="10" height="80" />
             <text id="gyroNumber" x="90" y="115">0º</text>
         </svg>
+        <!-- Example robot diagram, arm moves when encoder value changes -->
         <svg id="robotDiagram" width="332" height="450">
             <rect x="75" y="360" width="230" height="40" />
             <rect x="85" y="370" width="210" height="40" />
@@ -39,6 +46,7 @@
     <aside>
         <!-- Example button -->
         <img id="exampleButton" src="img/logo.png">
+        <!-- Autonomous selector -->
         <select id="autoSelect">
             <option>Robot disconnected</option>
         </select>

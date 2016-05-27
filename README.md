@@ -1,7 +1,7 @@
-# FRC Dashboard
+# [FRC Dashboard](https://frcdashboard.github.io)
 ![Screenshot](img/screenshot.png)
 
-FRC Dashboard is a fully customizable web-based dashboard for FIRST Robotics Competition (FRC).
+FRC Dashboard is a fully customizable web-based dashboard for [FIRST Robotics Competition (FRC)](http://firstinspires.org/robotics/frc).
 
 __Contributions are VERY welcome! Please feel free to open a pull request or issue with improvements or a new feature.__
 
@@ -46,7 +46,8 @@ If you're on Windows, you can open `launch.bat`, which will start the server and
 There are several prebuilt addons for FRC Dashboard:
 * [MultiCamera](https://github.com/FRCDashboard/addon-MultiCamera) - Toggle between multiple camera views, great if your robot has multiple cameras.
 * [Tuning](https://github.com/FRCDashboard/addon-Tuning) - Easily modify NetworkTables variables directly. _Included by default._
-* [Gyro](https://github.com/FRCDashboard/addon-Gyro) - gyroscope widget to help orient your robot. _Included by default._
+* [Gyro](https://github.com/FRCDashboard/addon-Gyro) - Gyroscope widget to help orient your robot. _Included by default._
+* [AutoSelection](https://github.com/FRCDashboard/addon-AutoSelection) - Simple autonomous selection box. _Included by default._
 * [Encoder Slider](https://github.com/FRCDashboard/addon-EncoderSlider) - Slider to change encoder value. Can be easily repurposed to modify any NetworkTables value. _Included by default._
 * More coming soon!
 
@@ -65,4 +66,4 @@ This library is maintained by [Erik Boesen](https://github.com/ErikBoesen).
 
 ## License
 
-This software is licensed under the Apache 2.0 license. Basically, you can do whatever you want, as long as you give credit to the original source, and keep the license with it.
+This software is licensed under the `Apache 2.0` license. Basically, you can do whatever you want, as long as you give credit to the original source, and keep the license with it. More information in `LICENSE`.

@@ -24,7 +24,11 @@ var ui = {
 	exampleButton: document.getElementById('exampleButton'),
 	tuning: {
 		list: document.getElementById('tuning'),
-		button: document.getElementById('tuningButton')
+		button: document.getElementById('tuningButton'),
+        name: document.getElementById('name'),
+        value: document.getElementById('value'),
+		set: document.getElementById('set'),
+		get: document.getElementById('get')
 	},
 	autoSelect: document.getElementById('autoSelect')
 };
@@ -156,14 +160,14 @@ function onValueChanged(key, value, isNew) {
 			// Set value to the already-selected mode. If there is none, nothing will happen.
 			ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
 			break;
-        case '/SmartDashboard/Autonomous Mode/selected':
-            ui.autoSelect.value = value;
-            break;
+		case '/SmartDashboard/Autonomous Mode/selected':
+			ui.autoSelect.value = value;
+			break;
 	}
 
 	var propName = key.substring(16, key.length);
 	// Check if value is new, starts with /SmartDashboard/, and doesn't have a spot on the list yet
-	if (isNew && value && document.getElementsByName(propName).length === 0) {
+	if (isNew && !document.getElementsByName(propName)[0]) {
 		if (key.substring(0, 16) === '/SmartDashboard/') {
 			// Make a new div for this value
 			var div = document.createElement('div'); // Make div
@@ -207,7 +211,7 @@ function onValueChanged(key, value, isNew) {
 			// Put the input into the div.
 			div.appendChild(input);
 		}
-	} else { // If the value is new
+	} else { // If the value is not new
 		// Find already-existing input for changing this variable
 		var oldInput = document.getElementsByName(propName)[0];
 		if (oldInput) { // If there is one (there should be, unless something is wrong)
@@ -217,7 +221,7 @@ function onValueChanged(key, value, isNew) {
 				oldInput.value = value;
 			}
 		} else {
-			console.log('Error: Non-new variable ' + propName + ' not present in tuning list!');
+			console.log('Error: Non-new variable ' + key + ' not present in tuning list!');
 		}
 	}
 }
@@ -248,6 +252,16 @@ ui.tuning.button.onclick = function() {
 	} else {
 		ui.tuning.list.style.display = 'none';
 	}
+};
+
+// Manages get and set buttons at the top of the tuning pane
+ui.tuning.set.onclick = function() {
+    if (ui.tuning.name.value && ui.tuning.value.value) { // Make sure the inputs have content
+        NetworkTables.setValue(ui.tuning.name.value, ui.tuning.value.value);
+    }
+};
+ui.tuning.get.onclick = function() {
+	ui.tuning.value.value = NetworkTables.getValue(ui.tuning.name.value);
 };
 
 // Update NetworkTables when autonomous selector is changed
