@@ -7,9 +7,7 @@ var ui = {
 		val: 0,
 		offset: 0,
 		visualVal: 0,
-		arm: document.getElementById('gyroArm'),
-		number: document.getElementById('gyroNumber'),
-		button: document.getElementById('gyroButton')
+		arm: document.getElementById('gyroArm')
 	},
 	encoder: {
 		container: document.getElementById('encoder'),
@@ -166,8 +164,9 @@ function onValueChanged(key, value, isNew) {
 	}
 
 	var propName = key.substring(16, key.length);
-	// Check if value is new, starts with /SmartDashboard/, and doesn't have a spot on the list yet
+	// Check if value is new and doesn't have a spot on the list yet
 	if (isNew && !document.getElementsByName(propName)[0]) {
+        // Make sure name starts with /SmartDashboard/. Properties that don't are technical and don't need to be shown on the list.
 		if (key.substring(0, 16) === '/SmartDashboard/') {
 			// Make a new div for this value
 			var div = document.createElement('div'); // Make div
@@ -256,7 +255,8 @@ ui.tuning.button.onclick = function() {
 
 // Manages get and set buttons at the top of the tuning pane
 ui.tuning.set.onclick = function() {
-    if (ui.tuning.name.value && ui.tuning.value.value) { // Make sure the inputs have content
+    // Make sure the inputs have content, if they do update the NT value
+    if (ui.tuning.name.value && ui.tuning.value.value) {
         NetworkTables.setValue(ui.tuning.name.value, ui.tuning.value.value);
     }
 };

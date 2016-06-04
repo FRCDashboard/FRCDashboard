@@ -66,4 +66,4 @@ This library is maintained by [Erik Boesen](https://github.com/ErikBoesen).
 
 ## License
 
-This software is licensed under the `Apache 2.0` license. Basically, you can do whatever you want, as long as you give credit to the original source, and keep the license with it. More information in `LICENSE`.
+This software is licensed under the `Apache 2.0` license. Basically, you can do whatever you want, as long as you give credit to the [original source](https://github.com/FRCDashboard/FRCDashboard), and keep the license with it. More information in `LICENSE`.
