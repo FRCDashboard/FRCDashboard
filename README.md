@@ -12,6 +12,9 @@ __Contributions are VERY welcome! Please feel free to open a pull request or iss
 * Inbuilt camera streaming system, SVG gyroscope, encoder control, and example buttons
 * Lots of addons to easily create new dashboard widgets for your own use!
 
+## Training
+FRC Dashboard is full of comments and is designed to be easy to understand. However, if you need some help, check out [the official training repository.](https://github.com/FRCDashboard/training).
+
 ## Setting up
 
 * For the camera to work, you must change the source in `index.html` to the IP of your live camera feed. This may take some tweaking depending on how your camera stream works. We use and recommend [MJPG Streamer](https://github.com/jacksonliam/mjpg-streamer).
@@ -19,13 +22,15 @@ __Contributions are VERY welcome! Please feel free to open a pull request or iss
 
 ## Running the code
 
-### Requirements
+### Dependencies
 
 Python 3 must be installed!
 
 Make sure you have pynetworktables2 installed:
 
     pip3 install pynetworktables2js
+
+(If you don't have administrator privileges, put `--user` at the end of that command.)
 
 ### Start the dashboard server
 
