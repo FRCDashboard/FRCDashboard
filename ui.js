@@ -56,7 +56,7 @@ function onValueChanged(key, value, isNew) {
 
 	// This switch statement chooses which UI element to update when a NetworkTables variable changes.
 	switch (key) {
-		case '/SmartDashboard/Drive/NavX | Yaw': // Gyro rotation
+		case '/SmartDashboard/drive/navX/yaw': // Gyro rotation
 			ui.gyro.val = value;
 			ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
 			if (ui.gyro.visualVal < 0) { // Corrects for negative values
@@ -65,7 +65,7 @@ function onValueChanged(key, value, isNew) {
 			ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
 			ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 			break;
-		case '/SmartDashboard/Arm | Middle':
+		case '/SmartDashboard/arm/middle':
 			// 0 and 1200 are the encoder's min and max values, we don't want it going past that.
 			if (value > 1200) {
 				value = 1200;
@@ -76,17 +76,17 @@ function onValueChanged(key, value, isNew) {
 			ui.encoder.slider.value = value;
 			ui.encoder.valDisplay.innerHTML = 'Encoder Val: ' + value;
 			break;
-		case '/SmartDashboard/Arm | Forward Limit Switch':
+		case '/SmartDashboard/arm/forward-limit-switch':
 			ui.encoder.forward.innerHTML = 'Forward Encoder:' + value;
 			ui.encoder.forward.style.color = value ? 'green' : 'red';
 			break;
-		case '/SmartDashboard/Arm | Reverse Limit Switch':
+		case '/SmartDashboard/arm/reverse-limit-switch':
 			ui.encoder.forward.innerHTML = 'Reverse Encoder:' + value;
 			ui.encoder.reverse.style.color = value ? 'green' : 'red';
 			break;
 			// The following case is an example, for a robot with an arm at the front.
 			// Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
-		case '/SmartDashboard/Arm | Encoder':
+		case '/SmartDashboard/arm/encoder':
 			// 0 is all the way back, 1200 is 45 degrees forward. We don't want it going past that.
 			if (value > 1140) {
 				value = 1140;
@@ -145,7 +145,7 @@ function onValueChanged(key, value, isNew) {
 			}
 			NetworkTables.setValue(key, false);
 			break;
-		case '/SmartDashboard/Autonomous Mode/options': // Load list of prewritten autonomous modes
+		case '/SmartDashboard/autonomous/options': // Load list of prewritten autonomous modes
 			// Clear previous list
 			while (ui.autoSelect.firstChild) {
 				ui.autoSelect.removeChild(ui.autoSelect.firstChild);
@@ -159,7 +159,7 @@ function onValueChanged(key, value, isNew) {
 			// Set value to the already-selected mode. If there is none, nothing will happen.
 			ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
 			break;
-		case '/SmartDashboard/Autonomous Mode/selected':
+		case '/SmartDashboard/autonomous/selected':
 			ui.autoSelect.value = value;
 			break;
 	}
@@ -236,7 +236,7 @@ ui.exampleButton.onclick = function() {
 
 // Get value of encoder slider when it's adjusted
 ui.encoder.slider.onclick = function() {
-	NetworkTables.setValue('/SmartDashboard/Arm | Middle', parseInt(ui.encoder.slider.value));
+	NetworkTables.setValue('/SmartDashboard/arm/middle', parseInt(ui.encoder.slider.value));
 };
 
 // Reset gyro value to 0 on click
@@ -244,7 +244,7 @@ ui.gyro.container.onclick = function() {
 	// Store previous gyro val, will now be subtracted from val for callibration
 	ui.gyro.offset = ui.gyro.val;
 	// Trigger the gyro to recalculate value.
-	onValueChanged('/SmartDashboard/Drive/NavX | Yaw', ui.gyro.val);
+	onValueChanged('/SmartDashboard/drive/navX/yaw', ui.gyro.val);
 };
 
 // Open tuning section when button is clicked
