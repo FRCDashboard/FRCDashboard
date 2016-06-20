@@ -1,7 +1,5 @@
 body,
-header {
-    color: #fe3131;
-}
+header,
 button,
 input[type="text"],
 input[type="number"],
@@ -9,15 +7,12 @@ input[type="number"],
 select {
     color: #fe3131;
 }
-svg * {
+svg *:not(text) {
     stroke: #fe3131;
 }
 text {
     fill: #fe3131;
 }
 #gyro {
-    border-color: #fe3131;
-}
-#example-button.active {
     border-color: #fe3131;
 }

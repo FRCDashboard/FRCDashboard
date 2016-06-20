@@ -103,8 +103,9 @@ svg * {
     transform-origin: center;
 }
 text {
-    font-size: 25px;
-    text-anchor: middle;
+    font-size: 16px;
+    letter-spacing: 2px;
+    stroke: none;
     fill: white;
 }
 #gyro {
@@ -120,17 +121,28 @@ text {
     -ms-transform-origin: bottom;
     transform-origin: bottom;
 }
+#gyro-number {
+    font-size: 25px;
+    text-anchor: middle;
+}
+#robot-diagram {
+    position: absolute;
+    bottom: 1px;
+    right: 1vw;
+}
+#robot-arm {
+    -webkit-transform-origin: right;
+    -ms-transform-origin: right;
+    transform-origin: right;
+}
 aside {
     right: 0;
     top: 0;
     width: 15vw;
     height: 100vh;
 }
-#example-button {
-    width: 150px;
-    height: 150px;
-    border: solid 4px transparent;
-}
-#example-button.active {
-    border-color: red;
+#example-section,
+.selection-container,
+#color-select {
+    margin-bottom: 10px;
 }

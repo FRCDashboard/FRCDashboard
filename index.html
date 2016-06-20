@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    <!-- Clock that shows up in top left -->
+    <div id="timer">2:15</div>
     <header>
         <!-- Tells whether robot is connected to UI. -->
         <div id="robot-state">Unknown state</div>
@@ -24,8 +26,6 @@
         <button id="set">Set</button>
         <button id="get">Get</button>
     </div>
-    <!-- Clock that shows up in top left -->
-    <div id="timer">2:15</div>
     <!-- The main body of the UI, by default contains the gyro monitor and the robot diagram -->
     <article>
         <!-- Gyroscope -->
@@ -34,10 +34,24 @@
             <rect id="gyro-arm" x="80" y="5" width="10" height="80" />
             <text id="gyro-number" x="90" y="115">0º</text>
         </svg>
+        <!-- Example robot diagram, arm moves when encoder value changes -->
+        <svg id="robot-diagram" width="332" height="450">
+            <text x="55" y="340">Exmpl. SVG Robot Diagrm</text>
+            <rect x="75" y="360" width="230" height="40" />
+            <rect x="85" y="370" width="210" height="40" />
+            <rect id="robot-arm" x="5" y="375" width="80" height="10" />
+            <circle cx="100" cy="410" r="25" />
+            <circle cx="260" cy="410" r="25" />
+            <rect x="60" y="380" width="250" height="30" />
+        </svg>
     </article>
     <aside>
-        <!-- Example button which toggles /SmartDashboard/exampleButton NetworkTables value. -->
-        <img id="example-button" src="img/logo.png">
+        <!-- Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
+            The <p> below then says the value. -->
+        <div id="example-section">
+            <button id="example-button">Change example value</button>
+            <p id="example-readout">Value is undefined</p>
+        </div>
         <!-- Autonomous selector -->
         <div class="select-container">
             <select id="auto-select">

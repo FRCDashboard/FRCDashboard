@@ -10,7 +10,13 @@ var ui = {
 		arm: document.getElementById('gyro-arm'),
         number: document.getElementById('gyro-number')
 	},
-	exampleButton: document.getElementById('example-button'),
+    robotDiagram: {
+        arm: document.getElementById('robot-arm')
+    },
+	example: {
+        button: document.getElementById('example-button'),
+        readout: document.getElementById('example-readout')
+    },
 	tuning: {
 		list: document.getElementById('tuning'),
 		button: document.getElementById('tuning-button'),
@@ -80,10 +86,12 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/exampleVariable':
 			if (value) { // If function is active:
 				// Add active class to button.
-				ui.exampleButton.className = 'active';
+				ui.example.button.className = 'active';
+                ui.example.readout.innerHTML = 'Value is true';
 			} else { // Otherwise
 				// Take it off
-				ui.exampleButton.className = '';
+				ui.example.button.className = '';
+                ui.example.readout.innerHTML = 'Value is false';
 			}
 			break;
 		case '/SmartDashboard/timeRunning':
@@ -206,7 +214,7 @@ function onValueChanged(key, value, isNew) {
 }
 
 // The rest of the doc is listeners for UI elements being clicked on
-ui.exampleButton.onclick = function() {
+ui.example.button.onclick = function() {
 	// Set NetworkTables values to the opposite of whether button has active class.
 	NetworkTables.setValue('/SmartDashboard/exampleVariable', this.className != 'active');
 };
