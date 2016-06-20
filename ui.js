@@ -1,35 +1,31 @@
 // Define UI elements
 var ui = {
 	timer: document.getElementById('timer'),
-	robotState: document.getElementById('robotState'),
+	robotState: document.getElementById('robot-state'),
 	gyro: {
 		container: document.getElementById('gyro'),
 		val: 0,
 		offset: 0,
 		visualVal: 0,
-		arm: document.getElementById('gyroArm'),
-        number: document.getElementById('gyroNumber')
+		arm: document.getElementById('gyro-arm'),
+        number: document.getElementById('gyro-number')
 	},
-	encoder: {
-		container: document.getElementById('encoder'),
-		valDisplay: document.getElementById('encoderValDisplay'),
-		slider: document.getElementById('encoderSlider'),
-		forward: document.getElementById('forwardEncoder'),
-		reverse: document.getElementById('reverseEncoder')
-	},
-	robotDiagram: {
-		arm: document.getElementById('robotArm')
-	},
-	exampleButton: document.getElementById('exampleButton'),
+	exampleButton: document.getElementById('example-button'),
 	tuning: {
 		list: document.getElementById('tuning'),
-		button: document.getElementById('tuningButton'),
+		button: document.getElementById('tuning-button'),
         name: document.getElementById('name'),
         value: document.getElementById('value'),
 		set: document.getElementById('set'),
 		get: document.getElementById('get')
 	},
-	autoSelect: document.getElementById('autoSelect')
+	autoSelect: document.getElementById('auto-select'),
+    color: {
+        link: document.getElementById('color-link'),
+        container: document.getElementById('color-select'),
+        red: document.getElementById('color-select-red'),
+        blue: document.getElementById('color-select-blue')
+    }
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -65,27 +61,8 @@ function onValueChanged(key, value, isNew) {
 			ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
 			ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 			break;
-		case '/SmartDashboard/arm/middle':
-			// 0 and 1200 are the encoder's min and max values, we don't want it going past that.
-			if (value > 1200) {
-				value = 1200;
-			} else if (value < 0) {
-				value = 0;
-			}
-			// Set slider and number display to new encoder value
-			ui.encoder.slider.value = value;
-			ui.encoder.valDisplay.innerHTML = 'Encoder Val: ' + value;
-			break;
-		case '/SmartDashboard/arm/forward-limit-switch':
-			ui.encoder.forward.innerHTML = 'Forward Encoder:' + value;
-			ui.encoder.forward.style.color = value ? 'green' : 'red';
-			break;
-		case '/SmartDashboard/arm/reverse-limit-switch':
-			ui.encoder.forward.innerHTML = 'Reverse Encoder:' + value;
-			ui.encoder.reverse.style.color = value ? 'green' : 'red';
-			break;
-			// The following case is an example, for a robot with an arm at the front.
-			// Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
+		// The following case is an example, for a robot with an arm at the front.
+		// Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
 		case '/SmartDashboard/arm/encoder':
 			// 0 is all the way back, 1200 is 45 degrees forward. We don't want it going past that.
 			if (value > 1140) {
@@ -100,7 +77,7 @@ function onValueChanged(key, value, isNew) {
 			ui.robotDiagram.arm.style.transform = 'rotate(' + armAngle + ')';
 			break;
 			// This button is just an example of triggering an event on the robot by clicking a button.
-		case '/SmartDashboard/exampleButton':
+		case '/SmartDashboard/exampleVariable':
 			if (value) { // If function is active:
 				// Add active class to button.
 				ui.exampleButton.className = 'active';
@@ -231,12 +208,7 @@ function onValueChanged(key, value, isNew) {
 // The rest of the doc is listeners for UI elements being clicked on
 ui.exampleButton.onclick = function() {
 	// Set NetworkTables values to the opposite of whether button has active class.
-	NetworkTables.setValue('/SmartDashboard/' + this.id, this.className != 'active');
-};
-
-// Get value of encoder slider when it's adjusted
-ui.encoder.slider.onclick = function() {
-	NetworkTables.setValue('/SmartDashboard/arm/middle', parseInt(ui.encoder.slider.value));
+	NetworkTables.setValue('/SmartDashboard/exampleVariable', this.className != 'active');
 };
 
 // Reset gyro value to 0 on click
@@ -260,7 +232,7 @@ ui.tuning.button.onclick = function() {
 ui.tuning.set.onclick = function() {
     // Make sure the inputs have content, if they do update the NT value
     if (ui.tuning.name.value && ui.tuning.value.value) {
-        NetworkTables.setValue(ui.tuning.name.value, ui.tuning.value.value);
+        NetworkTables.setValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
     }
 };
 ui.tuning.get.onclick = function() {
@@ -269,5 +241,15 @@ ui.tuning.get.onclick = function() {
 
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function() {
-	NetworkTables.setValue('/SmartDashboard/Autonomous Mode/selected', this.value);
+	NetworkTables.setValue('/SmartDashboard/autonomous/selected', this.value);
+};
+
+// When alliance selection is made, turn on that colored theme and hide alliance selector
+ui.color.red.onclick = function() {
+    ui.color.link.href = 'css/red.css';
+    ui.color.container.style.display = 'none';
+};
+ui.color.blue.onclick = function() {
+    ui.color.link.href = 'css/blue.css';
+    ui.color.container.style.display = 'none';
 };

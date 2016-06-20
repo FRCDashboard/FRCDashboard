@@ -1,0 +1,23 @@
+body,
+header {
+    color: #fe3131;
+}
+button,
+input[type="text"],
+input[type="number"],
+.select-container,
+select {
+    color: #fe3131;
+}
+svg * {
+    stroke: #fe3131;
+}
+text {
+    fill: #fe3131;
+}
+#gyro {
+    border-color: #fe3131;
+}
+#example-button.active {
+    border-color: #fe3131;
+}
