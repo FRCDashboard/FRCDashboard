@@ -21,10 +21,7 @@ button {
     cursor: pointer;
     outline: 0;
 }
-button:active {
-    background: #eee;
-}
-/* Major parts of interface. */
+/* Major interface panes. */
 header,
 article,
 aside,
@@ -34,6 +31,8 @@ aside,
     position: fixed;
     overflow: scroll;
 }
+
+
 article {
     top: 0;
     left: 50vw;

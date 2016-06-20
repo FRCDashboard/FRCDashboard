@@ -7,7 +7,8 @@ var ui = {
 		val: 0,
 		offset: 0,
 		visualVal: 0,
-		arm: document.getElementById('gyroArm')
+		arm: document.getElementById('gyroArm'),
+        number: document.getElementById('gyroNumber')
 	},
 	encoder: {
 		container: document.getElementById('encoder'),
@@ -163,6 +164,8 @@ function onValueChanged(key, value, isNew) {
 			break;
 	}
 
+    // The following code manages tuning section of the interface.
+    // This section displays a list of all NetworkTables variables (that start with /SmartDashboard/) and allows you to directly manipulate them.
 	var propName = key.substring(16, key.length);
 	// Check if value is new and doesn't have a spot on the list yet
 	if (isNew && !document.getElementsByName(propName)[0]) {
