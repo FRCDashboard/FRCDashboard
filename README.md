@@ -1,17 +1,10 @@
 # [FRC Dashboard](https://frcdashboard.github.io)
-## Examples
-### Red Alliance
-![Red theme](screenshots/red.png)
-### Blue Alliance
-![Blue theme](screenshots/blue.png)
-### Rainbow
-![Rainbow theme](screenshots/rainbow.gif)
-### Light
-![Light theme](screenshots/light.png)
-### Dark
-![Dark theme](screenshots/dark.png)
-
 FRC Dashboard is a fully customizable web-based dashboard for [FIRST Robotics Competition (FRC)](http://firstinspires.org/robotics/frc).
+
+![Red theme](screenshots/red.png)
+![Blue theme](screenshots/blue.png)
+![Light theme](screenshots/light.png)
+![Dark theme](screenshots/dark.png)
 
 __Contributions are VERY welcome! Please feel free to open a pull request or issue with improvements or a new feature.__
 
@@ -42,7 +35,7 @@ Make sure you have pynetworktables2 installed:
 
 (If you don't have administrator privileges, put `--user` at the end of that command.)
 
-### Start the dashboard server
+### Start dashboard server
 
 Run this command:
 
@@ -58,27 +51,15 @@ If you're on Windows, you can open `launch.bat`, which will start the server and
 
 ## Addons
 
-There are several prebuilt addons for FRC Dashboard:
-* [MultiCamera](https://github.com/FRCDashboard/addon-MultiCamera) - Toggle between multiple camera views, great if your robot has multiple cameras.
-* [Tuning](https://github.com/FRCDashboard/addon-Tuning) - Easily modify NetworkTables variables directly. _Included by default._
-* [Gyro](https://github.com/FRCDashboard/addon-Gyro) - Gyroscope widget to help orient your robot. _Included by default._
-* [AutoSelection](https://github.com/FRCDashboard/addon-AutoSelection) - Simple autonomous selection box. _Included by default._
-* [Encoder Slider](https://github.com/FRCDashboard/addon-EncoderSlider) - Slider to change encoder value. Can be easily repurposed to modify any NetworkTables value. _Included by default._
-* More coming soon!
-
-_A full list of addons can be found on the [FRC Dashboard website](https://frcdashboard.github.io)._
+There are several prebuilt addons for FRC Dashboard. You can find a full list on the [FRC Dashboard website](https://frcdashboard.github.io) or on the [FRC DB GitHub page](https://github.com/FRCDashboard).
 
 ## Authors
 
-This library is maintained by [Erik Boesen](https://github.com/ErikBoesen).
-
-### Other authors
-
-[FRC Team 1418 Vae Victis](https://github.com/frc1418) used earlier versions of this code in 2015 and 2016.
-
+* This library is primarily maintained by [Erik Boesen](https://github.com/ErikBoesen).
+* [FRC Team 1418](https://github.com/frc1418) used earlier versions of this code in 2015 and 2016.
 * [Leon Tan](https://github.com/lleontan) led the original 1418 UI team and coded the first iteration of the UI and pynetworktables2js
 * [Dustin Spicuzza](https://github.com/virtuald), 1418 mentor and head of the [RobotPy](https://github.com/robotpy) project.
 
 ## License
 
-This software is licensed under the `Apache 2.0` license. Basically, you can do whatever you want, as long as you give credit to the [original source](https://github.com/FRCDashboard/FRCDashboard), and keep the license with it. More information in `LICENSE`.
+This software is licensed under the `Apache 2.0` license. Basically, do whatever you want, as long as you give credit to the [original source](https://github.com/FRCDashboard/FRCDashboard), and keep the license with it. More information in `LICENSE`.

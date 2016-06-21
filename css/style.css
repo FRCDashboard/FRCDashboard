@@ -43,6 +43,10 @@ input[type="text"],
 input[type="number"] {
     cursor: text;
 }
+input[type="checkbox"] {
+    -webkit-filter: saturate(0);
+    filter: saturate(0);
+}
 
 /* Major interface panes, aside, article, header, etc. */
 body > * {
