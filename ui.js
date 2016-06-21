@@ -25,13 +25,7 @@ var ui = {
 		set: document.getElementById('set'),
 		get: document.getElementById('get')
 	},
-	autoSelect: document.getElementById('auto-select'),
-    color: {
-        link: document.getElementById('color-link'),
-        container: document.getElementById('color-select'),
-        red: document.getElementById('color-select-red'),
-        blue: document.getElementById('color-select-blue')
-    }
+	autoSelect: document.getElementById('auto-select')
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -250,14 +244,4 @@ ui.tuning.get.onclick = function() {
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function() {
 	NetworkTables.setValue('/SmartDashboard/autonomous/selected', this.value);
-};
-
-// When alliance selection is made, turn on that colored theme and hide alliance selector
-ui.color.red.onclick = function() {
-    ui.color.link.href = 'css/red.css';
-    ui.color.container.style.display = 'none';
-};
-ui.color.blue.onclick = function() {
-    ui.color.link.href = 'css/blue.css';
-    ui.color.container.style.display = 'none';
 };

@@ -14,6 +14,7 @@ body {
     user-select: none;
     color: white;
     overflow: hidden;
+    background: #222;
 }
 button,
 input[type="text"],
@@ -44,7 +45,6 @@ input[type="number"] {
 }
 
 /* Major interface panes, aside, article, header, etc. */
-
 body > * {
     padding: 10px;
     position: fixed;
@@ -54,17 +54,17 @@ body > * {
 #timer {
     display: block;
     height: 20vh;
-    width: 25vw;
+    width: 30vw;
     top: 0;
     left: 0;
     font-size: 20vh;
     line-height: .7;
 }
 header {
-    width: 25vw;
+    width: 20vw;
     height: 20vh;
     top: 0;
-    left: 25vw;
+    left: 30vw;
     color: white;
 }
 #camera {
@@ -75,6 +75,9 @@ header {
     width: 50vw;
     height: 80vh;
     overflow: hidden;
+    background-color: #333;
+    /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
+    background-image: url('LINK TO CAMERA SOURCE HERE');
 }
 #tuning {
     width: 50vw;
@@ -111,8 +114,6 @@ text {
 #gyro {
     width: 175px;
     height: 175px;
-    border: solid 2px white;
-    border-radius: 50%;
     margin-left: 30px;
     margin-top: 15px;
 }
@@ -141,8 +142,6 @@ aside {
     width: 15vw;
     height: 100vh;
 }
-#example-section,
-.selection-container,
-#color-select {
-    margin-bottom: 10px;
+aside > * {
+    margin-bottom: 20px;
 }

@@ -1,5 +1,15 @@
 # [FRC Dashboard](https://frcdashboard.github.io)
-![Screenshot](img/screenshot.png)
+## Examples
+### Red Alliance
+![Red theme](screenshots/red.png)
+### Blue Alliance
+![Blue theme](screenshots/blue.png)
+### Rainbow
+![Rainbow theme](screenshots/rainbow.gif)
+### Light
+![Light theme](screenshots/light.png)
+### Dark
+![Dark theme](screenshots/dark.png)
 
 FRC Dashboard is a fully customizable web-based dashboard for [FIRST Robotics Competition (FRC)](http://firstinspires.org/robotics/frc).
 

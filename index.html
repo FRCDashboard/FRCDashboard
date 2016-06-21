@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <title>FRC Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- href val is added by JS if/when user chooses their alliance color. -->
-    <link id="color-link" rel="stylesheet" href>
 </head>
 
 <body>
@@ -17,9 +15,8 @@
         <div id="robot-state">Unknown state</div>
         <button id="tuning-button">Tuning</button>
     </header>
-    <!-- Depending on what other robot systems you're using, you may have to mess with this a little.
-        The src attribute should link to a live-updating image from the camera feed. Using other camera streaming systems will require some tweaking. If img tags don't work with your system, make sure the replacement element has the #camera class. -->
-    <img src="INSERT LINK TO CAMERA SOURCE HERE" id="camera">
+    <!-- You'll need to mess around with the CSS of #camera (found in css/style.css) to get it to work. -->
+    <div id="camera"></div>
     <div id="tuning" style="display: none;">
         <input type="text" placeholder="Property" id="name">
         <input type="text" placeholder="Value" id="value">
@@ -30,13 +27,14 @@
     <article>
         <!-- Gyroscope -->
         <svg id="gyro">
+            <circle cx="85" cy="85" r="83" />
             <circle cx="85" cy="85" r="50" />
             <rect id="gyro-arm" x="80" y="5" width="10" height="80" />
             <text id="gyro-number" x="90" y="115">0º</text>
         </svg>
         <!-- Example robot diagram, arm moves when encoder value changes -->
         <svg id="robot-diagram" width="332" height="450">
-            <text x="55" y="340">Exmpl. SVG Robot Diagrm</text>
+            <text x="40" y="340">Example SVG Robot Diagram</text>
             <rect x="75" y="360" width="230" height="40" />
             <rect x="85" y="370" width="210" height="40" />
             <rect id="robot-arm" x="5" y="375" width="80" height="10" />
@@ -55,14 +53,9 @@
         <!-- Autonomous selector -->
         <div class="select-container">
             <select id="auto-select">
-                <option>Robot disconnected</option>
+                <option>No auto modes found</option>
                 <!-- This gets populated by JS -->
             </select>
-        </div>
-        <div id="color-select">
-            <p>Alliance:</p>
-            <button id="color-select-red">Red</button>
-            <button id="color-select-blue">Blue</button>
         </div>
     </aside>
     <script src="/networktables/networktables.js"></script>
