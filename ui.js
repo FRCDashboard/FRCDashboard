@@ -8,24 +8,25 @@ var ui = {
 		offset: 0,
 		visualVal: 0,
 		arm: document.getElementById('gyro-arm'),
-        number: document.getElementById('gyro-number')
+		number: document.getElementById('gyro-number')
 	},
-    robotDiagram: {
-        arm: document.getElementById('robot-arm')
-    },
+	robotDiagram: {
+		arm: document.getElementById('robot-arm')
+	},
 	example: {
-        button: document.getElementById('example-button'),
-        readout: document.getElementById('example-readout')
-    },
+		button: document.getElementById('example-button'),
+		readout: document.getElementById('example-readout')
+	},
 	tuning: {
 		list: document.getElementById('tuning'),
 		button: document.getElementById('tuning-button'),
-        name: document.getElementById('name'),
-        value: document.getElementById('value'),
+		name: document.getElementById('name'),
+		value: document.getElementById('value'),
 		set: document.getElementById('set'),
 		get: document.getElementById('get')
 	},
-	autoSelect: document.getElementById('auto-select')
+	autoSelect: document.getElementById('auto-select'),
+    armPosition: document.getElementById('arm-position')
 };
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -61,8 +62,8 @@ function onValueChanged(key, value, isNew) {
 			ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
 			ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 			break;
-		// The following case is an example, for a robot with an arm at the front.
-		// Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
+			// The following case is an example, for a robot with an arm at the front.
+			// Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
 		case '/SmartDashboard/arm/encoder':
 			// 0 is all the way back, 1200 is 45 degrees forward. We don't want it going past that.
 			if (value > 1140) {
@@ -71,21 +72,21 @@ function onValueChanged(key, value, isNew) {
 				value = 0;
 			}
 			// Calculate visual rotation of arm
-			var armAngle = 180 - value * 225 / 1200;
+			var armAngle = value * 3 / 20 - 45;
 
 			// Rotate the arm in diagram to match real arm
-			ui.robotDiagram.arm.style.transform = 'rotate(' + armAngle + ')';
+			ui.robotDiagram.arm.style.transform = 'rotate(' + armAngle + 'deg)';
 			break;
 			// This button is just an example of triggering an event on the robot by clicking a button.
 		case '/SmartDashboard/exampleVariable':
 			if (value) { // If function is active:
 				// Add active class to button.
 				ui.example.button.className = 'active';
-                ui.example.readout.innerHTML = 'Value is true';
+				ui.example.readout.innerHTML = 'Value is true';
 			} else { // Otherwise
 				// Take it off
 				ui.example.button.className = '';
-                ui.example.readout.innerHTML = 'Value is false';
+				ui.example.readout.innerHTML = 'Value is false';
 			}
 			break;
 		case '/SmartDashboard/timeRunning':
@@ -143,12 +144,12 @@ function onValueChanged(key, value, isNew) {
 			break;
 	}
 
-    // The following code manages tuning section of the interface.
-    // This section displays a list of all NetworkTables variables (that start with /SmartDashboard/) and allows you to directly manipulate them.
+	// The following code manages tuning section of the interface.
+	// This section displays a list of all NetworkTables variables (that start with /SmartDashboard/) and allows you to directly manipulate them.
 	var propName = key.substring(16, key.length);
 	// Check if value is new and doesn't have a spot on the list yet
 	if (isNew && !document.getElementsByName(propName)[0]) {
-        // Make sure name starts with /SmartDashboard/. Properties that don't are technical and don't need to be shown on the list.
+		// Make sure name starts with /SmartDashboard/. Properties that don't are technical and don't need to be shown on the list.
 		if (key.substring(0, 16) === '/SmartDashboard/') {
 			// Make a new div for this value
 			var div = document.createElement('div'); // Make div
@@ -232,10 +233,10 @@ ui.tuning.button.onclick = function() {
 
 // Manages get and set buttons at the top of the tuning pane
 ui.tuning.set.onclick = function() {
-    // Make sure the inputs have content, if they do update the NT value
-    if (ui.tuning.name.value && ui.tuning.value.value) {
-        NetworkTables.setValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
-    }
+	// Make sure the inputs have content, if they do update the NT value
+	if (ui.tuning.name.value && ui.tuning.value.value) {
+		NetworkTables.setValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
+	}
 };
 ui.tuning.get.onclick = function() {
 	ui.tuning.value.value = NetworkTables.getValue(ui.tuning.name.value);
@@ -244,4 +245,9 @@ ui.tuning.get.onclick = function() {
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function() {
 	NetworkTables.setValue('/SmartDashboard/autonomous/selected', this.value);
+};
+
+// Get value of arm height slider when it's adjusted
+ui.armPosition.onchange = function() {
+	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };

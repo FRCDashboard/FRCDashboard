@@ -7,7 +7,7 @@
     display: none;
 }
 body {
-    font: 16px monospace;
+    font: 16px sans-serif;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -56,6 +56,7 @@ body > * {
     background: #222;
 }
 #timer {
+    font-family: monospace;
     display: block;
     height: 20vh;
     width: 30vw;
