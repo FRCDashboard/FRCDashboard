@@ -11,7 +11,7 @@
     <!-- Clock that shows up in top left -->
     <div id="timer">2:15</div>
     <header>
-        <!-- Tells whether robot is connected to UI. -->
+        <!-- Tells whether robot is connected to dashboard. -->
         <div id="robot-state">Unknown state</div>
         <button id="tuning-button">Tuning</button>
     </header>
@@ -23,7 +23,7 @@
         <button id="set">Set</button>
         <button id="get">Get</button>
     </div>
-    <!-- The main body of the UI, by default contains the gyro monitor and the robot diagram -->
+    <!-- The main body of the dashboard, by default contains the gyro monitor and the robot diagram -->
     <article>
         <!-- Gyroscope -->
         <svg id="gyro">
@@ -43,6 +43,7 @@
             <rect x="60" y="380" width="250" height="30" />
         </svg>
     </article>
+    <!-- The sidebar of the dashboard. Designed for smaller control elements like selection boxes and small buttons. -->
     <aside>
         <!-- Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
             The <p> below then says the value. -->

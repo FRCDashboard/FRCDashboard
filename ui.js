@@ -44,7 +44,7 @@ function onRobotConnection(connected) {
 }
 
 function onValueChanged(key, value, isNew) {
-	// Sometimes, NetworkTables will pass strings instead of bools. This corrects for that.
+	// Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
 	if (value == 'true') {
 		value = true;
 	} else if (value == 'false') {
