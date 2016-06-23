@@ -29,7 +29,7 @@ If you're going to be using the preferred method of using the dashboard (as an a
 1. Connect to your robot's network. (If you're just testing the dashboard and don't currently need to use it with the robot, you can skip this step.)
 2. Start dashboard server:
 
-        start py -3 serverpy
+        start py -3 server.py
 
     Or, if you're on Mac/Linux (or otherwise using bash):
 
@@ -41,7 +41,7 @@ The preferred method of using the dashboard is to run it using the [Electron](ht
 
         npm start
 
-This will start the application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R on Mac`) to refresh the application.
+This will start the application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` on Mac) to refresh the application.
 
 ### Running dashboard through web browser
 The less desirable, but perfectly functional method of viewing your dashboard is to use it like a webpage. This method will work even if you don't have the privileges to install `node.js` and `npm`. The standard toolbars from your browser will still be shown and will take up space on the screen, and the experience will be less fluid, but it will work.

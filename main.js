@@ -17,9 +17,11 @@ function createWindow() {
 		height: 600
 	});
 
-	// and load the index.html of the app.
-	//mainWindow.loadURL('file://' + __dirname + '/index.html');
-    mainWindow.loadURL('http://localhost:8888');
+	// Load the index.html of the app.
+	// mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+	// Instead, load the server URL.
+	mainWindow.loadURL('http://localhost:8888');
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function() {
@@ -33,6 +35,9 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', createWindow);
+app.on('browser-window-created', function(e, window) {
+	window.setMenu(null);
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
