@@ -29,6 +29,10 @@ If you're going to be using the preferred method of using the dashboard (as an a
 1. Connect to your robot's network. (If you're just testing the dashboard and don't currently need to use it with the robot, you can skip this step.)
 2. Start dashboard server:
 
+        start py -3 serverpy
+
+    Or, if you're on Mac/Linux (or otherwise using bash):
+
         python3 server.py
 
 ### Running dashboard as Application
