@@ -1,5 +1,3 @@
-![Blue theme](screenshots/blue.png)
-
 # FRC Dashboard
 FRC Dashboard is a fully customizable dashboard for [FIRST Robotics Competition (FRC)](http://firstinspires.org/robotics/frc) which is based on web languages (JavaScript/CSS/HTML). It's completely legal for competition, and can be used to give your whole drive team significantly richer control of your robot.
 
@@ -7,7 +5,7 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
 **Contributions are VERY welcome! Please feel free to open a pull request or issue!**
 
-![Red theme](screenshots/red.png)
+![Screenshot slideshow](screenshots.gif)
 
 ## Setup
 ### Dependencies
@@ -18,7 +16,7 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
     If you don't have administrator privileges, put `--user` at the end of that command.)
 
-If you're going to be using the dashboard as an application, you'll also need:
+If you're going to be using the preferred method of using the dashboard (as an application), you'll also need:
 * [`nodejs`](https://nodejs.com) & [`npm`](https://npmjs.com)
     * If you don't have permission to install these, see [this gist](https://gist.github.com/isaacs/579814) for a workaround.
 * Electron (to install, `cd` into dashboard directory and run `npm install`)
@@ -48,15 +46,11 @@ The less desirable, but perfectly functional method of viewing your dashboard is
 
 It is recommended that while using the dashboard on your driver station, you close the top panel of the FRC DriverStation to make room for the dashboard.
 
-![Light theme](screenshots/light.png)
-
 ## Authors
 * [Erik Boesen](https://github.com/ErikBoesen) is the primary developer of FRC Dashboard.
 * [Team 1418](https://github.com/frc1418) used earlier versions of this code in 2015 and 2016.
 * [Leon Tan](https://github.com/lleontan) led the original 1418 UI team, coded pynetworktables2js, and developed a web-browser-based UI which was years later reworked to create FRC Dashboard.
 * [Dustin Spicuzza](https://github.com/virtuald) leads the [RobotPy](https://github.com/robotpy) project mentored team 1418 through much of FRC Dashboard's genesis.
-
-![Dark theme](screenshots/dark.png)
 
 ## License
 This software is licensed under the `Apache 2.0` license. Basically, do whatever you want, as long as you give credit to the [original source](https://github.com/FRCDashboard/FRCDashboard), and keep the license with it. More information in `LICENSE`.
