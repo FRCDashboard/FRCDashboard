@@ -1,4 +1,2 @@
 .DS_Store
-.project
-.pydevproject
-__pycache__
+node_modules
