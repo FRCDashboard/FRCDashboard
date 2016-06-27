@@ -27,25 +27,30 @@ If you're going to be using the preferred method of using the dashboard (as an a
 
 ## Running
 1. Connect to your robot's network. (If you're just testing the dashboard and don't currently need to use it with the robot, you can skip this step.)
-2. Start dashboard server:
+2. Start dashboard server.
+
+    Windows:
 
         start py -3 server.py
 
-    Or, if you're on Mac/Linux (or otherwise using bash):
+    Mac/Linux (using bash):
 
         python3 server.py
 
 ### Running dashboard as Application
 The preferred method of using the dashboard is to run it using the [Electron](http://electron.atom.io) framework. Your dashboard will be its own application, and will be easy to manipulate.
-1. While in the dashboard directory, run:
 
-        npm start
+While in the dashboard directory, run:
+
+    npm start
 
 This will start the application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` on Mac) to refresh the application.
 
 ### Running dashboard through web browser
 The less desirable, but perfectly functional method of viewing your dashboard is to use it like a webpage. This method will work even if you don't have the privileges to install `node.js` and `npm`. The standard toolbars from your browser will still be shown and will take up space on the screen, and the experience will be less fluid, but it will work.
-1. Navigate to `http://localhost:8888`.
+
+To view the dashboard, use your browser to navigate to `http://localhost:8888`.
+
 
 
 It is recommended that while using the dashboard on your driver station, you close the top panel of the FRC DriverStation to make room for the dashboard.
