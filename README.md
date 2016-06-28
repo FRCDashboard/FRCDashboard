@@ -37,6 +37,8 @@ If you're going to be using the preferred method of using the dashboard (as an a
 
         python3 server.py
 
+3. If you are able to use node/npm, use the section below labeled "Running dashboard as Application." If not, use the section titled "Running dashboard through web browser."
+
 ### Running dashboard as Application
 The preferred method of using the dashboard is to run it using the [Electron](http://electron.atom.io) framework. Your dashboard will be its own application, and will be easy to manipulate.
 
