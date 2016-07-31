@@ -141,6 +141,10 @@ text {
     -ms-transform-origin: right;
     transform-origin: right;
 }
+#team {
+    font-size: 28px;
+    letter-spacing: -1px;
+}
 aside {
     right: 0;
     top: 0;

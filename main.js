@@ -13,14 +13,16 @@ let mainWindow;
 function createWindow() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
-		width: 1000,
-		height: 600
+		width: 1366,
+		height: 570
+        // 1366x570 is a good standard height, but you may want to change this to fit your DriverStation computer's screen better.
+        // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
 	});
 
-	// Load the index.html of the app.
-	// mainWindow.loadURL('file://' + __dirname + '/index.html');
+    // Move window to top (left) of screen.
+    mainWindow.setPosition(0, 0);
 
-	// Instead, load the server URL.
+	// Load the server URL.
 	mainWindow.loadURL('http://localhost:8888');
 
 	// Emitted when the window is closed.
