@@ -23,7 +23,24 @@ If you're going to be using the preferred method of using the dashboard (as an a
 
 ### Configuration
 * In `ui.js`, there's a large `switch` statement in the `onValueChanged()` function which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
-* For the camera to work, you must change the source in `style.css` to the IP of your live camera feed.
+
+### Usage With Camera
+In order to run the camera, you must start an mjpg server on the roborio. You must install mjpg-streamer on the roborio with the following:
+
+1. Download robotpy from GitHub, which has the script which downloads and installs packages to the RoboRIO
+2. Download and install the mjpg-streamer:
+    Windows:
+    
+        py -3 installer.py download-opkg mjpg-streamer
+        py -3 installer.py install-opkg mjpg-streamer
+        
+    Mac/Linux (using bash):
+    
+        python3 installer.py download-opkg mjpg-streamer
+        python3 installer.py install-opkg mjpg-streamer
+
+3. Update `style.css` to use the IP of your live camera feed. Usually this is like `roborio-XXXX-frc.local:5800/?action=stream` where `XXXX` is your team's number.
+
 
 ## Running
 1. Connect to your robot's network. (If you're just testing the dashboard and don't currently need to use it with the robot, you can skip this step.)
