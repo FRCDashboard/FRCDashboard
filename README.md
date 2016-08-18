@@ -24,11 +24,11 @@ If you're going to be using the preferred method of using the dashboard (as an a
 ### Configuration
 * In `ui.js`, there's a large `switch` statement in the `onValueChanged()` function which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
-### Usage With Camera
-In order to run the camera, you must start an mjpg server on the roborio. You must install mjpg-streamer on the roborio with the following:
+#### Configuring Camera feed
+In order to run the camera, you must start an mjpg server on the RoboRIO. To install `mjpg-streamer`:
 
-1. Download robotpy from GitHub, which has the script which downloads and installs packages to the RoboRIO
-2. Download and install the mjpg-streamer:
+1. Download [robotpy's fork of MJPG Streamer](https://github.com/robotpy/mjpg-streamer) from GitHub, which has the script which downloads and installs packages to the RoboRIO
+2. While in the `mjpg-streamer` directory, run:
     Windows:
     
         py -3 installer.py download-opkg mjpg-streamer
@@ -39,7 +39,7 @@ In order to run the camera, you must start an mjpg server on the roborio. You mu
         python3 installer.py download-opkg mjpg-streamer
         python3 installer.py install-opkg mjpg-streamer
 
-3. Update `style.css` to use the IP of your live camera feed. Usually this is like `roborio-XXXX-frc.local:5800/?action=stream` where `XXXX` is your team's number.
+3. Update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number.
 
 
 ## Running
