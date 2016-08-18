@@ -27,8 +27,9 @@ If you're going to be using the preferred method of using the dashboard (as an a
 #### Configuring Camera feed
 In order to run the camera, you must start an mjpg server on the RoboRIO. To install `mjpg-streamer`:
 
-1. Download [robotpy's fork of MJPG Streamer](https://github.com/robotpy/mjpg-streamer) from GitHub, which has the script which downloads and installs packages to the RoboRIO
-2. While in the `mjpg-streamer` directory, run:
+1. Download <a href='https://raw.githubusercontent.com/robotpy/robotpy-wpilib/master/installer/installer.py' target='_blank'>this installer script</a> from GitHub. This script is for downloading and installing packages to the RoboRIO.
+2. While in the directory where you downloaded the installer script, run:
+
     Windows:
     
         py -3 installer.py download-opkg mjpg-streamer
