@@ -11,12 +11,21 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow() {
+
+  if (process.platform == 'win32') {
+    var subpy = require('child_process').spawn('py', ['-3', './server.py']);
+  } else {
+    var subpy = require('child_process').spawn('python3', ['./server.py']);
+  }
+
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
 		width: 1366,
-		height: 570
+		height: 570,
         // 1366x570 is a good standard height, but you may want to change this to fit your DriverStation computer's screen better.
         // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
+    // The window is closed until the python server is ready
+    show: false
 	});
 
     // Move window to top (left) of screen.
@@ -24,6 +33,15 @@ function createWindow() {
 
 	// Load the server URL.
 	mainWindow.loadURL('http://localhost:8888');
+
+  // Once the python server is ready, reload the server
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.loadURL('http://localhost:8888');
+    mainWindow.once('ready-to-show', () => {
+      // Once it has reloaded, show the window
+      mainWindow.show();
+    })
+  })
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function() {
