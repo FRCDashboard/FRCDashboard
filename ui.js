@@ -243,11 +243,11 @@ ui.tuning.get.onclick = function() {
 };
 
 // Update NetworkTables when autonomous selector is changed
-ui.autoSelect.onchange = function() {
+ui.autoSelect.oninput = function() {
 	NetworkTables.setValue('/SmartDashboard/autonomous/selected', this.value);
 };
 
 // Get value of arm height slider when it's adjusted
-ui.armPosition.onchange = function() {
+ui.armPosition.oninput = function() {
 	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };
