@@ -1,0 +1,166 @@
+// You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking.
+camera-url = 'Your Camera Url Here'
+
+dashboard-background = #222
+
+// this is the color of the select boxes and inputs
+input-background = lighten(dashboard-background, 15.5%)
+
+// this is the color of the camera box when there is no camera stream
+camera-background = lighten(dashboard-background, 8.5%)
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+::-webkit-scrollbar
+  display: none
+
+body
+  font: 16px sans-serif
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  color: white
+  overflow: hidden
+  background: dashboard-background
+
+button,
+input[type="text"],
+input[type="number"],
+.select-container,
+select
+  color: white
+  background: input-background
+  border: none
+  font-size: 14px
+  padding: 6px 8px
+  cursor: pointer
+  outline: 0
+
+.select-container
+  padding: 0
+  display: inline-block
+
+select
+  border: none
+  background: none
+  color: white
+  height: 25px
+
+input[type="text"],
+input[type="number"]
+  cursor: text
+
+input[type="checkbox"]
+  -webkit-filter: saturate(0)
+  filter: saturate(0)
+
+
+/* Major interface panes, aside, article, header, etc. */
+body > *
+  padding: 10px
+  position: fixed
+  overflow: scroll
+  background: dashboard-background
+
+#timer
+  font-family: monospace
+  display: block
+  height: 20vh
+  width: 30vw
+  top: 0
+  left: 0
+  font-size: 20vh
+  line-height: .8
+
+header
+  width: 20vw
+  height: 20vh
+  top: 0
+  left: 30vw
+  color: white
+
+#camera
+  padding: 0
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 50vw
+  height: 80vh
+  overflow: hidden
+  background-color: camera-background
+  background-image: url(camera-url)
+
+#tuning
+  width: 50vw
+  height: 80vh
+  bottom: 0
+  left: 0
+
+#tuning div
+  margin: 20px 0
+
+#tuning p
+  margin-bottom: 10px
+
+article
+  top: 0
+  left: 50vw
+  height: 100vh
+  width: 35vw
+
+svg *
+  stroke: white
+  fill: dashboard-background
+  stroke-width: 2
+  -webkit-transform-origin: center
+  -ms-transform-origin: center
+  transform-origin: center
+
+text
+  font-size: 16px
+  letter-spacing: 2px
+  stroke: none
+  fill: white
+
+#gyro
+  width: 175px
+  height: 175px
+  margin-left: 30px
+  margin-top: 15px
+
+#gyro-arm
+  -webkit-transform-origin: bottom
+  -ms-transform-origin: bottom
+  transform-origin: bottom
+
+#gyro-number
+  font-size: 25px
+  text-anchor: middle
+
+#robot-diagram
+  position: absolute
+  bottom: 1px
+  right: 1vw
+
+#robot-arm
+  -webkit-transform-origin: right
+  -ms-transform-origin: right
+  transform-origin: right
+
+#team
+  font-size: 28px
+  letter-spacing: -1px
+
+aside
+  right: 0
+  top: 0
+  width: 15vw
+  height: 100vh
+
+aside > *
+  margin-bottom: 20px
+
