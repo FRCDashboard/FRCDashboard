@@ -248,6 +248,6 @@ ui.autoSelect.onchange = function() {
 };
 
 // Get value of arm height slider when it's adjusted
-ui.armPosition.onchange = function() {
+ui.armPosition.oninput = function() {
 	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };

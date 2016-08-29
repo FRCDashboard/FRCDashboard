@@ -27,16 +27,16 @@ If you're going to be using the preferred method of using the dashboard (as an a
 #### Configuring Camera feed
 In order to run the camera, you must start an mjpg server on the RoboRIO. To install `mjpg-streamer`:
 
-1. Download <a href='https://raw.githubusercontent.com/robotpy/robotpy-wpilib/master/installer/installer.py' target='_blank'>this installer script</a> from GitHub. This script is for downloading and installing packages to the RoboRIO.
+1. Download [this installer script](https://raw.githubusercontent.com/robotpy/robotpy-wpilib/master/installer/installer.py) from GitHub. This script is for downloading and installing packages to the RoboRIO.
 2. While in the directory where you downloaded the installer script, run:
 
     Windows:
-    
+
         py -3 installer.py download-opkg mjpg-streamer
         py -3 installer.py install-opkg mjpg-streamer
-        
+
     Mac/Linux (using bash):
-    
+
         python3 installer.py download-opkg mjpg-streamer
         python3 installer.py install-opkg mjpg-streamer
 
@@ -44,8 +44,22 @@ In order to run the camera, you must start an mjpg server on the RoboRIO. To ins
 
 
 ## Running
-1. Connect to your robot's network. (If you're just testing the dashboard and don't currently need to use it with the robot, you can skip this step.)
-2. Start dashboard server.
+1. Connect to your robot's network if you haven't already. (If you're just testing the dashboard and don't currently need to use it with your robot, you can skip this step.)
+2. If you are able to use node/npm, use the section below labeled "Using dashboard as Application." If not, use the section titled "Using dashboard through web browser."
+
+### Using dashboard as Application
+The preferred method of using the dashboard is to run it using the [Electron](http://electron.atom.io) framework. Your dashboard will be its own application, and will be easy to manipulate.
+
+While in the dashboard directory, run:
+
+    npm start
+
+This will start a Python server and open the dashboard application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` on Mac) to refresh the application.
+
+### Using dashboard through web browser
+The less desirable, but perfectly functional method of viewing your dashboard is to use it like a webpage. This method will work even if you don't have the privileges to install `node.js` and `npm`. The standard toolbars from your browser will still be shown and will take up space on the screen, and the experience will be less fluid, but it will work.
+
+1. Start the Python server independently:
 
     Windows:
 
@@ -55,22 +69,7 @@ In order to run the camera, you must start an mjpg server on the RoboRIO. To ins
 
         python3 server.py
 
-3. If you are able to use node/npm, use the section below labeled "Running dashboard as Application." If not, use the section titled "Running dashboard through web browser."
-
-### Running dashboard as Application
-The preferred method of using the dashboard is to run it using the [Electron](http://electron.atom.io) framework. Your dashboard will be its own application, and will be easy to manipulate.
-
-While in the dashboard directory, run:
-
-    npm start
-
-This will start the application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` on Mac) to refresh the application.
-
-### Running dashboard through web browser
-The less desirable, but perfectly functional method of viewing your dashboard is to use it like a webpage. This method will work even if you don't have the privileges to install `node.js` and `npm`. The standard toolbars from your browser will still be shown and will take up space on the screen, and the experience will be less fluid, but it will work.
-
-To view the dashboard, use your browser to navigate to `http://localhost:8888`.
-
+2. To view the dashboard, use your browser to navigate to `http://localhost:8888`.
 
 
 It is recommended that while using the dashboard on your driver station, you close the top panel of the FRC DriverStation to make room for the dashboard.
@@ -78,8 +77,12 @@ It is recommended that while using the dashboard on your driver station, you clo
 ## Authors
 * [Erik Boesen](https://github.com/ErikBoesen) is the primary developer of FRC Dashboard.
 * [Team 1418](https://github.com/frc1418) used earlier versions of this code in 2015 and 2016.
-* [Leon Tan](https://github.com/lleontan) led the original 1418 UI team, coded pynetworktables2js, and developed a web-browser-based UI which was years later reworked to create FRC Dashboard.
+* [Leon Tan](https://github.com/lleontan) led the original 1418 UI team, coded pynetworktables2js, and developed a browser-based UI which was years later reworked to create FRC Dashboard.
 * [Dustin Spicuzza](https://github.com/virtuald) leads the [RobotPy](https://github.com/robotpy) project mentored team 1418 through much of FRC Dashboard's genesis.
 
-## License
-This software is licensed under the `Apache 2.0` license. Basically, do whatever you want, as long as you give credit to the [original source](https://github.com/FRCDashboard/FRCDashboard), and keep the license with it. More information in `LICENSE`.
+## Modifying
+FRC Dashboard is designed to be modified for your team's purposes, but we have some restrictions we'd like you to follow when using this software.
+
+We'd like if you fork this repository to your team's organization (or wherever else you like) if you plan to use GitHub for development. This will allow us to be informed about who's using the software and will help you to easily apply updates should we issue them. You don't HAVE to do this, but we'd much prefer it to other methods, like copying the repository contents to your own.
+
+This software is licensed under the MIT license. Basically, modify as much as you like, as long as you give credit to the [original source](https://github.com/FRCDashboard/FRCDashboard) and don't hold us accountable for anything. More information in `LICENSE`.
