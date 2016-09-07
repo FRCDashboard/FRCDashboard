@@ -63,11 +63,11 @@ The less desirable, but perfectly functional method of viewing your dashboard is
 
     Windows:
 
-        start py -3 server.py
+        start py -3 -m pynetworktables2js
 
     Mac/Linux (using bash):
 
-        python3 server.py
+        python3 -m pynetworktables2js
 
 2. To view the dashboard, use your browser to navigate to `http://localhost:8888`.
 
