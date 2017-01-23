@@ -53,7 +53,7 @@ function onValueChanged(key, value, isNew) {
 
 	// This switch statement chooses which UI element to update when a NetworkTables variable changes.
 	switch (key) {
-		case '/SmartDashboard/drive/navX/yaw': // Gyro rotation
+		case '/SmartDashboard/drive/navx/yaw': // Gyro rotation
 			ui.gyro.val = value;
 			ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
 			if (ui.gyro.visualVal < 0) { // Corrects for negative values
@@ -78,7 +78,7 @@ function onValueChanged(key, value, isNew) {
 			ui.robotDiagram.arm.style.transform = 'rotate(' + armAngle + 'deg)';
 			break;
 			// This button is just an example of triggering an event on the robot by clicking a button.
-		case '/SmartDashboard/exampleVariable':
+		case '/SmartDashboard/example_variable':
 			if (value) { // If function is active:
 				// Add active class to button.
 				ui.example.button.className = 'active';
@@ -89,7 +89,7 @@ function onValueChanged(key, value, isNew) {
 				ui.example.readout.innerHTML = 'Value is false';
 			}
 			break;
-		case '/SmartDashboard/timeRunning':
+		case '/SmartDashboard/time_running':
 			// When this NetworkTables variable is true, the timer will start.
 			// You shouldn't need to touch this code, but it's documented anyway in case you do.
 			var s = 135;
@@ -211,7 +211,7 @@ function onValueChanged(key, value, isNew) {
 // The rest of the doc is listeners for UI elements being clicked on
 ui.example.button.onclick = function() {
 	// Set NetworkTables values to the opposite of whether button has active class.
-	NetworkTables.setValue('/SmartDashboard/exampleVariable', this.className != 'active');
+	NetworkTables.setValue('/SmartDashboard/example_variable', this.className != 'active');
 };
 
 // Reset gyro value to 0 on click
@@ -219,7 +219,7 @@ ui.gyro.container.onclick = function() {
 	// Store previous gyro val, will now be subtracted from val for callibration
 	ui.gyro.offset = ui.gyro.val;
 	// Trigger the gyro to recalculate value.
-	onValueChanged('/SmartDashboard/drive/navX/yaw', ui.gyro.val);
+	onValueChanged('/SmartDashboard/drive/navx/yaw', ui.gyro.val);
 };
 
 // Open tuning section when button is clicked

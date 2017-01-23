@@ -1,7 +1,7 @@
 # FRC Dashboard
 FRC Dashboard is a fully customizable dashboard for [FIRST Robotics Competition (FRC)](http://firstinspires.org/robotics/frc) which is based on web languages (JavaScript/CSS/HTML). It's completely legal for competition, and can be used to give your whole drive team significantly richer control of your robot.
 
-The dashboard's code is designed to be 100% accessible, tweakable, and expandable. To help in this aim, the code is rigorously documented with thousands of inline comments and [a set of training exercises](https://github.com/FRCDashboard/training). In addition, the base system comes with several functioning example widgets and features, and [many addons](https://github.com/FRCDashboard?query=addon-) have been created to speed up the development of your team's dashboard.
+The dashboard's code is designed to be 100% accessible, tweakable, and expandable. To help in this aim, the code is rigorously commented and [a set of training exercises](https://github.com/FRCDashboard/training) have been prepared to orient new users. In addition, the base system comes with several functioning example widgets and features, and we've build [several helpful addons](https://github.com/FRCDashboard?query=addon-) to speed up the development of your team's dashboard.
 
 **Contributions are VERY welcome! Please feel free to open a pull request or issue!**
 
@@ -16,16 +16,16 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
     If you don't have administrator privileges, put `--user` at the end of that command.)
 
-If you're going to be using the preferred method of using the dashboard (as an application), you'll also need:
+If you're going to be using the preferred method of using the dashboard (as an application through Electron), you'll also need:
 * [`nodejs`](https://nodejs.com) & [`npm`](https://npmjs.com)
     * If you don't have permission to install these, see [this gist](https://gist.github.com/isaacs/579814) for a workaround.
-* Electron (to install, `cd` into dashboard directory and run `npm install`)
+* Node dependencies (to install, `cd` into dashboard directory and run `npm install`)
 
 ### Configuration
 * In `ui.js`, there's a large `switch` statement in the `onValueChanged()` function which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
 #### Configuring Camera feed
-In order to run the camera, you must start an mjpg server on the RoboRIO. To install `mjpg-streamer`:
+In order to run the camera, you must start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:
 
 1. Download [this installer script](https://raw.githubusercontent.com/robotpy/robotpy-wpilib/master/installer/installer.py) from GitHub. This script is for downloading and installing packages to the RoboRIO.
 2. While in the directory where you downloaded the installer script, run:
@@ -57,13 +57,13 @@ While in the dashboard directory, run:
 This will start a Python server and open the dashboard application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` on Mac) to refresh the application.
 
 ### Using dashboard through web browser
-The less desirable, but perfectly functional method of viewing your dashboard is to use it like a webpage. This method will work even if you don't have the privileges to install `node.js` and `npm`. The standard toolbars from your browser will still be shown and will take up space on the screen, and the experience will be less fluid, but it will work.
+The less desirable, but perfectly functional method of viewing your dashboard is to use it like a webpage. This method will work even if you don't have the privileges to install `node.js` and `npm`. The standard toolbars from your browser will still be shown and will take up space on the screen, and the experience will be a bit less fluid, but it will work.
 
 1. Start the Python server independently:
 
     Windows:
 
-        start py -3 -m pynetworktables2js
+        py -3 -m pynetworktables2js
 
     Mac/Linux (using bash):
 
@@ -81,8 +81,6 @@ It is recommended that while using the dashboard on your driver station, you clo
 * [Dustin Spicuzza](https://github.com/virtuald) leads the [RobotPy](https://github.com/robotpy) project mentored team 1418 through much of FRC Dashboard's genesis.
 
 ## Modifying
-FRC Dashboard is designed to be modified for your team's purposes, but we have some restrictions we'd like you to follow when using this software.
+FRC Dashboard is designed to be modified for your team's purposes, so you're allowed to do whatever you think is best for you. However, it would be good if you could fork this repository or copy it to another. This will allow you to easily pull updates when they occur, and if you fork it it helps us tell who's using it.
 
-We'd like if you fork this repository to your team's organization (or wherever else you like) if you plan to use GitHub for development. This will allow us to be informed about who's using the software and will help you to easily apply updates should we issue them. You don't HAVE to do this, but we'd much prefer it to other methods, like copying the repository contents to your own.
-
-This software is licensed under the MIT license. Basically, modify as much as you like, as long as you give credit to the [original source](https://github.com/FRCDashboard/FRCDashboard) and don't hold us accountable for anything. More information in `LICENSE`.
+This software is licensed under the MIT license. Basically, modify as much as you like, as long as you give credit where it's due and don't hold us accountable for anything. More information in `LICENSE`.

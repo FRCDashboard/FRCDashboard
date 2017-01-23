@@ -27,7 +27,7 @@ function createWindow() {
 	mainWindow = new BrowserWindow({
 		width: 1366,
 		height: 570,
-		// 1366x570 is a good standard height, but you may want to change this to fit your DriverStation computer's screen better.
+		// 1366x570 is a good standard height, but you may want to change this to fit your DriverStation's screen better.
 		// It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
 		// The window is closed until the python server is ready
 		show: false
@@ -40,6 +40,7 @@ function createWindow() {
 	mainWindow.loadURL('http://localhost:8888');
 
 	// Once the python server is ready, load window contents.
+    // TODO: fix this abnomination
 	mainWindow.once('ready-to-show', function() {
 		mainWindow.loadURL('http://localhost:8888');
 		mainWindow.once('ready-to-show', function() {
@@ -68,9 +69,8 @@ app.on('ready', createWindow);
 app.on('window-all-closed', function() {
 	// On OS X it is common for applications and their menu bar
 	// to stay active until the user quits explicitly with Cmd + Q.
-    // For FRCDB, though? Screw the standard.
-    // That standard sucks for this application.
-    // So we're going to kill the application regardless.
+    // Not like we're creating a consumer application though.
+    // Let's just kill it anyway.
 
     // If you want to restore the standard behavior, uncomment the next line.
     // if (process.platform !== 'darwin')
