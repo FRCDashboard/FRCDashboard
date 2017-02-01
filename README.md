@@ -17,7 +17,7 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
     If you don't have administrator privileges, put `--user` at the end of that command.)
 
 If you're going to be using the preferred method of using the dashboard (as an application through Electron), you'll also need:
-* [`nodejs`](https://nodejs.com) & [`npm`](https://npmjs.com)
+* [`nodejs`](https://nodejs.org) & [`npm`](https://npmjs.com)
     * If you don't have permission to install these, see [this gist](https://gist.github.com/isaacs/579814) for a workaround.
 * Node dependencies (to install, `cd` into dashboard directory and run `npm install`)
 
