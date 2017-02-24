@@ -23,7 +23,7 @@ If you're going to be using the preferred method of using the dashboard (as an a
 * Node dependencies (to install, `cd` into dashboard directory and run `npm install`)
 
 ### Configuration
-* In `ui.js`, there's a large `switch` statement in the `onValueChanged()` function which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
+* In `ui.js`, there are a bunch of `Network.addKeyListener()` which contain key listeners that control the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
 #### Configuring Camera feed
 In order to run the camera, you must start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:
