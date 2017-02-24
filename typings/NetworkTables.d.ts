@@ -25,7 +25,7 @@ declare namespace NetworkTables {
      * @param f When the key changes, this function will be called with the following parameters; key: key name for entry, value: value of entry, isNew: If true, the entry has just been created
      * @param immediateNotify If true, the function will be immediately called with the current value of the specified key
      */
-    function addKeyListener(key: string, f: (key: string, value: any, isNew: boolean) => any, immediateNotify?: boolean)
+    function addKeyListener(key: string, f: (key: string, value: any, isNew: boolean) => any, immediateNotify?: boolean): void
     /**
      * Use this to test whether a value is present in the table or not
      * @param key A networktables key
