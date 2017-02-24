@@ -86,12 +86,12 @@ FRC Dashboard is designed to be modified for your team's purposes, so you're all
 
 Please do not modify the .js files as those are only the transpiled files from the .ts counterparts
 
-### Typescript
+### [Typescript](https://www.typescriptlang.org/)
 * Latest version of Javascript with Types
 * It is reccomended to install typescript globally using `npm -g install typescript`
 * **.ts** files can be tranpiled using the command `tsc` 
 * It can optionally be run with the `-w` flag to set it to watch mode where it transpiles the .ts files as you save them
 * If you import additional libraries then also import their type definitions most of which can be found in the @types directory of npm
-* More can be found [at this link](https://www.typescriptlang.org/)
+* Documentation and a Quick Start Guide can be found [at this link](https://www.typescriptlang.org/docs/tutorial.html)
 
 This software is licensed under the MIT license. Basically, modify as much as you like, as long as you give credit where it's due and don't hold us accountable for anything. More information in `LICENSE`.
