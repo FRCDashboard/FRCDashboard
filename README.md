@@ -23,7 +23,7 @@ If you're going to be using the preferred method of using the dashboard (as an a
 * Node dependencies (to install, `cd` into dashboard directory and run `npm install`)
 
 ### Configuration
-* In `ui.js`, there's a large `switch` statement in the `onValueChanged()` function which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
+* In `ui.ts`, there's a large `switch` statement in the `onValueChanged()` function which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
 #### Configuring Camera feed
 In order to run the camera, you must start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:
@@ -83,5 +83,15 @@ It is recommended that while using the dashboard on your driver station, you clo
 
 ## Modifying
 FRC Dashboard is designed to be modified for your team's purposes, so you're allowed to do whatever you think is best for you. However, it would be good if you could fork this repository or copy it to another. This will allow you to easily pull updates when they occur, and if you fork it it helps us tell who's using it.
+
+Please do not modify the .js files as those are only the transpiled files from the .ts counterparts
+
+### [Typescript](https://www.typescriptlang.org/)
+* Latest version of Javascript with Types
+* It is reccomended to install typescript globally using `npm -g install typescript`
+* **.ts** files can be tranpiled using the command `tsc` 
+* It can optionally be run with the `-w` flag to set it to watch mode where it transpiles the .ts files as you save them
+* If you import additional libraries then also import their type definitions most of which can be found in the @types directory of npm
+* Documentation and a Quick Start Guide can be found [at this link](https://www.typescriptlang.org/docs/tutorial.html)
 
 This software is licensed under the MIT license. Basically, modify as much as you like, as long as you give credit where it's due and don't hold us accountable for anything. More information in `LICENSE`.

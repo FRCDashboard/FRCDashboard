@@ -1,16 +1,17 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const electron = require("electron");
-const child_process = require("child_process");
+import * as electron from 'electron'
+import * as child_process from 'child_process'
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
+let mainWindow: Electron.BrowserWindow;
+
 // Define global reference to the python server (which we'll start next).
-let server;
+let server: child_process.ChildProcess;
+
 function startServer() {
     let isWin = process.platform === 'win32';
     // Start python server.
@@ -22,6 +23,7 @@ function startServer() {
         // If on unix-like/other OSes, use bash command (python3 ./server.py).
         server = child_process.spawn('python3', ['-m', 'pynetworktables2js']);
     }
+
     // On an error close the window and display an error message to the user
     server.on('error', error => {
         mainWindow.close();
@@ -32,23 +34,28 @@ function startServer() {
 		or go to 
 		https://www.python.org/downloads/`);
     });
+
     // On server exiting before being killed
     server.on('exit', errCode => {
+
         // If the servers exits without an error
         if (errCode === 0) {
             electron.dialog.showErrorBox('Python Server Exit', 'Server Exited');
             return;
         }
+
         //Reads the error
         let errorMesg = server.stderr.read().toString().trim();
         //Gets the Module name
         let pythonExtract = /module named (\w+)/.exec(errorMesg);
         let extraMesg = "";
         let moduleInstalled = false;
+
         // If the server exited due to a module not being installed
         if (pythonExtract !== null && pythonExtract[1]) {
             let moduleName;
             moduleName = pythonExtract[1];
+
             // If windows then try to install the module
             if (isWin) {
                 let { status, stderr } = child_process.spawnSync('py', ['-3', '-m', 'pip', 'install', moduleName]);
@@ -78,14 +85,14 @@ function startServer() {
         if (moduleInstalled) {
             // Restart the server if the problem was resolved
             startServer();
-        }
-        else {
+        } else {
             // Close the window if the problem was not resolved
             mainWindow.close();
             electron.dialog.showErrorBox('Python Error', errorMesg + extraMesg);
         }
     });
 }
+
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
