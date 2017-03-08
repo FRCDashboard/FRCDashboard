@@ -17,7 +17,8 @@ function createWindow() {
     // Start python server.
     if (process.platform === 'win32') {
         // If on Windows, use the batch command (py -3 ./server.py).
-        server = require('child_process').spawn('py', ['-3', '-m', 'pynetworktables2js']);
+        // Change the X's in the IP below to your robot's IP, according to the guide in the README.
+        server = require('child_process').spawn('py', ['-3', '-m', 'pynetworktables2js', '--robot', '10.XX.XX.2']);
     } else {
         // If on unix-like/other OSes, use bash command (python3 ./server.py).
         server = require('child_process').spawn('python3', ['-m', 'pynetworktables2js']);

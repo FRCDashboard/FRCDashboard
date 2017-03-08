@@ -23,6 +23,7 @@ If you're going to be using the preferred method of using the dashboard (as an a
 * Node dependencies (to install, `cd` into dashboard directory and run `npm install`)
 
 ### Configuration
+* Before you can connect to your robot, you need to edit `main.js` and replace the IP reading `10.XX.XX.2` with your robot's static IP. For how to find this IP, see [this guide](http://wpilib.screenstepslive.com/s/4485/m/24193/l/319135-ip-networking-at-the-event).
 * In `ui.js`, there's a large `switch` statement in the `onValueChanged()` function which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
 #### Configuring Camera feed
