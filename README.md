@@ -10,7 +10,6 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
 ## Setup
 ### Dependencies
-* Python 3 **(MUST be 3, not 2!)**
 * [`nodejs`](https://nodejs.org) & [`npm`](https://npmjs.com)
     * If you don't have permission to install these, see [this gist](https://gist.github.com/isaacs/579814) for a workaround.
 * Node dependencies (to install, `cd` into dashboard directory and run `npm install`)

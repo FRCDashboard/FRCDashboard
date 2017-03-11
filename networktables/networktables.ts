@@ -1,6 +1,6 @@
 type clientMesg = { key: string, val: any, valType: string, id: number, flags: number }
 type sendMesg = { key: string, val: any, id?: number, flags: number }
-let ipc = require('electron').ipcRenderer
+
 namespace NetworkTables {
     let keys: { [key: string]: { val: any, valType, id, flags, new: boolean } } = {},
         connectionListeners: ((connected: boolean) => any)[] = [],

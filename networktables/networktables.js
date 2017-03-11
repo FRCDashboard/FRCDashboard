@@ -1,4 +1,3 @@
-let ipc = require('electron').ipcRenderer;
 var NetworkTables;
 (function (NetworkTables) {
     let keys = {}, connectionListeners = [], connected = false, globalListeners = [], keyListeners = {}, robotAddress = "127.0.0.1";
