@@ -11,19 +11,12 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 ## Setup
 ### Dependencies
 * Python 3 **(MUST be 3, not 2!)**
-* `pynetworktables2js`
-
-        pip3 install pynetworktables2js
-
-    If you don't have administrator privileges, put `--user` at the end of that command.)
-
-If you're going to be using the preferred method of using the dashboard (as an application through Electron), you'll also need:
 * [`nodejs`](https://nodejs.org) & [`npm`](https://npmjs.com)
     * If you don't have permission to install these, see [this gist](https://gist.github.com/isaacs/579814) for a workaround.
 * Node dependencies (to install, `cd` into dashboard directory and run `npm install`)
 
 ### Configuration
-* In `ui.ts`, there's a large `switch` statement in the `onValueChanged()` function which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
+* In `ui.ts`, there are a bunch of key handler functions which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
 #### Configuring Camera feed
 In order to run the camera, you must start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:

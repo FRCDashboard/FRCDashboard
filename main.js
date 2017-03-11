@@ -11,8 +11,6 @@ const ipc = electron.ipcMain;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-// Define global reference to the python server (which we'll start next).
-let server;
 let connected, ready = false;
 function createWindow() {
     // Attempt to connect to the localhost
@@ -44,7 +42,8 @@ function createWindow() {
         }
     });
     ipc.on('add', (ev, mesg) => {
-        client.Assign(mesg.valType, mesg.val, mesg.key, (mesg.flags & 1) === 1);
+        if (connected)
+            client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1);
     });
     ipc.on('update', (ev, mesg) => {
         client.Update(mesg.id, mesg.val);
@@ -96,9 +95,7 @@ app.on("window-all-closed", function () {
     app.quit();
 });
 app.on("quit", function () {
-    console.log("Application quit. Killing tornado server.");
-    // Kill tornado server child process.
-    server.kill("SIGINT");
+    console.log("Application quit.");
 });
 app.on("activate", function () {
     // On OS X it's common to re-create a window in the app when the

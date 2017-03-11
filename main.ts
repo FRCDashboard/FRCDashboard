@@ -15,9 +15,6 @@ const ipc = electron.ipcMain
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow: Electron.BrowserWindow;
 
-// Define global reference to the python server (which we'll start next).
-let server: child_process.ChildProcess;
-
 let connected: () => any,
     ready = false
 type respMesg = { key: string, val: any, valType: number, id?: number, flags: number }
@@ -49,7 +46,7 @@ function createWindow() {
         }
     })
     ipc.on('add', (ev, mesg: respMesg) => {
-        client.Assign(mesg.valType, mesg.val, mesg.key, (mesg.flags & 1) === 1)
+        if(connected)client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1)
     })
     ipc.on('update', (ev, mesg: respMesg) => {
         client.Update(mesg.id, mesg.val)
@@ -105,9 +102,7 @@ app.on("window-all-closed", function () {
 });
 
 app.on("quit", function () {
-    console.log("Application quit. Killing tornado server.");
-    // Kill tornado server child process.
-    server.kill("SIGINT");
+    console.log("Application quit.");
 });
 
 app.on("activate", function () {
