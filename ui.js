@@ -35,6 +35,19 @@ let address = document.getElementById('connect-address'), connect = document.get
 NetworkTables.addRobotConnectionListener(onRobotConnection, false);
 // Sets function to be called when any NetworkTables key/value changes
 NetworkTables.addGlobalListener(onValueChanged, true);
+let escCount = 0;
+onkeydown = key => {
+    if (key.key === 'Escape') {
+        setTimeout(() => { escCount = 0; }, 400);
+        escCount++;
+        console.log(escCount);
+        if (escCount === 2) {
+            document.body.classList.toggle('login-close', true);
+        }
+    }
+    else
+        console.log(key.key);
+};
 if (noElectron) {
     document.body.classList.add('login-close');
 }

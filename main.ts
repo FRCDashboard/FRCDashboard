@@ -46,7 +46,7 @@ function createWindow() {
         }
     })
     ipc.on('add', (ev, mesg: respMesg) => {
-        if(connected)client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1)
+        client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1)
     })
     ipc.on('update', (ev, mesg: respMesg) => {
         client.Update(mesg.id, mesg.val)

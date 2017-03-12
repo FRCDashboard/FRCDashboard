@@ -42,8 +42,7 @@ function createWindow() {
         }
     });
     ipc.on('add', (ev, mesg) => {
-        if (connected)
-            client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1);
+        client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1);
     });
     ipc.on('update', (ev, mesg) => {
         client.Update(mesg.id, mesg.val);
