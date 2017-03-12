@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "pack":"build --dir",
-    "dist":"build"
+    "pack": "build --dir",
+    "dist": "build"
   },
   "repository": {
     "type": "git",
@@ -27,8 +27,8 @@
   "dependencies": {
     "wpilib-nt-client": "^1.1.3"
   },
-  "build":{
-    "appId":"SmartDashboardJS",
-    "productName":"SmartDashboardJS"
+  "build": {
+    "appId": "SmartDashboardJS",
+    "productName": "SmartDashboardJS"
   }
 }
