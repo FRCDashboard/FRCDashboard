@@ -17,7 +17,7 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
     * If you are installing `mjpg-streamer` or are using this aplication throught the browser
 
 ### Configuration
-* In `ui.ts`, there are a bunch of key handler functions which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
+* In `ui.js`, there are a bunch of key handler functions which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
 #### Configuring Camera feed
 In order to run the camera, you must start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:
@@ -37,14 +37,6 @@ In order to run the camera, you must start an `mjpg-streamer` server on the Robo
 
 3. Update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number. The port may vary.
 
-
-### [Typescript](https://www.typescriptlang.org/)
-* Javascript, with types and other helpful features.
-* To install TypeScript: `npm -g install typescript`
-* **.ts** files can be transpiled using the command `tsc`
-* It can optionally be run with the `-w` flag to set it to watch mode where it transpiles the .ts files as you save them
-* If you import additional libraries then also import their type definitions most of which can be found in the @types directory of npm.
-* Documentation and a Quick Start Guide can be found [at this link](https://www.typescriptlang.org/docs/tutorial.html)
 
 ## Building
 1. Get `npm`
