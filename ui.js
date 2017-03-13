@@ -265,6 +265,7 @@ function onValueChanged(key, value, isNew) {
             console.log('Error: Non-new variable ' + key + ' not present in tuning list!');
         }
     }
+
 }
 // The rest of the doc is listeners for UI elements being clicked on
 ui.example.button.onclick = function () {

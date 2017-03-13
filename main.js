@@ -74,6 +74,7 @@ function createWindow() {
     mainWindow.once("ready-to-show", function () {
         mainWindow.show();
     });
+
     // Remove menu
     mainWindow.setMenu(null);
     // Emitted when the window is closed.
