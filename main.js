@@ -3,14 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const electron = require("electron");
 const wpilib_NT = require("wpilib-nt-client");
 const client = new wpilib_NT.Client();
+
 // Module to control application life.
 const app = electron.app;
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+
+// Module for receiving messages from the BrowserWindow
 const ipc = electron.ipcMain;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
 let connected, ready = false;
 function createWindow() {
     // Attempt to connect to the localhost
@@ -78,11 +84,13 @@ function createWindow() {
         mainWindow = null;
     });
 }
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on("ready", () => {
     createWindow();
 });
+
 // Quit when all windows are closed.
 app.on("window-all-closed", function () {
     // On OS X it is common for applications and their menu bar
@@ -93,9 +101,11 @@ app.on("window-all-closed", function () {
     // if (process.platform !== "darwin")
     app.quit();
 });
+
 app.on("quit", function () {
     console.log("Application quit.");
 });
+
 app.on("activate", function () {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.

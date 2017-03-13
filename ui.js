@@ -28,13 +28,18 @@ var ui = {
     autoSelect: document.getElementById('auto-select'),
     armPosition: document.getElementById('arm-position')
 };
-let address = document.getElementById('connect-address'), connect = document.getElementById('connect');
+let address = document.getElementById('connect-address'), 
+    connect = document.getElementById('connect');
+
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
 // NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
+
 // Sets function to be called when robot dis/connects
 NetworkTables.addRobotConnectionListener(onRobotConnection, false);
+
 // Sets function to be called when any NetworkTables key/value changes
 NetworkTables.addGlobalListener(onValueChanged, true);
+
 let escCount = 0;
 onkeydown = key => {
     if (key.key === 'Escape') {
@@ -51,6 +56,7 @@ onkeydown = key => {
 if (noElectron) {
     document.body.classList.add('login-close');
 }
+
 function onRobotConnection(connected) {
     var state = connected ? 'Robot connected!' : 'Robot disconnected.';
     console.log(state);
@@ -87,7 +93,9 @@ function onRobotConnection(connected) {
         }
     }
 }
+
 /**** KEY Listeners ****/
+
 // Gyro rotation
 let updateGyro = (key, value) => {
     ui.gyro.val = value;
@@ -99,6 +107,7 @@ let updateGyro = (key, value) => {
     ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 };
 NetworkTables.addKeyListener('/SmartDashboard/drive/navx/yaw', updateGyro);
+
 // The following case is an example, for a robot with an arm at the front.
 // Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
 NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
@@ -114,6 +123,7 @@ NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
     // Rotate the arm in diagram to match real arm
     ui.robotDiagram.arm.style.transform = `rotate(${armAngle}deg)`;
 });
+
 // This button is just an example of triggering an event on the robot by clicking a button.
 NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
     // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
@@ -123,6 +133,7 @@ NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) =>
     ui.example.button.classList.toggle('active', value);
     ui.example.readout.data = 'Value is ' + (value ? 'true' : 'false');
 });
+
 NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
     // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
     if (typeof value === 'string')
@@ -163,6 +174,7 @@ NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
     }
     NetworkTables.putValue(key, false);
 });
+
 // Load list of prewritten autonomous modes
 NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
     // Clear previous list
@@ -178,10 +190,12 @@ NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
     // Set value to the already-selected mode. If there is none, nothing will happen.
     ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
 });
+
 // Load list of prewritten autonomous modes
 NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value) => {
     ui.autoSelect.value = value;
 });
+
 // Global Listener
 function onValueChanged(key, value, isNew) {
     // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
