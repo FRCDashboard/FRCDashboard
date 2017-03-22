@@ -4,7 +4,9 @@
   "description": "Dashboard for extra robot controls in FRC. Experimental Electron environment.",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "pack": "build --dir",
+    "dist": "build"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,14 @@
   },
   "homepage": "http://frcdashboard.github.io",
   "devDependencies": {
-    "electron": "^1.2.0"
+    "electron": "^1.2.0",
+    "electron-builder": "~15.2.0"
+  },
+  "dependencies": {
+    "wpilib-nt-client": "^1.1.3"
+  },
+  "build": {
+    "appId": "FRCDashboard",
+    "productName": "FRCDashboard"
   }
 }
