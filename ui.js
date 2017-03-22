@@ -28,23 +28,74 @@ var ui = {
     autoSelect: document.getElementById('auto-select'),
     armPosition: document.getElementById('arm-position')
 };
+let address = document.getElementById('connect-address'), 
+    connect = document.getElementById('connect');
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
 // NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
+
 // Sets function to be called when robot dis/connects
-NetworkTables.addRobotConnectionListener(onRobotConnection, true);
+NetworkTables.addRobotConnectionListener(onRobotConnection, false);
+
 // Sets function to be called when any NetworkTables key/value changes
 NetworkTables.addGlobalListener(onValueChanged, true);
 
+let escCount = 0;
+onkeydown = key => {
+    if (key.key === 'Escape') {
+        setTimeout(() => { escCount = 0; }, 400);
+        escCount++;
+        console.log(escCount);
+        if (escCount === 2) {
+            document.body.classList.toggle('login-close', true);
+        }
+    }
+    else
+        console.log(key.key);
+};
+if (noElectron) {
+    document.body.classList.add('login-close');
+}
 
 function onRobotConnection(connected) {
-
     var state = connected ? 'Robot connected!' : 'Robot disconnected.';
     console.log(state);
     ui.robotState.data = state;
+    if (!noElectron) {
+        if (connected) {
+            // On connect hide the connect popup
+            document.body.classList.toggle('login-close', true);
+        }
+        else {
+            // On disconnect show the connect popup
+            document.body.classList.toggle('login-close', false);
+            // Add Enter key handler
+            address.onkeydown = ev => {
+                if (ev.key === "Enter") {
+                    connect.click();
+                }
+            };
+            // Enable the input and the button
+            address.disabled = false;
+            connect.disabled = false;
+            connect.firstChild.data = "Connect";
+            // Add the default address and select xxxx
+            address.value = "roborio-xxxx.local";
+            address.focus();
+            address.setSelectionRange(8, 12);
+            // On click try to connect and disable the input and the button
+            connect.onclick = () => {
+                ipc.send('connect', address.value);
+                address.disabled = true;
+                connect.disabled = true;
+                connect.firstChild.data = "Connecting";
+            };
+        }
+    }
 }
 
 /**** KEY Listeners ****/
+
 // Gyro rotation
 let updateGyro = (key, value) => {
     ui.gyro.val = value;
@@ -216,13 +267,11 @@ function onValueChanged(key, value, isNew) {
     }
 
 }
-
 // The rest of the doc is listeners for UI elements being clicked on
-ui.example.button.onclick = function() {
-	// Set NetworkTables values to the opposite of whether button has active class.
-	NetworkTables.setValue('/SmartDashboard/example_variable', this.className != 'active');
+ui.example.button.onclick = function () {
+    // Set NetworkTables values to the opposite of whether button has active class.
+    NetworkTables.putValue('/SmartDashboard/example_variable', this.className != 'active');
 };
-
 // Reset gyro value to 0 on click
 ui.gyro.container.onclick = function () {
     // Store previous gyro val, will now be subtracted from val for callibration
@@ -230,33 +279,30 @@ ui.gyro.container.onclick = function () {
     // Trigger the gyro to recalculate value.
     updateGyro('/SmartDashboard/drive/navx/yaw', ui.gyro.val);
 };
-
 // Open tuning section when button is clicked
-ui.tuning.button.onclick = function() {
-	if (ui.tuning.list.style.display === 'none') {
-		ui.tuning.list.style.display = 'block';
-	} else {
-		ui.tuning.list.style.display = 'none';
-	}
+ui.tuning.button.onclick = function () {
+    if (ui.tuning.list.style.display === 'none') {
+        ui.tuning.list.style.display = 'block';
+    }
+    else {
+        ui.tuning.list.style.display = 'none';
+    }
 };
-
 // Manages get and set buttons at the top of the tuning pane
-ui.tuning.set.onclick = function() {
-	// Make sure the inputs have content, if they do update the NT value
-	if (ui.tuning.name.value && ui.tuning.value.value) {
-		NetworkTables.setValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
-	}
+ui.tuning.set.onclick = function () {
+    // Make sure the inputs have content, if they do update the NT value
+    if (ui.tuning.name.value && ui.tuning.value.value) {
+        NetworkTables.putValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
+    }
 };
-ui.tuning.get.onclick = function() {
-	ui.tuning.value.value = NetworkTables.getValue(ui.tuning.name.value);
+ui.tuning.get.onclick = function () {
+    ui.tuning.value.value = NetworkTables.getValue(ui.tuning.name.value);
 };
-
 // Update NetworkTables when autonomous selector is changed
-ui.autoSelect.onchange = function() {
-	NetworkTables.setValue('/SmartDashboard/autonomous/selected', this.value);
+ui.autoSelect.onchange = function () {
+    NetworkTables.putValue('/SmartDashboard/autonomous/selected', this.value);
 };
-
 // Get value of arm height slider when it's adjusted
-ui.armPosition.oninput = function() {
-	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
+ui.armPosition.oninput = function () {
+    NetworkTables.putValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };

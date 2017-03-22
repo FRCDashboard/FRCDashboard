@@ -10,20 +10,15 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
 ## Setup
 ### Dependencies
-* Python 3 **(MUST be 3, not 2!)**
-* `pynetworktables2js`
-
-        pip3 install pynetworktables2js
-
-    If you don't have administrator privileges, put `--user` at the end of that command.)
-
-If you're going to be using the preferred method of using the dashboard (as an application through Electron), you'll also need:
 * [`nodejs`](https://nodejs.org) & [`npm`](https://npmjs.com)
     * If you don't have permission to install these, see [this gist](https://gist.github.com/isaacs/579814) for a workaround.
 * Node dependencies (to install, `cd` into dashboard directory and run `npm install`)
+* Python 3
+    * If you are installing `mjpg-streamer` or are using this aplication throught the browser
 
 ### Configuration
-* In `ui.js`, there are a bunch of `Network.addKeyListener()` which contain key listeners that control the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
+* In `ui.js`, there are a bunch of key handler functions which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
+
 
 #### Configuring Camera feed
 In order to run the camera, you must start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:
@@ -41,8 +36,15 @@ In order to run the camera, you must start an `mjpg-streamer` server on the Robo
         python3 installer.py download-opkg mjpg-streamer
         python3 installer.py install-opkg mjpg-streamer
 
-3. Update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number.
+3. Update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number. The port may vary.
 
+
+## Building
+1. Get `npm`
+2. Run `npm i` to install all of the dependencies
+3. Run `npm run dist` to pack the entire application into a single file
+4. The Run the setup file located in dist/ on the system where you want to install the dashboard
+    * **Warning** currently there is no cross compilation
 
 ## Running
 1. Connect to your robot's network if you haven't already. (If you're just testing the dashboard and don't currently need to use it with your robot, you can skip this step.)

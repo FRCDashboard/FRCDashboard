@@ -16,11 +16,7 @@ body {
     overflow: hidden;
     background: #222;
 }
-button,
-input[type="text"],
-input[type="number"],
-.select-container,
-select {
+button, input[type="text"], input[type="number"], .select-container, select {
     color: white;
     background: #444;
     border: none;
@@ -39,15 +35,13 @@ select {
     color: white;
     height: 25px;
 }
-input[type="text"],
-input[type="number"] {
+input[type="text"], input[type="number"] {
     cursor: text;
 }
 input[type="checkbox"] {
     -webkit-filter: saturate(0);
     filter: saturate(0);
 }
-
 /* Major interface panes, aside, article, header, etc. */
 body > * {
     padding: 10px;
@@ -82,7 +76,7 @@ header {
     overflow: hidden;
     background-color: #333;
     /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
-    background-image: url('LINK TO CAMERA SOURCE HERE');
+    /*background-image: url('LINK TO CAMERA SOURCE HERE');*/
 }
 #tuning {
     width: 50vw;
@@ -154,3 +148,57 @@ aside {
 aside > * {
     margin-bottom: 20px;
 }
+.greybox {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+body.login-close > .greybox {
+    display: none
+}
+#login {
+    text-align: center;
+    display: block;
+    margin: 14em auto 0 auto;
+    width: 18em;
+    overflow: hidden;
+    animation: 1s linear;
+    padding: 4px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.8)
+}
+body.login-close #login {
+    opacity: 1;
+    width: 0;
+    animation: 1s linear;
+}
+#login :disabled {
+    filter: opacity(0.6)
+}
+#login > button{
+    width:6em
+}
+#connect{
+    text-align: center;
+}
+/*
+ Blur transition that does not work
+
+body:not(.login-close) >:not(.greybox) {
+    animation: blur 1s normal forwards
+}
+body.login-close >:not(.greybox) {
+    animation: blur 1s reverse backwards
+}
+@keyframes blur {
+    from {
+        filter: blur(0);
+    }
+    to {
+        filter: blur(3px);
+    }
+}
+*/
