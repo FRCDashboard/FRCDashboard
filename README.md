@@ -41,7 +41,7 @@ In order to run the camera, you must start an `mjpg-streamer` server on the Robo
 
 ## Building
 1. Get `npm`
-2. run `npm i` to install all of the depedencies
+2. Run `npm i` to install all of the dependencies
 3. Run `npm run dist` to pack the entire application into a single file
 4. The Run the setup file located in dist/ on the system where you want to install the dashboard
     * **Warning** currently there is no cross compilation
