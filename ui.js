@@ -1,5 +1,5 @@
 // Define UI elements
-var ui = {
+let ui = {
     timer: document.getElementById('timer'),
     robotState: document.getElementById('robot-state').firstChild,
     gyro: {
@@ -28,7 +28,7 @@ var ui = {
     autoSelect: document.getElementById('auto-select'),
     armPosition: document.getElementById('arm-position')
 };
-let address = document.getElementById('connect-address'), 
+let address = document.getElementById('connect-address'),
     connect = document.getElementById('connect');
 
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
@@ -71,16 +71,16 @@ function onRobotConnection(connected) {
             document.body.classList.toggle('login-close', false);
             // Add Enter key handler
             address.onkeydown = ev => {
-                if (ev.key === "Enter") {
+                if (ev.key === 'Enter') {
                     connect.click();
                 }
             };
             // Enable the input and the button
             address.disabled = false;
             connect.disabled = false;
-            connect.firstChild.data = "Connect";
+            connect.firstChild.data = 'Connect';
             // Add the default address and select xxxx
-            address.value = "roborio-xxxx.local";
+            address.value = 'roborio-xxxx.local';
             address.focus();
             address.setSelectionRange(8, 12);
             // On click try to connect and disable the input and the button
@@ -88,7 +88,7 @@ function onRobotConnection(connected) {
                 ipc.send('connect', address.value);
                 address.disabled = true;
                 connect.disabled = true;
-                connect.firstChild.data = "Connecting";
+                connect.firstChild.data = 'Connecting';
             };
         }
     }
@@ -127,8 +127,9 @@ NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
 // This button is just an example of triggering an event on the robot by clicking a button.
 NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
     // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
+    // TODO: We shouldn't have to do this for every variable that can be a boolean.
     if (typeof value === 'string')
-        value = value === "true";
+        value = value === 'true';
     // Set class active if value is true and unset it if it is false
     ui.example.button.classList.toggle('active', value);
     ui.example.readout.data = 'Value is ' + (value ? 'true' : 'false');
@@ -137,7 +138,7 @@ NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) =>
 NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
     // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
     if (typeof value === 'string')
-        value = value === "true";
+        value = value === 'true';
     // When this NetworkTables variable is true, the timer will start.
     // You shouldn't need to touch this code, but it's documented anyway in case you do.
     var s = 135;
@@ -224,7 +225,7 @@ function onValueChanged(key, value, isNew) {
             // The following statement figures out which data type the variable is.
             // If it's a boolean, it will make the input be a checkbox. If it's a number,
             // it will make it a number chooser with up and down arrows in the box. Otherwise, it will make it a textbox.
-            if (typeof value === "boolean") {
+            if (typeof value === 'boolean') {
                 input.type = 'checkbox';
                 input.checked = value; // value property doesn't work on checkboxes, we'll need to use the checked property instead
                 input.onchange = function () {
@@ -265,8 +266,8 @@ function onValueChanged(key, value, isNew) {
             console.log('Error: Non-new variable ' + key + ' not present in tuning list!');
         }
     }
-
 }
+
 // The rest of the doc is listeners for UI elements being clicked on
 ui.example.button.onclick = function () {
     // Set NetworkTables values to the opposite of whether button has active class.

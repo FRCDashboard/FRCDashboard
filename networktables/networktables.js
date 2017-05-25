@@ -1,6 +1,6 @@
 var NetworkTables;
 (function (NetworkTables) {
-    let keys = {}, connectionListeners = [], connected = false, globalListeners = [], keyListeners = {}, robotAddress = "127.0.0.1";
+    let keys = {}, connectionListeners = [], connected = false, globalListeners = [], keyListeners = {}, robotAddress = '127.0.0.1';
     ipc.send('ready');
     ipc.on('connected', (ev, con) => {
         connected = con;
@@ -56,12 +56,12 @@ var NetworkTables;
             return this._[d3_map_escape(key)] = value;
         };
     };
-    var d3_map_proto = "__proto__", d3_map_zero = "\x00";
+    var d3_map_proto = '__proto__', d3_map_zero = '\x00';
     function d3_map_escape(key) {
-        return (key += "") === d3_map_proto || key[0] === d3_map_zero ? d3_map_zero + encodeURIComponent(key) : encodeURIComponent(key);
+        return (key += '') === d3_map_proto || key[0] === d3_map_zero ? d3_map_zero + encodeURIComponent(key) : encodeURIComponent(key);
     }
     function d3_map_unescape(key) {
-        return (key += "")[0] === d3_map_zero ? decodeURIComponent(key.slice(1)) : decodeURIComponent(key);
+        return (key += '')[0] === d3_map_zero ? decodeURIComponent(key.slice(1)) : decodeURIComponent(key);
     }
     /**
      * Sets a function to be called when the robot connects/disconnects to the pynetworktables2js server via NetworkTables. It will also be called when the websocket connects/disconnects.
