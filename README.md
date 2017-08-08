@@ -23,7 +23,7 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 #### Configuring Camera feed
 In order to run the camera, you must start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:
 
-1. Download [this installer script](https://raw.githubusercontent.com/robotpy/robotpy-wpilib/master/installer/installer.py) from GitHub. This script is for downloading and installing packages to the RoboRIO.
+1. Download [this installer script](https://raw.githubusercontent.com/robotpy/robotpy-installer/master/robotpy_installer/installer.py) from GitHub. This script is for downloading and installing packages to the RoboRIO.
 2. While in the directory where you downloaded the installer script, run:
 
     Windows:
