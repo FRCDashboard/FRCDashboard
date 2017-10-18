@@ -5,13 +5,17 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
 **Contributions are VERY welcome! Please feel free to open a pull request or issue!**
 
+
 ![Screenshot slideshow](images/screenshots.gif)
 
-### Some example implementations of FRC Dashboard
+<details>
+   <summary>Some example implementations of FRC Dashboard</summary>
+   
 ![1132's 2017 Dashboard](images/example-1132.jpg)
 ![6325's 2017 Dashboard](https://i.redd.it/w9jt1gmbecpy.png)
 ![1418's 2017 Dashboard](https://raw.githubusercontent.com/frc1418/2017-dashboard/master/images/screenshot.png)
 ![1418's 2016 Dashboard](https://raw.githubusercontent.com/frc1418/FRCDashboard/2016/screenshot.png)
+</details>
 
 ## Setup
 ### Dependencies
@@ -62,7 +66,7 @@ While in the dashboard directory, run:
 
     npm start
 
-This will start a Python server and open the dashboard application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` on Mac) to refresh the application.
+This will start a Python server and open the dashboard application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` or `⌘+R` on Mac) to refresh the application.
 
 ### Using dashboard through web browser
 The less desirable, but perfectly functional method of viewing your dashboard is to use it like a webpage. This method will work even if you don't have the privileges to install `node.js` and `npm`. The standard toolbars from your browser will still be shown and will take up space on the screen, and the experience will be a bit less fluid, but it will work.
