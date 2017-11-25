@@ -1,20 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+
 const electron = require("electron");
 const wpilib_NT = require("wpilib-nt-client");
 const client = new wpilib_NT.Client();
 
-// Module to control application life.
+/** Module to control application life. */
 const app = electron.app;
 
-// Module to create native browser window.
+/** Module to create native browser window.*/
 const BrowserWindow = electron.BrowserWindow;
 
-// Module for receiving messages from the BrowserWindow
+/** Module for receiving messages from the BrowserWindow */
 const ipc = electron.ipcMain;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
+/** 
+ * The Main Window of the Program
+ * @type {Electron.BrowserWindow} 
+ * */
 let mainWindow;
 
 

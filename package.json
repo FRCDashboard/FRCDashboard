@@ -19,6 +19,7 @@
   },
   "homepage": "http://frcdashboard.github.io",
   "devDependencies": {
+    "@types/electron": "^1.6.10",
     "electron": "^1.7.9",
     "electron-builder": "~15.2.0"
   },
