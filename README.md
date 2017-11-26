@@ -5,7 +5,7 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
 **Contributions are VERY welcome! Please feel free to open a pull request or issue!**
 
-**As of Late March 2017 pynetworktables2js has been replaced by [FTC-NT-Client](https://github.com/rakusan2/FRC-NT-Client) in Electron thereby removing the Python dependency.** This is not the case if this aplication is used through a browser.
+**As of Late March 2017 pynetworktables2js has been replaced by [FTC-NT-Client](https://github.com/rakusan2/FRC-NT-Client) in Electron thereby removing the Python dependency.** This is not the case if this application is used through a browser.
 
 
 ![Screenshot slideshow](images/screenshots.gif)
@@ -51,7 +51,7 @@ In order to run the camera, you must start an `mjpg-streamer` server on the Robo
 
 
 ## Building
-This enebles the user to turn this entire aplication into a single .exe or .app file witch then can be run from any computer
+This enables the user to turn this entire application into a single .exe or .app file witch then can be run from any computer
  
 1. Get `npm`
 2. Run `npm i` to install all of the dependencies
@@ -100,4 +100,4 @@ It is recommended that while using the dashboard on your driver station, you clo
 ## Modifying
 FRC Dashboard is designed to be modified for your team's purposes, so you're allowed to do whatever you think is best for you. However, it would be good if you could fork this repository or copy it to another. This will allow you to easily pull updates when they occur, and if you fork it helps us tell who's using it.
 
-This software is licensed under the MIT license. Basically, modify as much as you like, as long as you give credit where it's due and don't hold us accountable for anything. More information in `LICENSE`.
+This software is licensed under the MIT license. Basically, you can modify as much as you like, as long as you give credit where it's due and you don't hold us accountable for anything. More information in `LICENSE`.
