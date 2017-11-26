@@ -5,6 +5,8 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
 **Contributions are VERY welcome! Please feel free to open a pull request or issue!**
 
+**As of Late March 2017 pynetworktables2js has been replaced by [FTC-NT-Client](https://github.com/rakusan2/FRC-NT-Client) in Electron thereby removing the Python dependency.** This is not the case if this aplication is used through a browser.
+
 
 ![Screenshot slideshow](images/screenshots.gif)
 
@@ -93,6 +95,7 @@ It is recommended that while using the dashboard on your driver station, you clo
 * [Team 1418](https://github.com/frc1418) used earlier versions of this code in 2015 and 2016.
 * [Leon Tan](https://github.com/lleontan) led the original 1418 UI team, coded pynetworktables2js, and developed a browser-based UI which was years later reworked to create FRC Dashboard.
 * [Dustin Spicuzza](https://github.com/virtuald) leads the [RobotPy](https://github.com/robotpy) project mentored team 1418 through much of FRC Dashboard's genesis.
+* [Tomas Rakusan](https://github.com/rakusan2) Developed Node based [NetworkTables client](https://github.com/rakusan2/FRC-NT-Client) and its interface in this project
 
 ## Modifying
 FRC Dashboard is designed to be modified for your team's purposes, so you're allowed to do whatever you think is best for you. However, it would be good if you could fork this repository or copy it to another. This will allow you to easily pull updates when they occur, and if you fork it helps us tell who's using it.
