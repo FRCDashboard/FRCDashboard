@@ -5,6 +5,8 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
 
 **Contributions are VERY welcome! Please feel free to open a pull request or issue!**
 
+**As of Late March 2017 pynetworktables2js has been replaced by [FTC-NT-Client](https://github.com/rakusan2/FRC-NT-Client) in Electron thereby removing the Python dependency.** This is not the case if this application is used through a browser.
+
 
 ![Screenshot slideshow](images/screenshots.gif)
 
@@ -23,7 +25,7 @@ The dashboard's code is designed to be 100% accessible, tweakable, and expandabl
     * If you don't have permission to install these, see [this gist](https://gist.github.com/isaacs/579814) for a workaround.
 * Node dependencies (to install, `cd` into dashboard directory and run `npm install`)
 * Python 3
-    * If you are installing `mjpg-streamer` or are using this aplication throught the browser
+    * If you are installing `mjpg-streamer` or are using this application through the browser
 
 ### Configuration
 * In `ui.js`, there are a bunch of key handler functions which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
@@ -49,6 +51,8 @@ In order to run the camera, you must start an `mjpg-streamer` server on the Robo
 
 
 ## Building
+This enables the user to turn this entire application into a single .exe or .app file witch then can be run from any computer
+ 
 1. Get `npm`
 2. Run `npm i` to install all of the dependencies
 3. Run `npm run dist` to pack the entire application into a single file
@@ -66,7 +70,7 @@ While in the dashboard directory, run:
 
     npm start
 
-This will start a Python server and open the dashboard application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` or `⌘+R` on Mac) to refresh the application.
+This will open the dashboard application. Note that you don't have to close and reopen the application every time you make a change, you can just press `Ctrl+R` (`Cmd+R` or `⌘+R` on Mac) to refresh the application as long as you do not change main.js or tryIPC.js
 
 ### Using dashboard through web browser
 The less desirable, but perfectly functional method of viewing your dashboard is to use it like a webpage. This method will work even if you don't have the privileges to install `node.js` and `npm`. The standard toolbars from your browser will still be shown and will take up space on the screen, and the experience will be a bit less fluid, but it will work.
@@ -91,8 +95,9 @@ It is recommended that while using the dashboard on your driver station, you clo
 * [Team 1418](https://github.com/frc1418) used earlier versions of this code in 2015 and 2016.
 * [Leon Tan](https://github.com/lleontan) led the original 1418 UI team, coded pynetworktables2js, and developed a browser-based UI which was years later reworked to create FRC Dashboard.
 * [Dustin Spicuzza](https://github.com/virtuald) leads the [RobotPy](https://github.com/robotpy) project mentored team 1418 through much of FRC Dashboard's genesis.
+* [Tomas Rakusan](https://github.com/rakusan2) Developed Node based [NetworkTables client](https://github.com/rakusan2/FRC-NT-Client) and its interface in this project
 
 ## Modifying
-FRC Dashboard is designed to be modified for your team's purposes, so you're allowed to do whatever you think is best for you. However, it would be good if you could fork this repository or copy it to another. This will allow you to easily pull updates when they occur, and if you fork it it helps us tell who's using it.
+FRC Dashboard is designed to be modified for your team's purposes, so you're allowed to do whatever you think is best for you. However, it would be good if you could fork this repository or copy it to another. This will allow you to easily pull updates when they occur, and if you fork it helps us tell who's using it.
 
-This software is licensed under the MIT license. Basically, modify as much as you like, as long as you give credit where it's due and don't hold us accountable for anything. More information in `LICENSE`.
+This software is licensed under the MIT license. Basically, you can modify as much as you like, as long as you give credit where it's due and you don't hold us accountable for anything. More information in `LICENSE`.

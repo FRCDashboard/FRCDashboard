@@ -40,6 +40,7 @@ NetworkTables.addRobotConnectionListener(onRobotConnection, false);
 // Sets function to be called when any NetworkTables key/value changes
 NetworkTables.addGlobalListener(onValueChanged, true);
 
+// Function for hiding the connect box 
 let escCount = 0;
 onkeydown = key => {
     if (key.key === 'Escape') {
@@ -57,6 +58,10 @@ if (noElectron) {
     document.body.classList.add('login-close');
 }
 
+/**
+ * Function to be called when robot connects
+ * @param {boolean} connected 
+ */
 function onRobotConnection(connected) {
     var state = connected ? 'Robot connected!' : 'Robot disconnected.';
     console.log(state);
@@ -197,13 +202,18 @@ NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value)
     ui.autoSelect.value = value;
 });
 
-// Global Listener
+/**
+ * Global Listener that runs whenever any value changes
+ * @param {string} key 
+ * @param value 
+ * @param {boolean} isNew 
+ */
 function onValueChanged(key, value, isNew) {
     // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
-    if (value == 'true') {
+    if (value === 'true') {
         value = true;
     }
-    else if (value == 'false') {
+    else if (value === 'false') {
         value = false;
     }
     // The following code manages tuning section of the interface.

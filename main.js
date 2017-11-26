@@ -1,21 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+
 const electron = require("electron");
 const wpilib_NT = require("wpilib-nt-client");
 const client = new wpilib_NT.Client();
 
-// Module to control application life.
+/** Module to control application life. */
 const app = electron.app;
 
-// Module to create native browser window.
+/** Module to create native browser window.*/
 const BrowserWindow = electron.BrowserWindow;
 
-// Module for receiving messages from the BrowserWindow
+/** Module for receiving messages from the BrowserWindow */
 const ipc = electron.ipcMain;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
+/** 
+ * The Main Window of the Program
+ * @type {Electron.BrowserWindow} 
+ * */
 let mainWindow;
+
 
 let connected, ready = false;
 function createWindow() {
@@ -85,7 +91,6 @@ function createWindow() {
         mainWindow = null;
     });
 }
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', () => {
@@ -99,6 +104,7 @@ app.on('window-all-closed', function () {
     // Not like we're creating a consumer application though.
     // Let's just kill it anyway.
     // If you want to restore the standard behavior, uncomment the next line.
+
     // if (process.platform !== "darwin")
     app.quit();
 });
