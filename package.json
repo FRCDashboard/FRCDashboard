@@ -6,7 +6,8 @@
   "main": "App/main.js",
   "scripts": {
     "start": "electron-forge start",
-    "dist": "electron-packager . --out dist "
+    "dist": "electron-packager . --out dist ",
+    "distAll": "electron-packager . --out dist --platform all"
   },
   "repository": {
     "type": "git",
