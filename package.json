@@ -5,7 +5,7 @@
   "description": "Dashboard for extra robot controls in FRC. Experimental Electron environment.",
   "main": "App/main.js",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "electron .",
     "dist": "electron-packager . --out dist ",
     "distAll": "electron-packager . --out dist --platform all"
   },
