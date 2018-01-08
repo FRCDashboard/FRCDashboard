@@ -55,9 +55,8 @@ This enables the user to turn this entire application into a single .exe or .app
  
 1. Get `npm`
 2. Run `npm i` to install all of the dependencies
-3. Run `npm run dist` to pack the entire application into a single file
-4. The Run the setup file located in dist/ on the system where you want to install the dashboard
-    * **Warning** currently there is no cross compilation
+3. Run `npm run dist` to pack the entire application into a single folder or `npm run distAll` to create an application for all x64 platforms
+4. Then copy the folder to where ever you want to run it from and run the `FRCDashboard` executible inside
 
 ## Running
 1. Connect to your robot's network if you haven't already. (If you're just testing the dashboard and don't currently need to use it with your robot, you can skip this step.)

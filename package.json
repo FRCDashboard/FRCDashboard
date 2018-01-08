@@ -1,12 +1,13 @@
 {
   "name": "FRCDashboard",
-  "version": "v2.0.0",
+  "productName":"FRCDashBoard",
+  "version": "2.1.0",
   "description": "Dashboard for extra robot controls in FRC. Experimental Electron environment.",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "electron main.js",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "start": "electron .",
+    "dist": "electron-packager . --out dist ",
+    "distAll": "electron-packager . --out dist --platform all"
   },
   "repository": {
     "type": "git",
@@ -20,23 +21,10 @@
   "homepage": "http://frcdashboard.github.io",
   "devDependencies": {
     "@types/electron": "^1.6.10",
-    "electron": "^1.7.9",
-    "electron-builder": "~15.2.0"
+    "electron": "1.7.9",
+    "electron-packager": "^10.1.0"
   },
   "dependencies": {
     "wpilib-nt-client": "^1.3.0"
-  },
-  "build": {
-    "appId": "FRCDashboard",
-    "productName": "FRCDashboard",
-    "win": {
-      "target": "portable"
-    },
-    "nsis": {
-      "warningsAsErrors": false
-    },
-    "portable": {
-      "requestExecutionLevel": "user"
-    }
   }
 }
