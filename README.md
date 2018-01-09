@@ -29,10 +29,10 @@ One way to use a start an `mjpg-streamer` server on the RoboRIO. To install `mjp
 
 1. Download and run [this installer script](https://raw.githubusercontent.com/robotpy/robotpy-installer/master/robotpy_installer/installer.py) from GitHub. This script is for downloading and installing packages to the RoboRIO.
 2. While in the directory where you downloaded the installer script, run:
-
-    python3 installer.py download-opkg mjpg-streamer
-    python3 installer.py install-opkg mjpg-streamer
-
+```sh
+python3 installer.py download-opkg mjpg-streamer
+python3 installer.py install-opkg mjpg-streamer
+```
 3. Update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number. The port may vary.
 
 
