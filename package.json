@@ -1,13 +1,13 @@
 {
   "name": "FRCDashboard",
-  "productName":"FRCDashBoard",
+  "productName": "FRCDashBoard",
   "version": "2.1.0",
   "description": "Dashboard for extra robot controls in FRC. Experimental Electron environment.",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-packager . --out dist ",
-    "distAll": "electron-packager . --out dist --platform all"
+    "dist": "electron-packager . --out dist/",
+    "dist-all": "electron-packager . --out dist/ --all"
   },
   "repository": {
     "type": "git",
