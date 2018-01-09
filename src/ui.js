@@ -1,3 +1,6 @@
+// Import ipc
+ipc = require('electron').ipcRenderer;
+
 // Define UI elements
 let ui = {
     timer: document.getElementById('timer'),
@@ -138,7 +141,7 @@ NetworkTables.addKeyListener('/robot/time', (key, value) => {
 });
 
 // Load list of prewritten autonomous modes
-NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/autonomous/modes', (key, value) => {
     // Clear previous list
     while (ui.autoSelect.firstChild) {
         ui.autoSelect.removeChild(ui.autoSelect.firstChild);

@@ -16,9 +16,9 @@ const ipc = electron.ipcMain;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-/** 
+/**
  * The Main Window of the Program
- * @type {Electron.BrowserWindow} 
+ * @type {Electron.BrowserWindow}
  * */
 let mainWindow;
 
@@ -116,7 +116,5 @@ app.on('quit', function () {
 app.on('activate', function () {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (mainWindow == null) {
-        createWindow();
-    }
+    if (mainWindow == null) createWindow();
 });
