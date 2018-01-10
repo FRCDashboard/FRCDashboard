@@ -9,10 +9,12 @@ The dashboard's code is designed to be 100% accessible and expandable. To this a
 
 <details>
     <summary>Click to view some example implementations of FRC Dashboard</summary>
-    ![1132's 2017 Dashboard](images/example-1132.jpg)
-    ![6325's 2017 Dashboard](https://i.redd.it/w9jt1gmbecpy.png)
-    ![1418's 2017 Dashboard](https://raw.githubusercontent.com/frc1418/2017-dashboard/master/images/screenshot.png)
-    ![1418's 2016 Dashboard](https://raw.githubusercontent.com/frc1418/FRCDashboard/2016/screenshot.png)
+
+![1132's 2017 Dashboard](images/example-1132.jpg)  
+![6325's 2017 Dashboard](https://i.redd.it/w9jt1gmbecpy.png)  
+![1418's 2017 Dashboard](https://raw.githubusercontent.com/frc1418/2017-dashboard/master/images/screenshot.png)  
+![1418's 2016 Dashboard](https://raw.githubusercontent.com/frc1418/FRCDashboard/2016/screenshot.png)  
+
 </details>
 
 ## Setup
