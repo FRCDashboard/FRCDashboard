@@ -1,8 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 
-const electron = require("electron");
-const wpilib_NT = require("wpilib-nt-client");
+const electron = require('electron');
+const wpilib_NT = require('wpilib-nt-client');
 const client = new wpilib_NT.Client();
 
 /** Module to control application life. */
@@ -22,24 +22,21 @@ const ipc = electron.ipcMain;
  * */
 let mainWindow;
 
-
-let connected, ready = false;
+let connected,
+    ready = false;
 function createWindow() {
     // Attempt to connect to the localhost
     client.start((con, err) => {
         // If the Window is ready than send the connection status to it
         if (ready) {
             mainWindow.webContents.send('connected', con);
-        }
-        else
-            connected = () => mainWindow.webContents.send('connected', con);
+        } else connected = () => mainWindow.webContents.send('connected', con);
     });
     // When the script starts running in the window set the ready variable
     ipc.on('ready', (ev, mesg) => {
         ready = true;
         // Send connection message to the window if if the message is ready
-        if (connected)
-            connected();
+        if (connected) connected();
     });
     // When the user chooses the address of the bot than try to connect
     ipc.on('connect', (ev, address, port) => {
@@ -48,8 +45,7 @@ function createWindow() {
         };
         if (port) {
             client.start(callback, address, port);
-        }
-        else {
+        } else {
             client.start(callback, address);
         }
     });
@@ -61,6 +57,9 @@ function createWindow() {
     });
     // Listens to the changes coming from the client
     client.addListener((key, val, valType, mesgType, id, flags) => {
+        if (val === 'true' || val === 'false') {
+            val = val === 'true';
+        }
         mainWindow.webContents.send(mesgType, { key, val, valType, id, flags });
     });
     // Create the browser window.
@@ -77,14 +76,14 @@ function createWindow() {
     // Load window.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
     // Once the python server is ready, load window contents.
-    mainWindow.once('ready-to-show', function () {
+    mainWindow.once('ready-to-show', function() {
         mainWindow.show();
     });
 
     // Remove menu
     mainWindow.setMenu(null);
     // Emitted when the window is closed.
-    mainWindow.on('closed', function () {
+    mainWindow.on('closed', function() {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
@@ -98,22 +97,22 @@ app.on('ready', () => {
 });
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
+app.on('window-all-closed', function() {
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q.
     // Not like we're creating a consumer application though.
     // Let's just kill it anyway.
     // If you want to restore the standard behavior, uncomment the next line.
 
-    // if (process.platform !== "darwin")
+    // if (process.platform !== 'darwin')
     app.quit();
 });
 
-app.on('quit', function () {
+app.on('quit', function() {
     console.log('Application quit.');
 });
 
-app.on('activate', function () {
+app.on('activate', function() {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow == null) createWindow();
