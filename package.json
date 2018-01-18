@@ -6,8 +6,9 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-packager . --out dist/",
-    "dist-all": "electron-packager . --out dist/ --all"
+    "package-mac": "electron-packager . --platform=darwin --icon=images/icon.icns --out dist/",
+    "package-linux": "electron-packager . --platform=linux --icon=images/icon.png --out dist/",
+    "package-win": "electron-packager . --platform=win32 --icon=images/icon.ico --out dist/"
   },
   "repository": {
     "type": "git",
