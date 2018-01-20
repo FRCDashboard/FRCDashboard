@@ -1,5 +1,3 @@
-ipc = require('electron').ipcRenderer;
-
 let address = document.getElementById('connect-address'),
     connect = document.getElementById('connect');
 
