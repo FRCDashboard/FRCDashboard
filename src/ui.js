@@ -125,13 +125,9 @@ NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
 
 // This button is just an example of triggering an event on the robot by clicking a button.
 NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
-    // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
-    // TODO: We shouldn't have to do this for every variable that can be a boolean.
-    if (typeof value === 'string')
-        value = value === 'true';
     // Set class active if value is true and unset it if it is false
     ui.example.button.classList.toggle('active', value);
-    ui.example.readout.data = 'Value is ' + (value ? 'true' : 'false');
+    ui.example.readout.data = 'Value is ' + value;
 });
 
 NetworkTables.addKeyListener('/robot/time', (key, value) => {
@@ -168,13 +164,6 @@ NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value)
  * @param {boolean} isNew
  */
 function onValueChanged(key, value, isNew) {
-    // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
-    if (value === 'true') {
-        value = true;
-    }
-    else if (value === 'false') {
-        value = false;
-    }
     // The following code manages tuning section of the interface.
     // This section displays a list of all NetworkTables variables (that start with /SmartDashboard/) and allows you to directly manipulate them.
     var propName = key.substring(16, key.length);
