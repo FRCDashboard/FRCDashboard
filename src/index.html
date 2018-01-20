@@ -8,22 +8,14 @@
 </head>
 
 <body>
-    <!-- Clock that shows up in top left -->
     <div id="timer">2:15</div>
     <header>
         <!-- Tells whether robot is connected to dashboard. -->
         <div id="robot-state">Unknown state</div>
-        <button id="tuning-button">Tuning</button>
     </header>
     <!-- You'll need to mess around with the CSS of #camera (found in css/style.css) to get it to work.
         More explanation in that CSS rule. -->
     <div id="camera"></div>
-    <div id="tuning" style="display: none;">
-        <input id="name" type="text" placeholder="Property">
-        <input id="value" type="text" placeholder="Value">
-        <button id="set">Set</button>
-        <button id="get">Get</button>
-    </div>
     <!-- The main body of the dashboard, by default contains the gyro monitor and the robot diagram -->
     <article>
         <!-- Gyroscope -->

@@ -17,14 +17,6 @@ let ui = {
         button: document.getElementById('example-button'),
         readout: document.getElementById('example-readout').firstChild
     },
-    tuning: {
-        list: document.getElementById('tuning'),
-        button: document.getElementById('tuning-button'),
-        name: document.getElementById('name'),
-        value: document.getElementById('value'),
-        set: document.getElementById('set'),
-        get: document.getElementById('get')
-    },
     autoSelect: document.getElementById('auto-select'),
     armPosition: document.getElementById('arm-position')
 };
@@ -92,69 +84,6 @@ NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value)
     ui.autoSelect.value = value;
 });
 
-/**
- * Global Listener that runs whenever any value changes
- * @param {string} key
- * @param value
- * @param {boolean} isNew
- */
-function onValueChanged(key, value, isNew) {
-    // The following code manages tuning section of the interface.
-    // This section displays a list of all NetworkTables variables (that start with /SmartDashboard/) and allows you to directly manipulate them.
-    var propName = key.substring(16, key.length);
-    // Check if value is new and doesn't have a spot on the list yet
-    if (isNew && !document.getElementsByName(propName)[0]) {
-        // Make sure name starts with /SmartDashboard/. Properties that don't are technical and don't need to be shown on the list.
-        if (/^\/SmartDashboard\//.test(key)) {
-            // Make a new div for this value
-            var div = document.createElement('div'); // Make div
-            ui.tuning.list.appendChild(div); // Add the div to the page
-            var p = document.createElement('p'); // Make a <p> to display the name of the property
-            p.appendChild(document.createTextNode(propName)); // Make content of <p> have the name of the NetworkTables value
-            div.appendChild(p); // Put <p> in div
-            var input = document.createElement('input'); // Create input
-            input.name = propName; // Make its name property be the name of the NetworkTables value
-            input.value = value; // Set
-            // The following statement figures out which data type the variable is.
-            // If it's a boolean, it will make the input be a checkbox. If it's a number,
-            // it will make it a number chooser with up and down arrows in the box. Otherwise, it will make it a textbox.
-            if (typeof value === 'boolean') {
-                input.type = 'checkbox';
-                input.checked = value; // value property doesn't work on checkboxes, we'll need to use the checked property instead
-                input.onchange = function() {
-                    // For booleans, send bool of whether or not checkbox is checked
-                    NetworkTables.putValue(key, this.checked);
-                };
-            }
-            else if (!isNaN(value)) {
-                input.type = 'number';
-                input.onchange = function() {
-                    // For number values, send value of input as an int.
-                    NetworkTables.putValue(key, parseInt(this.value));
-                };
-            }
-            else {
-                input.type = 'text';
-                input.onchange = function() {
-                    // For normal text values, just send the value.
-                    NetworkTables.putValue(key, this.value);
-                };
-            }
-            // Put the input into the div.
-            div.appendChild(input);
-        }
-    }
-    else {
-        // Find already-existing input for changing this variable
-        var oldInput = document.getElementsByName(propName)[0];
-        if (oldInput) {
-            if (oldInput.type === 'checkbox') oldInput.checked = value;
-            else oldInput.value = value;
-        }
-        else console.log('Error: Non-new variable ' + key + ' not present in tuning list!');
-    }
-}
-
 // The rest of the doc is listeners for UI elements being clicked on
 ui.example.button.onclick = function() {
     // Set NetworkTables values to the opposite of whether button has active class.
@@ -166,25 +95,6 @@ ui.gyro.container.onclick = function() {
     ui.gyro.offset = ui.gyro.val;
     // Trigger the gyro to recalculate value.
     updateGyro('/SmartDashboard/drive/navx/yaw', ui.gyro.val);
-};
-// Open tuning section when button is clicked
-ui.tuning.button.onclick = function() {
-    if (ui.tuning.list.style.display === 'none') {
-        ui.tuning.list.style.display = 'block';
-    }
-    else {
-        ui.tuning.list.style.display = 'none';
-    }
-};
-// Manages get and set buttons at the top of the tuning pane
-ui.tuning.set.onclick = function() {
-    // Make sure the inputs have content, if they do update the NT value
-    if (ui.tuning.name.value && ui.tuning.value.value) {
-        NetworkTables.putValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
-    }
-};
-ui.tuning.get.onclick = function() {
-    ui.tuning.value.value = NetworkTables.getValue(ui.tuning.name.value);
 };
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function() {
