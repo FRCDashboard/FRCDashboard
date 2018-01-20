@@ -25,18 +25,8 @@ Before running your dashboard, you'll need to install the node dependencies by `
 ### Configuration
 * In `ui.js`, there are a bunch of key handler functions which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
-
 #### Camera feed
-One way to use a start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:
-
-1. Download and run [this installer script](https://raw.githubusercontent.com/robotpy/robotpy-installer/master/robotpy_installer/installer.py) from GitHub. This script is for downloading and installing packages to the RoboRIO.
-2. While in the directory where you downloaded the installer script, run:
-```sh
-python3 installer.py download-opkg mjpg-streamer
-python3 installer.py install-opkg mjpg-streamer
-```
-3. Update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number. The port may vary.
-
+FRC Dashboard supports display of MJPG camera streams. Once you've created a stream (using WPILib's `CameraServer` class, [mjpg-streamer](https://robotpy.github.io/2016/01/14/mjpg-streamer-for-roborio/), or another method), update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number. The port may vary.
 
 ## Building
 Some users may wish to compile their dashboard applications into standalone .exe or .app files.
