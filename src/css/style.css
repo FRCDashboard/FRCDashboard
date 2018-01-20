@@ -136,39 +136,27 @@ aside {
 aside > * {
     margin-bottom: 20px;
 }
-.greybox {
+#login {
     position: fixed;
-    bottom: 0;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.3);
-}
-body.login-close > .greybox {
-    display: none
-}
-#login {
-    text-align: center;
-    display: block;
-    margin: 14em auto 0 auto;
-    width: 18em;
-    overflow: hidden;
-    animation: 1s linear;
-    padding: 4px;
-    border-radius: 5px;
+    bottom: 0;
     background-color: rgba(0, 0, 0, 0.8)
 }
-body.login-close #login {
-    opacity: 1;
-    width: 0;
-    animation: 1s linear;
+body.login #login {
+    display: flex;
 }
 #login :disabled {
-    filter: opacity(0.6)
+    opacity: 0.6;
+}
+#login > * {
+    height: 40px;
 }
 #login > button {
-    width:6em
-}
-#connect {
-    text-align: center;
+    margin-left: 5px;
 }

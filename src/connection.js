@@ -12,7 +12,7 @@ NetworkTables.addRobotConnectionListener(onRobotConnection, false);
 
 // Function for hiding the connect box
 onkeydown = key => {
-    if (key.key === 'Escape') document.body.classList.toggle('login-close', true);
+    if (key.key === 'Escape') document.body.classList.toggle('login', false);
 };
 
 /**
@@ -22,22 +22,21 @@ onkeydown = key => {
 function onRobotConnection(connected) {
     var state = connected ? 'Robot connected!' : 'Robot disconnected.';
     console.log(state);
-    ui.robotState.data = state;
+    ui.robotState.textContent = state;
     if (connected) {
         // On connect hide the connect popup
-        document.body.classList.toggle('login-close', true);
+        document.body.classList.toggle('login', false);
     }
     else {
         // On disconnect show the connect popup
-        document.body.classList.toggle('login-close', false);
+        document.body.classList.toggle('login', true);
         // Add Enter key handler
         address.onkeydown = ev => {
             if (ev.key === 'Enter') connect.click();
         };
         // Enable the input and the button
-        address.disabled = false;
-        connect.disabled = false;
-        connect.firstChild.data = 'Connect';
+        address.disabled = connect.disabled = false;
+        connect.textContent = 'Connect';
         // Add the default address and select xxxx
         address.value = 'roborio-xxxx.local';
         address.focus();
@@ -45,9 +44,8 @@ function onRobotConnection(connected) {
         // On click try to connect and disable the input and the button
         connect.onclick = () => {
             ipc.send('connect', address.value);
-            address.disabled = true;
-            connect.disabled = true;
-            connect.firstChild.data = 'Connecting';
+            address.disabled = connect.disabled = true;
+            connect.textContent = 'Connecting...';
         };
     }
 }
