@@ -11,14 +11,8 @@ NetworkTables.addRobotConnectionListener(onRobotConnection, false);
 //NetworkTables.addGlobalListener(onValueChanged, true);
 
 // Function for hiding the connect box
-let escCount = 0;
 onkeydown = key => {
-    if (key.key === 'Escape') {
-        setTimeout(() => { escCount = 0; }, 400);
-        escCount++;
-        if (escCount === 2) document.body.classList.toggle('login-close', true);
-    }
-    else console.log(key.key);
+    if (key.key === 'Escape') document.body.classList.toggle('login-close', true);
 };
 
 /**
@@ -38,8 +32,7 @@ function onRobotConnection(connected) {
         document.body.classList.toggle('login-close', false);
         // Add Enter key handler
         address.onkeydown = ev => {
-            if (ev.key === 'Enter')
-                connect.click();
+            if (ev.key === 'Enter') connect.click();
         };
         // Enable the input and the button
         address.disabled = false;
