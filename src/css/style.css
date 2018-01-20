@@ -166,27 +166,9 @@ body.login-close #login {
 #login :disabled {
     filter: opacity(0.6)
 }
-#login > button{
+#login > button {
     width:6em
 }
-#connect{
+#connect {
     text-align: center;
 }
-/*
- Blur transition that does not work
-
-body:not(.login-close) >:not(.greybox) {
-    animation: blur 1s normal forwards
-}
-body.login-close >:not(.greybox) {
-    animation: blur 1s reverse backwards
-}
-@keyframes blur {
-    from {
-        filter: blur(0);
-    }
-    to {
-        filter: blur(3px);
-    }
-}
-*/
