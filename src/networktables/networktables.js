@@ -1,4 +1,4 @@
-ipc = require('electron').ipcRenderer;
+let ipc = require('electron').ipcRenderer;
 
 var NetworkTables =
     (() => {
@@ -74,6 +74,8 @@ var NetworkTables =
              * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current robot connection state
              */
             addRobotConnectionListener(f, immediateNotify) {
+                if(typeof f != 'function') return new Error('Invalid argument')
+
                 connectionListeners.push(f);
                 if (immediateNotify)
                     f(connected);
@@ -84,6 +86,8 @@ var NetworkTables =
              * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current value of all keys
              */
             addGlobalListener(f, immediateNotify) {
+                if(typeof f != 'function') return new Error('Invalid argument')
+
                 globalListeners.push(f);
                 if (immediateNotify) {
                     for (let key in keys) {
@@ -99,7 +103,9 @@ var NetworkTables =
              * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current value of the specified key
              */
             addKeyListener(key, f, immediateNotify) {
-                if (key in keyListeners) {
+                if(typeof key != 'string' || typeof f != 'function') return new Error('Valid Arguments are (string, function)')
+
+                if (typeof keyListeners[key] != 'undefined') {
                     keyListeners[key].push(f);
                 }
                 else {
@@ -116,6 +122,7 @@ var NetworkTables =
              * @returns true if a key is present in NetworkTables, false otherwise
              */
             containsKey(key) {
+                if(typeof f != 'string') return false
                 return key in keys;
             },
             /**
@@ -132,7 +139,9 @@ var NetworkTables =
              * @returns value of key if present, undefined or defaultValue otherwise
              */
             getValue(key, defaultValue) {
-                if (key in keys) {
+                if(typeof key != 'string') return new Error('Invalid Argument')
+
+                if (typeof keys[key] != 'undefined') {
                     return keys[key].val;
                 }
                 else {
@@ -158,7 +167,9 @@ var NetworkTables =
              * @returns True if the websocket is open, False otherwise
              */
             putValue(key, value) {
-                if (key in keys) {
+                if(typeof key != 'string') return new Error('Invalid Argument')
+
+                if (typeof keys[key] != 'undefined') {
                     keys[key].val = value;
                     ipc.send('update', { key, val: value, id: keys[key].id, flags: keys[key].flags });
                 }
