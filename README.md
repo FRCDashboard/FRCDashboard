@@ -1,3 +1,4 @@
+[<img src="images/icon.png" align="right" width="150">](https://github.com/FRCDashboard/FRCDashboard)
 # FRC Dashboard
 FRC Dashboard is a fully customizable dashboard for [FIRST Robotics Competition (FRC)](http://firstinspires.org/robotics/frc) which is based on web languages (JavaScript/CSS/HTML). It's completely legal for competition, and can be used to give your whole drive team significantly richer control of your robot.
 
@@ -10,7 +11,7 @@ The dashboard's code is designed to be 100% accessible and expandable. To this a
 <details>
     <summary>Click to view some example implementations of FRC Dashboard</summary>
 
-![1132's 2017 Dashboard](images/example-1132.jpg)  
+![1132's 2017 Dashboard](https://i.imgur.com/iSiTxjY.jpg)  
 ![6325's 2017 Dashboard](https://i.redd.it/w9jt1gmbecpy.png)  
 ![1418's 2017 Dashboard](https://raw.githubusercontent.com/frc1418/2017-dashboard/master/images/screenshot.png)  
 ![1418's 2016 Dashboard](https://raw.githubusercontent.com/frc1418/FRCDashboard/2016/screenshot.png)  
@@ -25,18 +26,8 @@ Before running your dashboard, you'll need to install the node dependencies by `
 ### Configuration
 * In `ui.js`, there are a bunch of key handler functions which controls the updating of control elements in the dashboard. Example NetworkTables key names are used, but you'll need to change them to match those used in your team's robot code for them to affect anything on your robot.
 
-
 #### Camera feed
-One way to use a start an `mjpg-streamer` server on the RoboRIO. To install `mjpg-streamer`:
-
-1. Download and run [this installer script](https://raw.githubusercontent.com/robotpy/robotpy-installer/master/robotpy_installer/installer.py) from GitHub. This script is for downloading and installing packages to the RoboRIO.
-2. While in the directory where you downloaded the installer script, run:
-```sh
-python3 installer.py download-opkg mjpg-streamer
-python3 installer.py install-opkg mjpg-streamer
-```
-3. Update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number. The port may vary.
-
+FRC Dashboard supports display of MJPG camera streams. Once you've created a stream (using WPILib's `CameraServer` class, [mjpg-streamer](https://robotpy.github.io/2016/01/14/mjpg-streamer-for-roborio/), or another method), update `style.css` to use the IP of your live camera feed. Usually this is something like `roborio-XXXX-frc.local:5800/?action=stream`, where `XXXX` is your team's number. The port may vary.
 
 ## Building
 Some users may wish to compile their dashboard applications into standalone .exe or .app files.

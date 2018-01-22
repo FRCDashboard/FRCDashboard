@@ -78,18 +78,6 @@ header {
     /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
     /*background-image: url('LINK TO CAMERA SOURCE HERE');*/
 }
-#tuning {
-    width: 50vw;
-    height: 80vh;
-    bottom: 0;
-    left: 0;
-}
-#tuning div {
-    margin: 20px 0;
-}
-#tuning p {
-    margin-bottom: 10px;
-}
 article {
     top: 0;
     left: 50vw;
@@ -148,57 +136,27 @@ aside {
 aside > * {
     margin-bottom: 20px;
 }
-.greybox {
+#login {
     position: fixed;
-    bottom: 0;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.3);
-}
-body.login-close > .greybox {
-    display: none
-}
-#login {
-    text-align: center;
-    display: block;
-    margin: 14em auto 0 auto;
-    width: 18em;
-    overflow: hidden;
-    animation: 1s linear;
-    padding: 4px;
-    border-radius: 5px;
+    bottom: 0;
     background-color: rgba(0, 0, 0, 0.8)
 }
-body.login-close #login {
-    opacity: 1;
-    width: 0;
-    animation: 1s linear;
+body.login #login {
+    display: flex;
 }
 #login :disabled {
-    filter: opacity(0.6)
+    opacity: 0.6;
 }
-#login > button{
-    width:6em
+#login > * {
+    height: 40px;
 }
-#connect{
-    text-align: center;
+#login > button {
+    margin-left: 5px;
 }
-/*
- Blur transition that does not work
-
-body:not(.login-close) >:not(.greybox) {
-    animation: blur 1s normal forwards
-}
-body.login-close >:not(.greybox) {
-    animation: blur 1s reverse backwards
-}
-@keyframes blur {
-    from {
-        filter: blur(0);
-    }
-    to {
-        filter: blur(3px);
-    }
-}
-*/
