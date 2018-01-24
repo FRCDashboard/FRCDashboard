@@ -1,0 +1,61 @@
+body,
+header,
+button,
+input[type="text"],
+input[type="number"],
+.select-container,
+select {
+    color: #18b5ee;
+    animation: fade 5s infinite linear;
+}
+svg * {
+    stroke: #18b5ee;
+    animation: fadeStroke 5s infinite linear;
+}
+text {
+    fill: #18b5ee;
+    stroke: none;
+    animation: fadeFill 5s infinite linear;
+}
+@keyframes fade {
+    0% {
+        color: #e81e1e;
+        border-color: #e81e1e;
+    }
+    20% {
+        color: #ffa733;
+        border-color: #ffa733;
+    }
+    40% {
+        color: #fbff37;
+        border-color: #fbff37;
+    }
+    60% {
+        color: #49f130;
+        border-color: #49f130;
+    }
+    80% {
+        color: #18b5ee;
+        border-color: #18b5ee;
+    }
+    100% {
+        color: #e81e1e;
+        border-color: #e81e1e;
+    }
+}
+@keyframes fadeStroke {
+    0% { stroke: #e81e1e; }
+    20% { stroke: #ffa733; }
+    40% { stroke: #fbff37; }
+    60% { stroke: #49f130; }
+    80% { stroke: #18b5ee; }
+    100% { stroke: #e81e1e; }
+}
+@keyframes fadeFill {
+    0% { fill: #e81e1e; }
+    20% { fill: #ffa733; }
+    40% { fill: #fbff37; }
+    60% { fill: #49f130; }
+    80% { fill: #18b5ee; }
+    100% { fill: #e81e1e; }
+}
