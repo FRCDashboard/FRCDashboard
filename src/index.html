@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <title>FRC Dashboard</title>
     <link href="css/style.css" rel="stylesheet">
+    <!-- Theme selection link -->
+    <link id="theme-link" rel="stylesheet" href>
 </head>
 
 <body>
@@ -56,7 +58,20 @@
             <p>Adjust arm height</p>
             <input id="arm-position" type="range" min="0" max="1200" value="770">
         </div>
+        <!-- Theme selection -->
+        <p>Theme:</p>
+        <div class="select-container">
+            <select id='theme-select'>
+                <option>dark</option>
+                <option>light</option>
+                <option>red</option>
+                <option>blue</option>
+                <option>rainbow</option>
+            </select>
+        </div>
+
     </aside>
+
     <div id="login">
         <input id="connect-address" type="text" value="localhost" disabled>
         <button id="connect" disabled>Connecting</button>
@@ -64,6 +79,9 @@
     <script src="networktables/networktables.js"></script>
     <script src="connection.js"></script>
     <script src="ui.js"></script>
+    <!-- Add-on components --->
+    <script src="components/themes.js"></script>
+    <script src="components/multicamera.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,18 @@
+body,
+header,
+button,
+input[type="text"],
+input[type="number"],
+.select-container,
+select {
+    color: #fe3131;
+}
+svg *:not(text) {
+    stroke: #fe3131;
+}
+text {
+    fill: #fe3131;
+}
+input[type="checkbox"] {
+    -webkit-filter: hue-rotate(150deg) saturate(2);
+}
