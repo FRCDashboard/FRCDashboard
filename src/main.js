@@ -117,7 +117,7 @@ function createWindow() {
     mainWindow.on('unresponsive', () => {
         console.log('Main Window is unresponsive');
     });
-    window.webContents.on('did-fail-load', () => {
+    mainWindow.webContents.on('did-fail-load', () => {
         console.log('window failed load');
     });
 }
