@@ -48,7 +48,7 @@ function createWindow() {
             // Listens to the changes coming from the client
             client.addListener(clientDataListener);
         };
-        
+
         // If the Window is ready than send the connection status to it
         if (ready) {
             connectFunc();
@@ -116,7 +116,7 @@ function createWindow() {
     mainWindow.on('unresponsive', () => {
         console.log('Main Window is unresponsive');
     });
-    window.webContents.on('did-fail-load', () => {
+    mainWindow.webContents.on('did-fail-load', () => {
         console.log('window failed load');
     });
 }
