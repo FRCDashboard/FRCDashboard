@@ -104,3 +104,7 @@ ui.autoSelect.onchange = function() {
 ui.armPosition.oninput = function() {
     NetworkTables.putValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };
+
+addEventListener('error',(ev)=>{
+    ipc.send('windowError',ev)
+})
