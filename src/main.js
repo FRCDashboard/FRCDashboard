@@ -24,22 +24,47 @@ let mainWindow;
 
 let connected,
     ready = false;
+
+let clientDataListener = (key, val, valType, mesgType, id, flags) => {
+    if (val === 'true' || val === 'false') {
+        val = val === 'true';
+    }
+    mainWindow.webContents.send(mesgType, {
+        key,
+        val,
+        valType,
+        id,
+        flags
+    });
+};
 function createWindow() {
     // Attempt to connect to the localhost
     client.start((con, err) => {
+
+        let connectFunc = () => {
+            console.log('Sending status');
+            mainWindow.webContents.send('connected', con);
+
+            // Listens to the changes coming from the client
+            client.addListener(clientDataListener);
+        };
+        
         // If the Window is ready than send the connection status to it
         if (ready) {
-            mainWindow.webContents.send('connected', con);
-        } else connected = () => mainWindow.webContents.send('connected', con);
+            connectFunc();
+        } else connected = connectFunc;
     });
     // When the script starts running in the window set the ready variable
     ipc.on('ready', (ev, mesg) => {
-        ready = true;
+        console.log('NetworkTables is ready');
+        ready = mainWindow != null;
         // Send connection message to the window if if the message is ready
         if (connected) connected();
+        connected = null;
     });
     // When the user chooses the address of the bot than try to connect
     ipc.on('connect', (ev, address, port) => {
+        console.log(`Trying to connect to ${address}` + (port ? ':' + port : ''));
         let callback = (connected, err) => {
             mainWindow.webContents.send('connected', connected);
         };
@@ -55,12 +80,8 @@ function createWindow() {
     ipc.on('update', (ev, mesg) => {
         client.Update(mesg.id, mesg.val);
     });
-    // Listens to the changes coming from the client
-    client.addListener((key, val, valType, mesgType, id, flags) => {
-        if (val === 'true' || val === 'false') {
-            val = val === 'true';
-        }
-        mainWindow.webContents.send(mesgType, { key, val, valType, id, flags });
+    ipc.on('error', (ev, error) => {
+        console.log(error);
     });
     // Create the browser window.
     mainWindow = new BrowserWindow({
@@ -76,24 +97,34 @@ function createWindow() {
     // Load window.
     mainWindow.loadURL(`file://${__dirname}/index.html`);
     // Once the python server is ready, load window contents.
-    mainWindow.once('ready-to-show', function() {
+    mainWindow.once('ready-to-show', () => {
+        console.log('main window is ready to be shown');
         mainWindow.show();
     });
 
     // Remove menu
     mainWindow.setMenu(null);
     // Emitted when the window is closed.
-    mainWindow.on('closed', function() {
+    mainWindow.on('closed', () => {
+        console.log('main window closed');
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null;
         ready = false;
+        client.removeListener(clientDataListener);
+    });
+    mainWindow.on('unresponsive', () => {
+        console.log('Main Window is unresponsive');
+    });
+    window.webContents.on('did-fail-load', () => {
+        console.log('window failed load');
     });
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', () => {
+    console.log('app is ready');
     createWindow();
 });
 
