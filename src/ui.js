@@ -1,110 +1,189 @@
-// Define UI elements
+// Reload on capital R
+window.addEventListener("keypress", function(ev) {
+    console.log(ev);
+    if (ev.key === "R")
+        location.reload(true);
+});
+
+/*
+ * Define UI Elements
+ */
 let ui = {
-    timer: document.getElementById('timer'),
-    robotState: document.getElementById('robot-state').firstChild,
-    gyro: {
-        container: document.getElementById('gyro'),
-        val: 0,
-        offset: 0,
-        visualVal: 0,
-        arm: document.getElementById('gyro-arm'),
-        number: document.getElementById('gyro-number')
+    misc: {
+        pdp: {
+            batteryVoltageChart: document.getElementById('batteryVoltageChart'),
+            batteryVoltage: document.getElementById('batteryVoltage')
+        },
+        timer: document.getElementById('timer'),
+        robotState: document.getElementById('robotState').firstChild,
+        autoSelect: document.getElementById('autoSelect')
     },
-    robotDiagram: {
-        arm: document.getElementById('robot-arm')
+    drive: {
+        voltages: {
+            voltageChart: document.getElementById('drivetrainVoltageChart'),
+            leftVoltage: document.getElementById('leftDrivetrainVoltage'),
+            rightVoltage: document.getElementById('rightDrivetrainVoltage')
+        },
+        currents: {
+            currentChart: document.getElementById('drivetrainCurrentChart'),
+            leftCurrent: document.getElementById('leftDrivetrainCurrent'),
+            rightCurrent: document.getElementById('rightDrivetrainCurrent')
+        },
+        encoders: {
+            leftEncoder: document.getElementById('leftDrivetrainEncoder'),
+            rightEncoder: document.getElementById('rightDrivetrainEncoder')
+        },
+        gyro: {
+            container: document.getElementById('gyro'),
+            val: 0,
+            offset: 0,
+            visualVal: 0,
+            gyroDial: document.getElementById('gyroDial'),
+            gyroNumber: document.getElementById('gyroNumber')
+        }
     },
-    example: {
-        button: document.getElementById('example-button'),
-        readout: document.getElementById('example-readout').firstChild
+    elevator: {
+        currentChart: document.getElementById('elevatorCurrentChart'),
+        current: document.getElementById('elevatorCurrent')
     },
-    autoSelect: document.getElementById('auto-select'),
-    armPosition: document.getElementById('arm-position')
+    claw: {
+    },
+    hanger: {}
 };
 
-// Key Listeners
+/**
+ * Drivetrain Listeners
+ */
 
 // Gyro rotation
-let updateGyro = (key, value) => {
-    ui.gyro.val = value;
-    ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
-    if (ui.gyro.visualVal < 0) {
-        ui.gyro.visualVal += 360;
-    }
-    ui.gyro.arm.style.transform = `rotate(${ui.gyro.visualVal}deg)`;
-    ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
+const updateGyro = (key, value) => {
+  ui.drive.gyro.val = value;
+  ui.drive.gyro.visualVal = Math.floor(ui.drive.gyro.val - ui.drive.gyro.offset);
+  if (ui.drive.gyro.visualVal < 0) {
+    ui.drive.gyro.visualVal += 360;
+  }
+  ui.drive.gyro.gyroDial.style.transform = `rotate(${ui.drive.gyro.visualVal}deg)`;
+  ui.drive.gyro.gyroNumber.innerHTML = `${ui.drive.gyro.visualVal}º`;
 };
-NetworkTables.addKeyListener('/SmartDashboard/drive/navx/yaw', updateGyro);
+NetworkTables.addKeyListener('/SmartDashboard/drive/gyro/angle', updateGyro);
 
-// The following case is an example, for a robot with an arm at the front.
-NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
-    // 0 is all the way back, 1200 is 45 degrees forward. We don't want it going past that.
-    if (value > 1140) {
-        value = 1140;
-    }
-    else if (value < 0) {
-        value = 0;
-    }
-    // Calculate visual rotation of arm
-    var armAngle = value * 3 / 20 - 45;
-    // Rotate the arm in diagram to match real arm
-    ui.robotDiagram.arm.style.transform = `rotate(${armAngle}deg)`;
+// Drivetrain Voltage
+const drivetrainVoltageChart = new SmoothieChart({
+  tooltip: true,
+  maxValue: 14,
+  minValue: -14,
+});
+drivetrainVoltageChart.streamTo(ui.drive.voltages.voltageChart, 0);
+const leftVoltageLine = new TimeSeries();
+const rightVoltageLine = new TimeSeries();
+drivetrainVoltageChart.addTimeSeries(leftVoltageLine, {
+  strokeStyle: 'blue',
+  lineWidth: 3,
+});
+drivetrainVoltageChart.addTimeSeries(rightVoltageLine, {
+  strokeStyle: 'red',
+  lineWidth: 3,
+});
+NetworkTables.addKeyListener('/SmartDashboard/drive/voltages/leftvoltage', (key, value) => {
+  leftVoltageLine.append(new Date().getTime(), value);
+  ui.drive.voltages.leftVoltage.innerHTML = `${value.toFixed(2)} v`;
+});
+NetworkTables.addKeyListener('/SmartDashboard/drive/voltages/rightvoltage', (key, value) => {
+  rightVoltageLine.append(new Date().getTime(), value);
+  ui.drive.voltages.rightVoltage.innerHTML = `${value.toFixed(2)} v`;
 });
 
-// This button is just an example of triggering an event on the robot by clicking a button.
-NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
-    // Set class active if value is true and unset it if it is false
-    ui.example.button.classList.toggle('active', value);
-    ui.example.readout.data = 'Value is ' + value;
+// Drivetrain Current
+const drivetrainCurrentChart = new SmoothieChart({
+  tooltip: true,
+  maxValue: 40,
+  minValue: 0,
 });
+drivetrainCurrentChart.streamTo(ui.drive.currents.currentChart, 0);
+const leftCurrentLine = new TimeSeries();
+const rightCurrentLine = new TimeSeries();
+drivetrainCurrentChart.addTimeSeries(leftCurrentLine, {
+  strokeStyle: 'blue',
+  lineWidth: 3,
+});
+drivetrainCurrentChart.addTimeSeries(rightCurrentLine, {
+  strokeStyle: 'red',
+  lineWidth: 3,
+});
+NetworkTables.addKeyListener('/SmartDashboard/drive/currents/leftcurrent', (key, value) => {
+  leftCurrentLine.append(new Date().getTime(), value),
+  ui.drive.currents.leftCurrent.innerHTML = `${value.toFixed(2)} a`;
+});
+NetworkTables.addKeyListener('/SmartDashboard/drive/currents/rightcurrent', (key, value) => {
+  rightCurrentLine.append(new Date().getTime(), value),
+  ui.drive.currents.rightCurrent.innerHTML = `${value.toFixed(2)} a`;
+});
+
+// Drivetrain Encoders
+NetworkTables.addKeyListener('/SmartDashboard/drive/encoders/leftencoder', (key, value) => {
+  console.log(value);
+  ui.drive.encoders.leftEncoder.innerHTML = `${value}`;
+});
+NetworkTables.addKeyListener('/SmartDashboard/drive/encoders/rightencoder', (key, value) => {
+  console.log(value);
+  ui.drive.encoders.rightEncoder.innerHTML = `${value}`;
+});
+
+
+/**
+ * Elevator Listeners
+ */
+
+// Elevator Current
+const elevatorCurrentChart = new SmoothieChart({
+  tooltip: true,
+  maxValue: 15,
+  minValue: 0,
+});
+elevatorCurrentChart.streamTo(ui.elevator.currentChart, 0);
+const elevatorCurrentLine = new TimeSeries();
+elevatorCurrentChart.addTimeSeries(elevatorCurrentLine, {
+  strokeStyle: 'green',
+  lineWidth: 3,
+});
+NetworkTables.addKeyListener('/SmartDashboard/elevator/current', (key, value) => {
+  elevatorCurrentLine.append(new Date().getTime(), value);
+  ui.elevator.current.innerHTML = `${value.toFixed(2)} a`;
+});
+
+
+/**
+ * Misc Listeners
+ */
+
+// Battery Voltage
+const batteryVoltageChart = new SmoothieChart({
+  tooltip: true,
+  maxValue: 14,
+  minValue: 0,
+});
+batteryVoltageChart.streamTo(ui.misc.pdp.batteryVoltageChart, 0);
+const batteryVoltageLine = new TimeSeries();
+batteryVoltageChart.addTimeSeries(batteryVoltageLine, {
+  strokeStyle: 'green',
+  lineWidth: 3,
+});
+NetworkTables.addKeyListener('/SmartDashboard/misc/pdp/batteryvoltage', (key, value) => {
+  batteryVoltageLine.append(new Date().getTime(), value);
+  ui.misc.pdp.batteryVoltage.innerHTML = `${value.toFixed(2)} v`;
+});
+
 
 NetworkTables.addKeyListener('/robot/time', (key, value) => {
-    // This is an example of how a dashboard could display the remaining time in a match.
-    // We assume here that value is an integer representing the number of seconds left.
-    ui.timer.innerHTML = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60;
+  // This is an example of how a dashboard could display the remaining time in a match.
+  // We assume here that value is an integer representing the number of seconds left.
+  ui.misc.timer.innerHTML = value < 0 ? '0:00' : `${Math.floor(value / 60)}:${value % 60 < 10 ? '0' : ''}${value % 60}`;
 });
 
-// Load list of prewritten autonomous modes
-NetworkTables.addKeyListener('/SmartDashboard/autonomous/modes', (key, value) => {
-    // Clear previous list
-    while (ui.autoSelect.firstChild) {
-        ui.autoSelect.removeChild(ui.autoSelect.firstChild);
-    }
-    // Make an option for each autonomous mode and put it in the selector
-    for (let i = 0; i < value.length; i++) {
-        var option = document.createElement('option');
-        option.appendChild(document.createTextNode(value[i]));
-        ui.autoSelect.appendChild(option);
-    }
-    // Set value to the already-selected mode. If there is none, nothing will happen.
-    ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
-});
-
-// Load list of prewritten autonomous modes
-NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value) => {
-    ui.autoSelect.value = value;
-});
-
-// The rest of the doc is listeners for UI elements being clicked on
-ui.example.button.onclick = function() {
-    // Set NetworkTables values to the opposite of whether button has active class.
-    NetworkTables.putValue('/SmartDashboard/example_variable', this.className != 'active');
-};
 // Reset gyro value to 0 on click
-ui.gyro.container.onclick = function() {
-    // Store previous gyro val, will now be subtracted from val for callibration
-    ui.gyro.offset = ui.gyro.val;
-    // Trigger the gyro to recalculate value.
-    updateGyro('/SmartDashboard/drive/navx/yaw', ui.gyro.val);
-};
-// Update NetworkTables when autonomous selector is changed
-ui.autoSelect.onchange = function() {
-    NetworkTables.putValue('/SmartDashboard/autonomous/selected', this.value);
-};
-// Get value of arm height slider when it's adjusted
-ui.armPosition.oninput = function() {
-    NetworkTables.putValue('/SmartDashboard/arm/encoder', parseInt(this.value));
-};
-
-addEventListener('error',(ev)=>{
-    ipc.send('windowError',ev)
-})
+ui.drive.gyro.container.addEventListener('click', () => {
+  // Store previous gyro val, will now be subtracted from val for callibration
+  ui.drive.gyro.offset = ui.drive.gyro.val;
+  // Trigger the gyro to recalculate value.
+  updateGyro('/SmartDashboard/drive/gyro/angle', ui.drive.gyro.val);
+});

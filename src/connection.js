@@ -1,4 +1,4 @@
-let address = document.getElementById('connect-address'),
+let address = document.getElementById('connectAddress'),
     connect = document.getElementById('connect');
 
 // Set function to be called on NetworkTables connect. Not implemented.
@@ -22,7 +22,7 @@ onkeydown = key => {
 function onRobotConnection(connected) {
     var state = connected ? 'Robot connected!' : 'Robot disconnected.';
     console.log(state);
-    ui.robotState.textContent = state;
+    ui.misc.robotState.textContent = state;
     if (connected) {
         // On connect hide the connect popup
         document.body.classList.toggle('login', false);
@@ -37,10 +37,10 @@ function onRobotConnection(connected) {
         // Enable the input and the button
         address.disabled = connect.disabled = false;
         connect.textContent = 'Connect';
-        // Add the default address and select xxxx
-        address.value = 'roborio-xxxx.local';
+        // Add the default address and select 973
+        address.value = 'roborio-973-frc.local';
         address.focus();
-        address.setSelectionRange(8, 12);
+        address.setSelectionRange(8, 11);
         // On click try to connect and disable the input and the button
         connect.onclick = () => {
             ipc.send('connect', address.value);

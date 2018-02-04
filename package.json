@@ -1,5 +1,6 @@
 {
-  "name": "FRCDashboard",
+  "name": "GreyDash",
+  "productName": "GreyDash",
   "version": "2.1.0",
   "description": "Robot control dashboard boilerplate for FRC.",
   "main": "src/main.js",
@@ -11,19 +12,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FRCDashboard/FRCDashboard"
+    "url": "git+https://github.com/Team973/GreyDash"
   },
-  "author": "Erik Boesen",
+  "author": "Chris Lawson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FRCDashboard/FRCDashboard/issues"
+    "url": "https://github.com/Team973/GreyDash/issues"
   },
-  "homepage": "http://frcdashboard.github.io",
+  "homepage": "https://github.com/Team973",
   "devDependencies": {
-    "electron": "^1.7.12",
-    "electron-packager": "^10.1.1"
+    "electron-packager": "^10.1.1",
+    "eslint": "^4.16.0"
   },
   "dependencies": {
-    "wpilib-nt-client": "^1.4.0"
+    "electron": "^1.7.11",
+    "wpilib-nt-client": "^1.4.2"
   }
 }

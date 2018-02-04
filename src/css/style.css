@@ -3,9 +3,11 @@
     margin: 0;
     padding: 0;
 }
+
 ::-webkit-scrollbar {
     display: none;
 }
+
 body {
     font: 16px sans-serif;
     -webkit-user-select: none;
@@ -16,74 +18,113 @@ body {
     overflow: hidden;
     background: #222;
 }
+
 button, input[type="text"], input[type="number"], .select-container, select {
     color: white;
     background: #444;
     border: none;
-    font-size: 14px;
+    font: 14px Roboto, sans-serif;
     padding: 6px 8px;
     cursor: pointer;
     outline: 0;
 }
+
 .select-container {
     padding: 0;
     display: inline-block;
 }
+
 select {
     border: none;
     background: none;
     color: white;
     height: 25px;
 }
+
 input[type="text"], input[type="number"] {
     cursor: text;
 }
+
 input[type="checkbox"] {
     -webkit-filter: saturate(0);
     filter: saturate(0);
 }
+
 /* Major interface panes, aside, article, header, etc. */
-body > * {
+
+body>* {
     padding: 10px;
     position: fixed;
     overflow: scroll;
     background: #222;
 }
+
 #timer {
-    font-family: monospace;
+    font: 20vh Roboto, sans-serif;
     display: block;
     height: 20vh;
     width: 30vw;
     top: 0;
     left: 0;
-    font-size: 20vh;
     line-height: .8;
 }
+
 header {
-    width: 20vw;
+    width: 25vw;
     height: 20vh;
     top: 0;
-    left: 30vw;
+    right: 0;
     color: white;
 }
-#camera {
-    padding: 0;
-    position: fixed;
-    bottom: 0;
+
+.graphs {
+    top: 0vh;
     left: 0;
-    width: 50vw;
-    height: 80vh;
-    overflow: hidden;
-    background-color: #333;
-    /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
-    /*background-image: url('LINK TO CAMERA SOURCE HERE');*/
-}
-article {
-    top: 0;
-    left: 50vw;
     height: 100vh;
-    width: 35vw;
+    width: 37.5vw;
 }
+
+.charts {
+    height: 120px;
+    width: 700px;
+}
+
+.list {
+    top: 0vh;
+    left: 37.5vw;
+    height: 100vh;
+    width: 37.5vw;
+    text-align: center;
+}
+
+.sidebar {
+    right: 0;
+    top: 20vh;
+    width: 25vw;
+    height: 100vh;
+}
+
+.sidebar>* {
+    margin-bottom: 20px;
+}
+
+#gyro {
+    width: 175px;
+    height: 175px;
+    margin-top: 15px;
+}
+
+#gyroDial {
+    -webkit-transform-origin: bottom;
+    -ms-transform-origin: bottom;
+    transform-origin: bottom;
+}
+
+#gyroNumber {
+    font: 25px Roboto, sans-serif;
+    text-anchor: middle;
+}
+
 svg * {
     stroke: white;
     fill: #222;
@@ -92,50 +133,14 @@ svg * {
     -ms-transform-origin: center;
     transform-origin: center;
 }
+
 text {
-    font-size: 16px;
+    font: 16px Roboto, sans-serif;
     letter-spacing: 2px;
     stroke: none;
     fill: white;
 }
-#gyro {
-    width: 175px;
-    height: 175px;
-    margin-left: 30px;
-    margin-top: 15px;
-}
-#gyro-arm {
-    -webkit-transform-origin: bottom;
-    -ms-transform-origin: bottom;
-    transform-origin: bottom;
-}
-#gyro-number {
-    font-size: 25px;
-    text-anchor: middle;
-}
-#robot-diagram {
-    position: absolute;
-    bottom: 1px;
-    right: 1vw;
-}
-#robot-arm {
-    -webkit-transform-origin: right;
-    -ms-transform-origin: right;
-    transform-origin: right;
-}
-#team {
-    font-size: 28px;
-    letter-spacing: -1px;
-}
-aside {
-    right: 0;
-    top: 0;
-    width: 15vw;
-    height: 100vh;
-}
-aside > * {
-    margin-bottom: 20px;
-}
+
 #login {
     position: fixed;
     display: none;
@@ -148,15 +153,19 @@ aside > * {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.8)
 }
+
 body.login #login {
     display: flex;
 }
+
 #login :disabled {
     opacity: 0.6;
 }
-#login > * {
+
+#login>* {
     height: 40px;
 }
-#login > button {
+
+#login>button {
     margin-left: 5px;
 }
