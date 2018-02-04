@@ -1,6 +1,5 @@
 {
   "name": "FRCDashboard",
-  "productName": "FRCDashBoard",
   "version": "2.1.0",
   "description": "Robot control dashboard boilerplate for FRC.",
   "main": "src/main.js",
