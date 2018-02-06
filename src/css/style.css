@@ -12,13 +12,13 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    color: white;
+    color: rgb(255, 255, 255);
     overflow: hidden;
-    background: #222;
+    background: rgb(34, 34, 34);
 }
 button, input[type="text"], input[type="number"], .select-container, select {
-    color: white;
-    background: #444;
+    color: rgb(255, 255, 255);
+    background: rgb(68, 68, 68);
     border: none;
     font-size: 14px;
     padding: 6px 8px;
@@ -32,7 +32,7 @@ button, input[type="text"], input[type="number"], .select-container, select {
 select {
     border: none;
     background: none;
-    color: black;
+    color: rgb(0, 0, 0);
     height: 30px;
 }
 input[type="text"], input[type="number"] {
@@ -47,7 +47,7 @@ body > * {
     padding: 10px;
     position: fixed;
     overflow: scroll;
-    background: #222;
+    background: rgb(34, 34, 34);
 }
 #timer {
     font-family: monospace;
@@ -64,7 +64,7 @@ header {
     height: 20vh;
     top: 0;
     left: 30vw;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 #camera {
     padding: 0;
@@ -74,7 +74,7 @@ header {
     width: 50vw;
     height: 80vh;
     overflow: hidden;
-    background-color: #333;
+    background-color: rgb(51, 51, 51);
     /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
     /*background-image: url('LINK TO CAMERA SOURCE HERE');*/
 }
@@ -85,7 +85,7 @@ article {
     width: 35vw;
 }
 svg * {
-    stroke: white;
+    stroke: rgb(255, 255, 255);
     fill: #222;
     stroke-width: 2;
     -webkit-transform-origin: center;
@@ -167,10 +167,10 @@ body.login #login {
     width: 50px;
     height: 20px;
   }
-  
+
   /* Hide default HTML checkbox */
   .switch input {display:none;}
-  
+
   /* The slider */
   .slider {
     position: absolute;
@@ -179,11 +179,11 @@ body.login #login {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: rgb(204, 204, 204);
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider:before {
     position: absolute;
     content: "";
@@ -191,30 +191,30 @@ body.login #login {
     width: 16px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   input:checked + .slider {
     background-color: rgb(0, 0, 0);
   }
-  
+
   input:focus + .slider {
     box-shadow: 0 0 1px rgb(0, 0, 0);
   }
-  
+
   input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
-  
+
   /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
-  
+
   .slider.round:before {
     border-radius: 50%;
   }
