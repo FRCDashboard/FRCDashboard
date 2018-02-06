@@ -40,7 +40,7 @@
         <circle cx="100" cy="410" r="25"></circle>
         <circle cx="260" cy="410" r="25"></circle>
         <rect x="60" y="380" width="250" height="30"></rect>
-        <text id="team" x="185" y="405" text-anchor="middle">####</text>
+        <text id="team" x="185" y="405" text-anchor="middle">4150</text>
       </svg>
     </article>
     <!-- The sidebar of the dashboard. Designed for smaller control elements like selection boxes and small buttons. -->
@@ -56,13 +56,20 @@
       <!-- Autonomous selector -->
       <div class="select-container">
         <select id="auto-select">
-          <option>No auto modes found</option>
+          <option>N/A</option>
+          <option>Up</option>
+          <option>Down</option>
+          <option>Left</option>
+          <option>Right</option>
+          <option>I'm Feelin' Lucky!</option>
+          <option>:JimThinkton:</option>
+          <option>:ThoonkingJim:</option>
           <!-- This gets populated by JS -->
         </select>
       </div>
       <div>
         <p>Adjust arm height</p>
-        <input id="arm-position" type="range" min="0" max="1200" value="770">
+        <button id="arm-position">
       </div>
     </aside>
     <div id="login">

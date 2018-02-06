@@ -32,8 +32,8 @@ button, input[type="text"], input[type="number"], .select-container, select {
 select {
     border: none;
     background: none;
-    color: white;
-    height: 25px;
+    color: black;
+    height: 30px;
 }
 input[type="text"], input[type="number"] {
     cursor: text;
