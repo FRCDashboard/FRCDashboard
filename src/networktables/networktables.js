@@ -1,8 +1,13 @@
 let ipc = require('electron').ipcRenderer
 
-var NetworkTables =
+var NetworkTables = // eslint-disable-line no-unused-vars
   (() => {
-    let keys = {}, connectionListeners = [], connected = false, globalListeners = [], keyListeners = {}, robotAddress = '127.0.0.1'
+    let keys = {}
+    let connectionListeners = []
+    let connected = false
+    let globalListeners = []
+    let keyListeners = {}
+    let robotAddress = '127.0.0.1'
     ipc.send('ready')
     ipc.on('connected', (ev, con) => {
       connected = con
@@ -34,7 +39,7 @@ var NetworkTables =
     ipc.on('flagChange', (ev, mesg) => {
       keys[mesg.key].flags = mesg.flags
     })
-    var d3_map = function () {
+    var d3_map = function () { // eslint-disable-line camelcase
       this._ = Object.create(null)
       this.forEach = function (f) {
         for (var key in this._) { f.call(this, d3_map_unescape(key), this._[key]) }
@@ -51,15 +56,16 @@ var NetworkTables =
         return d3_map_escape(key) in this._
       }
       this.set = function (key, value) {
-        return this._[d3_map_escape(key)] = value
+        return this._[d3_map_escape(key)] = value // eslint-disable-line no-return-assign
       }
     }
-    var d3_map_proto = '__proto__', d3_map_zero = '\x00'
-    function d3_map_escape (key) {
-      return (key += '') === d3_map_proto || key[0] === d3_map_zero ? d3_map_zero + encodeURIComponent(key) : encodeURIComponent(key)
+    var d3_map_proto = '__proto__' // eslint-disable-line camelcase
+    var d3_map_zero = '\x00' // eslint-disable-line camelcase
+    function d3_map_escape (key) { // eslint-disable-line camelcase
+      return (key += '') === d3_map_proto || key[0] === d3_map_zero ? d3_map_zero + encodeURIComponent(key) : encodeURIComponent(key) // eslint-disable-line camelcase
     }
-    function d3_map_unescape (key) {
-      return (key += '')[0] === d3_map_zero ? decodeURIComponent(key.slice(1)) : decodeURIComponent(key)
+    function d3_map_unescape (key) { // eslint-disable-line camelcase
+      return (key += '')[0] === d3_map_zero ? decodeURIComponent(key.slice(1)) : decodeURIComponent(key) // eslint-disable-line camelcase
     }
     return {
       /**
@@ -175,7 +181,7 @@ var NetworkTables =
        * @returns map object, with forEach/get/has/set functions defined. Simlar to a map object when using d3.js
        */
       create_map () {
-        return new d3_map()
+        return new d3_map() // eslint-disable-line new-cap
       },
       /**
        * Escapes NetworkTables keys so that they’re valid HTML identifiers.
@@ -189,7 +195,7 @@ var NetworkTables =
        * @returns Escaped value
        */
       keySelector (key) {
-        return encodeURIComponent(key).replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1')
+        return encodeURIComponent(key).replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1') // eslint-disable-line no-useless-escape
       }
     }
   })()
