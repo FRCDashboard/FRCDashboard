@@ -48,7 +48,7 @@ function createWindow() {
             // Listens to the changes coming from the client
             client.addListener(clientDataListener);
         };
-        
+
         // If the Window is ready than send the connection status to it
         if (ready) {
             connectFunc();
@@ -104,7 +104,7 @@ function createWindow() {
     });
 
     // Remove menu
-    mainWindow.setMenu(null);
+    //mainWindow.setMenu(null);
     // Emitted when the window is closed.
     mainWindow.on('closed', () => {
         console.log('main window closed');
