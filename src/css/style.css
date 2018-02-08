@@ -98,18 +98,18 @@ text {
     stroke: none;
     fill: white;
 }
-#gyro {
+#compressor {
     width: 175px;
     height: 175px;
     margin-left: 30px;
     margin-top: 15px;
 }
-#gyro-arm {
+#compressor-needle {
     -webkit-transform-origin: bottom;
     -ms-transform-origin: bottom;
     transform-origin: bottom;
 }
-#gyro-number {
+#compressor-number {
     font-size: 25px;
     text-anchor: middle;
 }

@@ -13,7 +13,7 @@
     <div id="timer">41:50</div>
     <header>
       <!-- Tells whether robot is connected to dashboard. -->
-      <div id="robot-state">Not connected</div>
+      <div id="robot-state">Not Connected!</div>
     </header>
     <!--
       You'll need to mess around with the CSS of #camera (found in css/style.css) to get it to work.
@@ -23,11 +23,11 @@
     <!-- The main body of the dashboard, by default contains the gyro monitor and the robot diagram -->
     <article>
       <!-- Gyroscope -->
-      <svg id="gyro">
+      <svg id="compressor">
         <circle cx="85" cy="85" r="83"></circle>
         <circle cx="85" cy="85" r="50"></circle>
-        <rect id="gyro-arm" x="80" y="5" width="10" height="80"></rect>
-        <text id="gyro-number" x="90" y="115">0º</text>
+        <rect id="compressor-needle" x="80" y="5" width="10" height="80"></rect>
+        <text id="compressor-number" x="85" y="115">0 PSI</text>
       </svg>
       <!-- Example robot diagram, arm moves when encoder value changes -->
       <svg id="robot-diagram" width="332" height="450">
@@ -48,8 +48,8 @@
         The <p> below then says the value.
       -->
       <div id="example-section">
-        <button id="example-button">Change example value</button>
-        <p id="example-readout">Value is undefined</p>
+        <p id="example-readout">Elevator Control</p>
+        <button onclick="console.log('Wow!')" id="example-button">Enabled</button>
       </div>
       <!-- Autonomous selector -->
       <div class="select-container">
