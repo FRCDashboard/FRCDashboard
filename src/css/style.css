@@ -160,6 +160,7 @@ body.login #login {
 #login > button {
     margin-left: 5px;
 }
+/* The switch */
 /* The switch - the box around the slider */
 .switch {
     position: relative;
