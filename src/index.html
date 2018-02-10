@@ -26,6 +26,10 @@
             <p>Drivetrain Current (blue left, red right):</p>
             <canvas id="drivetrainCurrentChart"></canvas>
         </div>
+        <div id="drivetrainOutputContainer">
+            <p>Drivetrain output (blue left setpoint, red left actual):</p>
+            <canvas id="drivetrainOutputChart"></canvas>
+        </div>
         <div id="elevatorCurrentContainer">
             <p>Elevator current:</p>
             <canvas id="elevatorCurrentChart"></canvas>
@@ -45,6 +49,9 @@
         <p>Left Drivetrain Encoder: <span id="leftDrivetrainEncoder">0000</span></p>
         <p>Right Drivetrain Encoder: <span id="rightDrivetrainEncoder">0000</span></p>
         <br>
+        <p>Left Motor Rate Setpoint: <span id="leftRateSetpoint">0</span></p>
+        <p>Left Motor Rate Actual: <span id="rightRateActual">0</span></p>
+        <br>
         <br>
         <p>Elevator Current: <span id="elevatorCurrent">00.00 a</span></p>
     </section>
@@ -59,6 +66,7 @@
             <circle cx="85" cy="85" r="50"></circle>
             <rect id="gyroDial" x="80" y="5" width="10" height="80"></rect>
             <text id="gyroNumber" x="90" y="115">0º</text>
+            <text id="gyroModNumber" x="90" y="150">0º</text>
         </svg>
     </section>
     <div id="login">

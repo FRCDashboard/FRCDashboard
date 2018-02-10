@@ -1,54 +1,60 @@
 // Reload on capital R
-window.addEventListener("keypress", function(ev) {
-    console.log(ev);
-    if (ev.key === "R")
-        location.reload(true);
+window.addEventListener('keypress', (ev) => {
+  console.log(ev);
+  if (ev.key === 'R') { location.reload(true); }
 });
 
 /*
  * Define UI Elements
  */
-let ui = {
-    misc: {
-        pdp: {
-            batteryVoltageChart: document.getElementById('batteryVoltageChart'),
-            batteryVoltage: document.getElementById('batteryVoltage')
-        },
-        timer: document.getElementById('timer'),
-        robotState: document.getElementById('robotState').firstChild,
-        autoSelect: document.getElementById('autoSelect')
+const ui = {
+  misc: {
+    pdp: {
+      batteryVoltageChart: document.getElementById('batteryVoltageChart'),
+      batteryVoltage: document.getElementById('batteryVoltage'),
     },
-    drive: {
-        voltages: {
-            voltageChart: document.getElementById('drivetrainVoltageChart'),
-            leftVoltage: document.getElementById('leftDrivetrainVoltage'),
-            rightVoltage: document.getElementById('rightDrivetrainVoltage')
-        },
-        currents: {
-            currentChart: document.getElementById('drivetrainCurrentChart'),
-            leftCurrent: document.getElementById('leftDrivetrainCurrent'),
-            rightCurrent: document.getElementById('rightDrivetrainCurrent')
-        },
-        encoders: {
-            leftEncoder: document.getElementById('leftDrivetrainEncoder'),
-            rightEncoder: document.getElementById('rightDrivetrainEncoder')
-        },
-        gyro: {
-            container: document.getElementById('gyro'),
-            val: 0,
-            offset: 0,
-            visualVal: 0,
-            gyroDial: document.getElementById('gyroDial'),
-            gyroNumber: document.getElementById('gyroNumber')
-        }
+    timer: document.getElementById('timer'),
+    robotState: document.getElementById('robotState').firstChild,
+    autoSelect: document.getElementById('autoSelect'),
+  },
+  drive: {
+    voltages: {
+      voltageChart: document.getElementById('drivetrainVoltageChart'),
+      leftVoltage: document.getElementById('leftDrivetrainVoltage'),
+      rightVoltage: document.getElementById('rightDrivetrainVoltage'),
     },
-    elevator: {
-        currentChart: document.getElementById('elevatorCurrentChart'),
-        current: document.getElementById('elevatorCurrent')
+    currents: {
+      currentChart: document.getElementById('drivetrainCurrentChart'),
+      leftCurrent: document.getElementById('leftDrivetrainCurrent'),
+      rightCurrent: document.getElementById('rightDrivetrainCurrent'),
     },
-    claw: {
+    encoders: {
+      leftEncoder: document.getElementById('leftDrivetrainEncoder'),
+      rightEncoder: document.getElementById('rightDrivetrainEncoder'),
     },
-    hanger: {}
+    outputs: {
+      outputChart: document.getElementById('drivetrainOutputChart'),
+      leftRateSetpoint: document.getElementById('leftRateSetpoint'),
+      leftRateActual: document.getElementById('leftRateActual'),
+    },
+    gyro: {
+      container: document.getElementById('gyro'),
+      val: 0,
+      offset: 0,
+      visualVal: 0,
+      modVal: 0,
+      gyroDial: document.getElementById('gyroDial'),
+      gyroNumber: document.getElementById('gyroNumber'),
+      gyroModNumber: document.getElementById('gyroModNumber'),
+    },
+  },
+  elevator: {
+    currentChart: document.getElementById('elevatorCurrentChart'),
+    current: document.getElementById('elevatorCurrent'),
+  },
+  claw: {
+  },
+  hanger: {},
 };
 
 /**
@@ -59,11 +65,10 @@ let ui = {
 const updateGyro = (key, value) => {
   ui.drive.gyro.val = value;
   ui.drive.gyro.visualVal = Math.floor(ui.drive.gyro.val - ui.drive.gyro.offset);
-  if (ui.drive.gyro.visualVal < 0) {
-    ui.drive.gyro.visualVal += 360;
-  }
-  ui.drive.gyro.gyroDial.style.transform = `rotate(${ui.drive.gyro.visualVal}deg)`;
+  ui.drive.gyro.modVal = ui.drive.visualVal % 360;
+  ui.drive.gyro.gyroDial.style.transform = `rotate(${-ui.drive.gyro.visualVal}deg)`;
   ui.drive.gyro.gyroNumber.innerHTML = `${ui.drive.gyro.visualVal}º`;
+  ui.drive.gyro.gyroModNumber.innerHTML = `${ui.drive.gyro.modVal}º`;
 };
 NetworkTables.addKeyListener('/SmartDashboard/drive/gyro/angle', updateGyro);
 
@@ -127,6 +132,33 @@ NetworkTables.addKeyListener('/SmartDashboard/drive/encoders/leftencoder', (key,
 NetworkTables.addKeyListener('/SmartDashboard/drive/encoders/rightencoder', (key, value) => {
   console.log(value);
   ui.drive.encoders.rightEncoder.innerHTML = `${value}`;
+});
+
+// Drivetrain Outputs
+const drivetrainOutputChart = new SmoothieChart({
+  tooltip: true,
+  interpolation: 'step',
+});
+drivetrainOutputChart.streamTo(ui.drive.outputs.outputChart, 0);
+const leftRateSetpointLine = new TimeSeries();
+const leftRateActualLine = new TimeSeries();
+drivetrainOutputChart.addTimeSeries(leftRateSetpointLine, {
+  strokeStyle: 'blue',
+  lineWidth: 3,
+});
+drivetrainOutputChart.addTimeSeries(leftRateActualLine, {
+  strokeStyle: 'red',
+  lineWidth: 3,
+});
+NetworkTables.addKeyListener('/SmartDashboard/drive/outputs/leftratesetpoint', (key, value) => {
+  console.log(value);
+  leftRateSetpointLine.append(new Date().getTime(), value);
+  ui.drive.outputs.leftRateSetpoint.innerHTML = `${value}`;
+});
+NetworkTables.addKeyListener('/SmartDashboard/drive/outputs/leftrateactual', (key, value) => {
+  console.log(value);
+  leftRateActualLine.append(new Date().getTime(), value);
+  ui.drive.outputs.leftRateActual.innerHTML = `${value}`;
 });
 
 
