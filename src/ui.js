@@ -27,9 +27,7 @@ let ui = {
 let updateGyro = (key, value) => {
     ui.gyro.val = value;
     ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
-    if (ui.gyro.visualVal < 0) {
-        ui.gyro.visualVal += 360;
-    }
+    ui.gyro.visualval %= 360
     ui.gyro.arm.style.transform = `rotate(${ui.gyro.visualVal}deg)`;
     ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
 };
