@@ -45,7 +45,7 @@
       -->
       <div id="example-section">
         <p id="example-readout">Elevator Control</p>
-        <button onclick="console.log('Wow!')" id="example-button">Enabled</button>
+        <button id="example-button">Enabled</button>
       </div>
       <!-- Autonomous selector -->
       <div class="select-container">
@@ -65,6 +65,12 @@
             <span class="slider round"></span>
           </label>
       </div>
+      <div>
+        <p id="leftEncoder"></p>
+        <p id="rightEncoder"></p>
+        <p id="leftMotor"></p>
+        <p id="rightMotor"></p>
+      </div>
     </aside>
     <div id="login">
       <input id="connect-address" type="text" value="localhost" disabled>
@@ -73,5 +79,6 @@
     <script src="networktables/networktables.js"></script>
     <script src="connection.js"></script>
     <script src="ui.js"></script>
+    <script src="index.js"></script>
   </body>
-</html>
+</ht>
