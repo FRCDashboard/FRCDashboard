@@ -22,7 +22,7 @@ const ipc = electron.ipcMain;
  * */
 let mainWindow;
 
-let connected,
+let connectedFunc,
     ready = false;
 
 let clientDataListener = (key, val, valType, mesgType, id, flags) => {
@@ -51,22 +51,28 @@ function createWindow() {
         // If the Window is ready than send the connection status to it
         if (ready) {
             connectFunc();
-        } else connected = connectFunc;
+        }
+        connectedFunc = connectFunc;
     });
     // When the script starts running in the window set the ready variable
     ipc.on('ready', (ev, mesg) => {
         console.log('NetworkTables is ready');
         ready = mainWindow != null;
-        
-        client.addListener(clientDataListener,true);
+
+        // Remove old Listener
+        client.removeListener(clientDataListener);
+
+        // Add new listener with immediate callback
+        client.addListener(clientDataListener, true);
+
         // Send connection message to the window if if the message is ready
-        if (connected) connected();
-        connected = null;
+        if (connectedFunc) connectedFunc();
     });
     // When the user chooses the address of the bot than try to connect
     ipc.on('connect', (ev, address, port) => {
         console.log(`Trying to connect to ${address}` + (port ? ':' + port : ''));
         let callback = (connected, err) => {
+            console.log('Sending status');
             mainWindow.webContents.send('connected', connected);
         };
         if (port) {
@@ -92,7 +98,7 @@ function createWindow() {
         // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
         // The window is closed until the python server is ready
         show: false,
-		icon: __dirname + '/../images/icon.png'
+        icon: __dirname + '/../images/icon.png'
     });
     // Move window to top (left) of screen.
     mainWindow.setPosition(0, 0);
@@ -114,6 +120,7 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null;
         ready = false;
+        connectedFunc = null;
         client.removeListener(clientDataListener);
     });
     mainWindow.on('unresponsive', () => {
@@ -131,7 +138,7 @@ app.on('ready', () => {
 });
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function() {
+app.on('window-all-closed', function () {
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q.
     // Not like we're creating a consumer application though.
@@ -142,11 +149,11 @@ app.on('window-all-closed', function() {
     app.quit();
 });
 
-app.on('quit', function() {
+app.on('quit', function () {
     console.log('Application quit.');
 });
 
-app.on('activate', function() {
+app.on('activate', function () {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow == null) createWindow();
