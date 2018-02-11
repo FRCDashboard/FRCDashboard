@@ -22,13 +22,14 @@
   },
   "homepage": "https://github.com/Team973",
   "devDependencies": {
-    "electron-packager": "^10.1.1",
-    "eslint": "^4.16.0",
+    "electron-packager": "^11.0.0",
+    "eslint": "^4.17.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0"
   },
   "dependencies": {
-    "electron": "^1.7.11",
-    "wpilib-nt-client": "^1.4.2"
+    "electron": "^1.8.2",
+    "smoothie": "^1.34.0",
+    "wpilib-nt-client": "^1.6.0"
   }
 }

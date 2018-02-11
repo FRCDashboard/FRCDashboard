@@ -13,47 +13,10 @@
         <div id="timer">2:15</div>
     </header>
     <!-- The graph section of the dashboard. -->
-    <section class="graphs">
-        <div id="batteryVoltageContainer">
-            <p>Battery Voltage:</p>
-            <canvas id="batteryVoltageChart"></canvas>
-        </div>
-        <div id="drivetrainVoltageContainer">
-            <p>Drivetrain Voltage (blue left, red right):</p>
-            <canvas id="drivetrainVoltageChart"></canvas>
-        </div>
-        <div id="drivetrainCurrentContainer">
-            <p>Drivetrain Current (blue left, red right):</p>
-            <canvas id="drivetrainCurrentChart"></canvas>
-        </div>
-        <div id="drivetrainOutputContainer">
-            <p>Drivetrain output (blue left setpoint, red left actual):</p>
-            <canvas id="drivetrainOutputChart"></canvas>
-        </div>
-        <div id="elevatorCurrentContainer">
-            <p>Elevator current:</p>
-            <canvas id="elevatorCurrentChart"></canvas>
-        </div>
+    <section id="charts" class="charts">
     </section>
     <!-- The list section of the dashboard -->
-    <section class="list">
-        <p>Battery Voltage: <span id="batteryVoltage">00.00 v</span></p>
-        <br>
-        <br>
-        <p>Left Drivetrain Voltage: <span id="leftDrivetrainVoltage">00.00 v</span></p>
-        <p>Right Drivetrain Voltage: <span id="rightDrivetrainVoltage">00.00 v</span></p>
-        <br>
-        <p>Left Drivetrain Current: <span id="leftDrivetrainCurrent">00.00 a</span></p>
-        <p>Right Drivetrain Current: <span id="rightDrivetrainCurrent">00.00 a</span></p>
-        <br>
-        <p>Left Drivetrain Encoder: <span id="leftDrivetrainEncoder">0000</span></p>
-        <p>Right Drivetrain Encoder: <span id="rightDrivetrainEncoder">0000</span></p>
-        <br>
-        <p>Left Motor Rate Setpoint: <span id="leftRateSetpoint">0</span></p>
-        <p>Left Motor Rate Actual: <span id="rightRateActual">0</span></p>
-        <br>
-        <br>
-        <p>Elevator Current: <span id="elevatorCurrent">00.00 a</span></p>
+    <section id="indicators" class="indicators">
     </section>
     <!-- The sidebar of the dashboard. Designed for smaller control elements like selection boxes and small buttons. -->
     <section class="sidebar">
@@ -66,7 +29,6 @@
             <circle cx="85" cy="85" r="50"></circle>
             <rect id="gyroDial" x="80" y="5" width="10" height="80"></rect>
             <text id="gyroNumber" x="90" y="115">0º</text>
-            <text id="gyroModNumber" x="90" y="150">0º</text>
         </svg>
     </section>
     <div id="login">
@@ -75,7 +37,6 @@
     </div>
     <script src="networktables/networktables.js"></script>
     <script src="connection.js"></script>
-    <script src="smoothie.js"></script>
     <script src="ui.js"></script>
 </body>
 

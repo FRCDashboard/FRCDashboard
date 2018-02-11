@@ -23,7 +23,7 @@ const ipc = electron.ipcMain;
  * */
 let mainWindow;
 
-let connected,
+let connectedFunc,
   ready = false;
 
 const clientDataListener = (key, val, valType, mesgType, id, flags) => {
@@ -46,26 +46,33 @@ function createWindow() {
       mainWindow.webContents.send('connected', con);
 
       // Listens to the changes coming from the client
-      client.addListener(clientDataListener);
     };
 
     // If the Window is ready than send the connection status to it
     if (ready) {
       connectFunc();
-    } else connected = connectFunc;
+    }
+    connectedFunc = connectFunc;
   });
   // When the script starts running in the window set the ready variable
   ipc.on('ready', (ev, mesg) => {
     console.log('NetworkTables is ready');
     ready = mainWindow != null;
+
+    // Remove old Listener
+    client.removeListener(clientDataListener);
+
+    // Add new listener with immediate callback
+    client.addListener(clientDataListener, true);
+
     // Send connection message to the window if if the message is ready
-    if (connected) connected();
-    connected = null;
+    if (connectedFunc) connectedFunc();
   });
   // When the user chooses the address of the bot than try to connect
   ipc.on('connect', (ev, address, port) => {
     console.log(`Trying to connect to ${address}${port ? `:${port}` : ''}`);
     const callback = (connected, err) => {
+      console.log('Sending status');
       mainWindow.webContents.send('connected', connected);
     };
     if (port) {
@@ -104,7 +111,7 @@ function createWindow() {
   });
 
   // Remove menu
-  mainWindow.setMenu(null);
+  // mainWindow.setMenu(null);
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     console.log('main window closed');
@@ -113,6 +120,7 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
     ready = false;
+    connectedFunc = null;
     client.removeListener(clientDataListener);
   });
   mainWindow.on('unresponsive', () => {

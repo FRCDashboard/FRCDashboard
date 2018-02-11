@@ -77,19 +77,14 @@ header {
     color: white;
 }
 
-.graphs {
+.charts {
     top: 0vh;
     left: 0;
     height: 100vh;
     width: 37.5vw;
 }
 
-.charts {
-    height: 120px;
-    width: 700px;
-}
-
-.list {
+.indicators {
     top: 0vh;
     left: 37.5vw;
     height: 100vh;

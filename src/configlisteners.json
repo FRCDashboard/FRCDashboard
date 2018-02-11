@@ -1,0 +1,122 @@
+{
+    "charts": [{
+            "settings": {
+                "tooltip": true,
+                "minValue": 0,
+                "maxValue": 40
+            },
+            "title": "Drive Currents",
+            "keys": [
+                "/SmartDashboard/drive/currents/leftcurrent",
+                "/SmartDashboard/drive/currents/rightcurrent"
+            ]
+        },
+        {
+            "settings": {
+                "tooltip": true,
+                "minValue": -14,
+                "maxValue": 14
+            },
+            "title": "Drive Voltages",
+            "keys": [
+                "/SmartDashboard/drive/voltages/leftvoltage",
+                "/SmartDashboard/drive/voltages/rightvoltage"
+            ]
+        },
+        {
+            "settings": {
+                "tooltip": true,
+                "minValue": 0,
+                "maxValue": 30
+            },
+            "title": "Elevator Current",
+            "keys": [
+                "/SmartDashboard/drive/currents/current"
+            ]
+        },
+        {
+            "settings": {
+                "tooltip": true,
+                "minValue": 0,
+                "maxValue": 14
+            },
+            "title": "Battery Voltage",
+            "keys": [
+                "/SmartDashboard/misc/pdp/batteryvoltage"
+            ]
+        }
+    ],
+    "indicators": [{
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Left Drive Current",
+            "unit": "a",
+            "key": "/SmartDashboard/drive/currents/leftcurrent"
+        },
+        {
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Right Drive Current",
+            "unit": "a",
+            "key": "/SmartDashboard/drive/currents/rightcurrent"
+        },
+        {
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Left Drive Encoder",
+            "unit": "in",
+            "key": "/SmartDashboard/drive/encoders/leftencoder"
+        },
+        {
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Right Drive Encoder",
+            "unit": "in",
+            "key": "/SmartDashboard/drive/encoders/rightencoder"
+        },
+        {
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Left Drive Voltage",
+            "unit": "v",
+            "key": "/SmartDashboard/drive/voltages/leftvoltage"
+        },
+        {
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Right Drive Voltage",
+            "unit": "v",
+            "key": "/SmartDashboard/drive/voltages/rightvoltage"
+        },
+        {
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Elevator Current",
+            "unit": "a",
+            "key": "/SmartDashboard/elevator/currents/current"
+        },
+        {
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Elevator Voltage",
+            "unit": "v",
+            "key": "/SmartDashboard/elevator/voltages/voltage"
+        },
+        {
+            "settings": {
+                "fixedDecimals": true
+            },
+            "title": "Battery Voltage",
+            "unit": "v",
+            "key": "/SmartDashboard/misc/pdp/batteryvoltage"
+        }
+    ]
+}
