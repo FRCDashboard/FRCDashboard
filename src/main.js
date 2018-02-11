@@ -46,7 +46,6 @@ function createWindow() {
             mainWindow.webContents.send('connected', con);
 
             // Listens to the changes coming from the client
-            client.addListener(clientDataListener);
         };
 
         // If the Window is ready than send the connection status to it
@@ -58,6 +57,8 @@ function createWindow() {
     ipc.on('ready', (ev, mesg) => {
         console.log('NetworkTables is ready');
         ready = mainWindow != null;
+        
+        client.addListener(clientDataListener,true);
         // Send connection message to the window if if the message is ready
         if (connected) connected();
         connected = null;
