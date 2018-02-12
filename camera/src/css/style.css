@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font: 16px sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    overflow: hidden;
+    background: black;
+}
+
+/* Major interface panes, aside, article, header, etc. */
+
+body>* {
+    padding: 10px;
+    position: fixed;
+    overflow: scroll;
+    background: #222;
+}
+
+#camera {
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    background-color: #333;
+    background-image: url('roborio-973-frc.local:8080');
+}
