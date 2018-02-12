@@ -131,45 +131,45 @@ function createWindow() {
   });
 }
 function createCameraWindow() {
-    // Create the browser window.
-    cameraWindow = new BrowserWindow({
-      width: 1280,
-      height: 720,
-      // 1366x570 is a good standard height, but you may want to change this to fit your DriverStation's screen better.
-      // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
-      // The window is closed until the python server is ready
-      show: false,
-      icon: `${__dirname}/../build/icon.png`,
-    });
-    // Move window to top (left) of screen.
-    cameraWindow.setPosition(0, 0);
-    // Load window.
-    cameraWindow.loadURL(`file://${__dirname}/../camera/src/index.html`);
-    // Once the python server is ready, load window contents.
-    cameraWindow.once('ready-to-show', () => {
-      console.log('camera window is ready to be shown');
-      cameraWindow.show();
-    });
+  // Create the browser window.
+  cameraWindow = new BrowserWindow({
+    width: 1280,
+    height: 720,
+    // 1366x570 is a good standard height, but you may want to change this to fit your DriverStation's screen better.
+    // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
+    // The window is closed until the python server is ready
+    show: false,
+    icon: `${__dirname}/../build/icon.png`,
+  });
+  // Move window to top (left) of screen.
+  cameraWindow.setPosition(0, 0);
+  // Load window.
+  cameraWindow.loadURL(`file://${__dirname}/../camera/src/index.html`);
+  // Once the python server is ready, load window contents.
+  cameraWindow.once('ready-to-show', () => {
+    console.log('camera window is ready to be shown');
+    cameraWindow.show();
+  });
 
-    // Remove menu
-    // cameraWindow.setMenu(null);
-    // Emitted when the window is closed.
-    cameraWindow.on('closed', () => {
-      console.log('camera window closed');
-      // Dereference the window object, usually you would store windows
-      // in an array if your app supports multi windows, this is the time
-      // when you should delete the corresponding element.
-      cameraWindow = null;
-      ready = false;
-      connectedFunc = null;
-      client.removeListener(clientDataListener);
-    });
-    cameraWindow.on('unresponsive', () => {
-      console.log('Camera Window is unresponsive');
-    });
-    cameraWindow.webContents.on('did-fail-load', () => {
-      console.log('camera window failed load');
-    });
+  // Remove menu
+  // cameraWindow.setMenu(null);
+  // Emitted when the window is closed.
+  cameraWindow.on('closed', () => {
+    console.log('camera window closed');
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    cameraWindow = null;
+    ready = false;
+    connectedFunc = null;
+    client.removeListener(clientDataListener);
+  });
+  cameraWindow.on('unresponsive', () => {
+    console.log('Camera Window is unresponsive');
+  });
+  cameraWindow.webContents.on('did-fail-load', () => {
+    console.log('camera window failed load');
+  });
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
