@@ -1,29 +1,52 @@
 {
-  "name": "FRCDashboard",
-  "version": "2.1.0",
-  "description": "Robot control dashboard boilerplate for FRC.",
-  "main": "src/main.js",
-  "scripts": {
-    "start": "electron .",
-    "package-mac": "electron-packager . --platform=darwin --icon=images/icon.icns --out dist/",
-    "package-linux": "electron-packager . --platform=linux --icon=images/icon.png --out dist/",
-    "package-win": "electron-packager . --platform=win32 --icon=images/icon.ico --out dist/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FRCDashboard/FRCDashboard"
-  },
-  "author": "Erik Boesen",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/FRCDashboard/FRCDashboard/issues"
-  },
-  "homepage": "http://frcdashboard.github.io",
-  "devDependencies": {
-    "electron": "^1.7.12",
-    "electron-packager": "^10.1.1"
-  },
-  "dependencies": {
-    "wpilib-nt-client": "^1.6.0"
-  }
+    "name": "GreyDash",
+    "version": "2.1.0",
+    "description": "Robot control dashboard boilerplate for FRC.",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electron .",
+        "lint": "eslint .",
+        "postinstall": "electron-builder install-app-deps",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Team973/GreyDash"
+    },
+    "author": "Team 973 The Greybots <973greybots@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Team973/GreyDash/issues"
+    },
+    "homepage": "https://github.com/Team973",
+    "build": {
+        "appId": "com.greybots.${name}",
+        "productName": "${name}",
+        "copyright": "Copyright © 2018 ${author}",
+        "mac": {
+            "category": "public.app-category.utilities"
+        },
+        "linux": {
+            "category": "Utility",
+            "target": [
+                "AppImage",
+                "deb"
+            ]
+        },
+        "win": {
+            "target": "NSIS"
+        }
+    },
+    "devDependencies": {
+        "electron": "^1.8.2",
+        "electron-builder": "^19.56.0",
+        "eslint": "^4.17.0",
+        "eslint-config-airbnb-base": "^12.1.0",
+        "eslint-plugin-import": "^2.8.0"
+    },
+    "dependencies": {
+        "smoothie": "^1.34.0",
+        "wpilib-nt-client": "^1.6.0"
+    }
 }
