@@ -90,7 +90,7 @@ function createWindow() {
     ipc.on('update', (ev, mesg) => {
         client.Update(mesg.id, mesg.val);
     });
-    ipc.on('error', (ev, error) => {
+    ipc.on('windowError', (ev, error) => {
         console.log(error);
     });
     // Create the browser window.
