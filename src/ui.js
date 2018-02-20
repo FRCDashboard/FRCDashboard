@@ -107,5 +107,5 @@ ui.armPosition.oninput = function() {
 };
 
 addEventListener('error',(ev)=>{
-    ipc.send('windowError',ev)
+    ipc.send('windowError',{mesg:ev.message,file:ev.filename,lineNumber:ev.lineno})
 })
