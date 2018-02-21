@@ -32,7 +32,7 @@ FRC Dashboard supports display of MJPG camera streams. Once you've created a str
 ## Building
 Some users may wish to compile their dashboard applications into standalone .exe or .app files.
 
-Assuming the necessary setup steps have been performed, users may run `npm run dist` to pack the entire application into a single executable or `npm run dist-all` to do the same for all platforms.
+Assuming the necessary setup steps have been performed, users may run `npm run dist-[platform]`, where `[platform]` is `linux`, `mac`, or `win` according to the target platform, to pack the entire application into a single executable.
 
 ## Running
 Connect to your robot's network if you haven't already. (If you're just testing the dashboard and don't currently need to use it with your robot, you can skip this step.)
