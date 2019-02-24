@@ -32,7 +32,7 @@ let updateGyro = (key, value) => {
         ui.gyro.visualVal += 360;
     }
     ui.gyro.arm.style.transform = `rotate(${ui.gyro.visualVal}deg)`;
-    ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
+    ui.gyro.number.textContent = ui.gyro.visualVal + 'º';
 };
 NetworkTables.addKeyListener('/SmartDashboard/drive/navx/yaw', updateGyro);
 
@@ -61,7 +61,7 @@ NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) =>
 NetworkTables.addKeyListener('/robot/time', (key, value) => {
     // This is an example of how a dashboard could display the remaining time in a match.
     // We assume here that value is an integer representing the number of seconds left.
-    ui.timer.innerHTML = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60;
+    ui.timer.textContent = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60;
 });
 
 // Load list of prewritten autonomous modes
