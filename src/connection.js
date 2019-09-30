@@ -21,6 +21,13 @@ onkeydown = key => {
   }
 };
 
+buttonConnect.onclick = () => {
+  document.body.classList.toggle('login', true);
+  loginShown = true;
+  
+  setLogin();
+};
+
 /**
  * Function to be called when robot connects
  * @param {boolean} connected
@@ -29,11 +36,7 @@ function onRobotConnection(connected) {
   var state = connected ? 'Robot connected!' : 'Robot disconnected.';
   console.log(state);
   ui.robotState.textContent = state;
-
-  buttonConnect.onclick = () => {
-    document.body.classList.toggle('login', true);
-    loginShown = true;
-  };
+  
   if (connected) {
     // On connect hide the connect popup
     document.body.classList.toggle('login', false);
