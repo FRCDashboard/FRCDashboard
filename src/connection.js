@@ -24,6 +24,8 @@ onkeydown = key => {
 buttonConnect.onclick = () => {
   document.body.classList.toggle('login', true);
   loginShown = true;
+  
+  setLogin();
 };
 
 /**
@@ -39,8 +41,6 @@ function onRobotConnection(connected) {
     // On connect hide the connect popup
     document.body.classList.toggle('login', false);
     loginShown = false;
-    
-    setLogin();
   } else if (loginShown) {
     setLogin();
   }
