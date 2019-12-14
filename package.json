@@ -19,11 +19,11 @@
     "url": "https://github.com/FRCDashboard/FRCDashboard/issues"
   },
   "homepage": "http://frcdashboard.github.io",
-  "devDependencies": {
-    "electron": "^1.7.12",
-    "electron-packager": "^10.1.1"
-  },
   "dependencies": {
     "wpilib-nt-client": "^1.7.1"
+  },
+  "devDependencies": {
+    "electron": "^7.1.5",
+    "electron-packager": "^14.1.1"
   }
 }
