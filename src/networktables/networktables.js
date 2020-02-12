@@ -67,10 +67,15 @@ var NetworkTables =
         }
         return {
             /**
+             * @callback robotConnectionCallback
+             * @param {boolean} connected
+             */
+
+            /**
              * Sets a function to be called when the robot connects/disconnects to the pynetworktables2js server via NetworkTables. It will also be called when the websocket connects/disconnects.
              *
              * When a listener function is called with a ‘true’ parameter, the NetworkTables.getRobotAddress() function will return a non-null value.
-             * @param {(connected: boolean) => any} f a function that will be called with a single boolean parameter that indicates whether the robot is connected
+             * @param {robotConnectionCallback} f a function that will be called with a single boolean parameter that indicates whether the robot is connected
              * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current robot connection state
              */
             addRobotConnectionListener(f, immediateNotify) {
@@ -81,8 +86,15 @@ var NetworkTables =
                     f(connected);
             },
             /**
+             * @callback keyListenerCallback
+             * @param {string} key
+             * @param {*} value
+             * @param {boolean} isNew
+             */
+
+            /**
              * Set a function that will be called whenever any NetworkTables value is changed
-             * @param {(key: string, value: any, isNew: boolean) => any} f When any key changes, this function will be called with the following parameters; key: key name for entry, value: value of entry, isNew: If true, the entry has just been created
+             * @param {keyListenerCallback} f When any key changes, this function will be called with the following parameters; key: key name for entry, value: value of entry, isNew: If true, the entry has just been created
              * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current value of all keys
              */
             addGlobalListener(f, immediateNotify) {
@@ -99,7 +111,7 @@ var NetworkTables =
             /**
              * Set a function that will be called whenever a value for a particular key is changed in NetworkTables
              * @param {string} key A networktables key to listen for
-             * @param {(key: string, value: any, isNew: boolean) => any} f When the key changes, this function will be called with the following parameters; key: key name for entry, value: value of entry, isNew: If true, the entry has just been created
+             * @param {keyListenerCallback} f When the key changes, this function will be called with the following parameters; key: key name for entry, value: value of entry, isNew: If true, the entry has just been created
              * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current value of the specified key
              */
             addKeyListener(key, f, immediateNotify) {
@@ -136,7 +148,7 @@ var NetworkTables =
              * Returns the value that the key maps to. If the websocket is not open, this will always return the default value specified.
              * @param {string} key A networktables key
              * @param {any} [defaultValue] If the key isn’t present in the table, return this instead
-             * @returns value of key if present, undefined or defaultValue otherwise
+             * @returns {*|undefined} value of key if present, undefined or defaultValue otherwise
              */
             getValue(key, defaultValue) {
                 if(typeof key != 'string') return new Error('Invalid Argument')
@@ -149,13 +161,13 @@ var NetworkTables =
                 }
             },
             /**
-             * @returns null if the robot is not connected, or a string otherwise
+             * @returns {string|null} null if the robot is not connected, or a string otherwise
              */
             getRobotAddress() {
                 return connected ? robotAddress : null;
             },
             /**
-             * @returns true if the robot is connected
+             * @returns {boolean} true if the robot is connected
              */
             isRobotConnected() {
                 return connected;
@@ -164,7 +176,7 @@ var NetworkTables =
              * Sets the value in NetworkTables. If the websocket is not connected, the value will be discarded.
              * @param {string} key A networktables key
              * @param value The value to set (see warnings)
-             * @returns True if the websocket is open, False otherwise
+             * @returns {boolean} True if the websocket is open, False otherwise
              */
             putValue(key, value) {
                 if(typeof key != 'string') return new Error('Invalid Argument')
