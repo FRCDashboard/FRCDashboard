@@ -16,3 +16,17 @@ NetworkTables.addKeyListener("/SmartDashboard/robot/auton", (key, value) => {
   var timer = document.getElementById("timer");
   timer.classList.toggle("auton", value);
 });
+
+const frontEndUpdate = (key, id) => {
+  NetworkTables.addKeyListener(key, (k, val) => {
+    console.log(k, val)
+    document.getElementById(id).innerHTML = "" + val;
+  })
+}
+
+frontEndUpdate("/FMSInfo/EventName", "event-name")
+frontEndUpdate("/FMSInfo/MatchType", "match-type")
+frontEndUpdate("/FMSInfo/MatchNumber", "match-number")
+frontEndUpdate("/FMSInfo/GameSpecificData", "game-data")
+frontEndUpdate("/SmartDashboard/shooterOutput", "shooter-target-speed")
+frontEndUpdate("/SmartDashboard/shooterMotorSpeed", "shooter-speed")
