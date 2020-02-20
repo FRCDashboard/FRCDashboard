@@ -1,6 +1,8 @@
-let address = document.getElementById('connect-address'),
-  connect = document.getElementById('connect'),
-  buttonConnect = document.getElementById('connect-button');
+let address = document.getElementById("connect-address"),
+  connect = document.getElementById("connect"),
+  localhostConnect = document.getElementById("connect-localhost"),
+  buttonConnect = document.getElementById("connect-button"),
+  loginModal = document.getElementById("connect-modal");
 
 let loginShown = true;
 
@@ -15,16 +17,16 @@ NetworkTables.addRobotConnectionListener(onRobotConnection, false);
 
 // Function for hiding the connect box
 onkeydown = key => {
-  if (key.key === 'Escape') {
-    document.body.classList.toggle('login', false);
+  if (key.key === "Escape") {
+    document.body.classList.toggle("login", false);
     loginShown = false;
   }
 };
 
 buttonConnect.onclick = () => {
-  document.body.classList.toggle('login', true);
+  document.body.classList.toggle("login", true);
   loginShown = true;
-  
+
   setLogin();
 };
 
@@ -33,36 +35,43 @@ buttonConnect.onclick = () => {
  * @param {boolean} connected
  */
 function onRobotConnection(connected) {
-  var state = connected ? 'Robot connected!' : 'Robot disconnected.';
+  var state = connected ? "Robot connected!" : "Robot disconnected.";
   console.log(state);
-  ui.robotState.textContent = state;
-  
+  document.getElementById("robot-state").innerHTML = state;
+
   if (connected) {
     // On connect hide the connect popup
-    document.body.classList.toggle('login', false);
+    loginModal.classList.toggle("is-active", false);
     loginShown = false;
   } else if (loginShown) {
     setLogin();
   }
 }
 function setLogin() {
+  loginModal.classList.toggle("is-active", true);
   // Add Enter key handler
   // Enable the input and the button
   address.disabled = connect.disabled = false;
-  connect.textContent = 'Connect';
+  connect.textContent = "Connect";
   // Add the default address and select xxxx
-  address.value = 'roborio-xxxx-frc.local';
+  address.value = "roborio-703-frc.local";
   address.focus();
-  address.setSelectionRange(8, 12);
+  address.setSelectionRange(8, 11);
 }
+localhostConnect.onclick = () => {
+  ipc.send("connect", "localhost");
+  address.disabled = connect.disabled = true;
+  connect.textContent = "Connecting...";
+};
+
 // On click try to connect and disable the input and the button
 connect.onclick = () => {
-  ipc.send('connect', address.value);
+  ipc.send("connect", address.value);
   address.disabled = connect.disabled = true;
-  connect.textContent = 'Connecting...';
+  connect.textContent = "Connecting...";
 };
 address.onkeydown = ev => {
-  if (ev.key === 'Enter') {
+  if (ev.key === "Enter") {
     connect.click();
     ev.preventDefault();
     ev.stopPropagation();
@@ -70,5 +79,5 @@ address.onkeydown = ev => {
 };
 
 // Show login when starting
-document.body.classList.toggle('login', true);
+document.body.classList.toggle("login", true);
 setLogin();

@@ -20,10 +20,12 @@
   },
   "homepage": "http://frcdashboard.github.io",
   "dependencies": {
+    "bulma": "^0.8.0",
+    "c3": "^0.7.13",
     "wpilib-nt-client": "^1.7.1"
   },
   "devDependencies": {
-    "electron": "^7.1.5",
+    "electron": "^5.0.7",
     "electron-packager": "^14.1.1"
   }
 }
