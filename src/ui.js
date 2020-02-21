@@ -1,7 +1,10 @@
+var currentTime = 0;
+
 NetworkTables.addKeyListener("/SmartDashboard/robot/time", (key, value) => {
   // This is an example of how a dashboard could display the remaining time in a match.
   // We assume here that value is an integer representing the number of seconds left.
   var timer = document.getElementById("timer");
+  currentTime = value;
   timer.innerHTML =
     value < 0
       ? "0:00"
@@ -19,14 +22,23 @@ NetworkTables.addKeyListener("/SmartDashboard/robot/auton", (key, value) => {
 
 const frontEndUpdate = (key, id) => {
   NetworkTables.addKeyListener(key, (k, val) => {
-    console.log(k, val)
-    document.getElementById(id).innerHTML = "" + val;
-  })
-}
+    console.log(k, val);
+    document.getElementById(id).textContent = "" + val;
+  });
+};
+NetworkTables.addKeyListener("/FMSInfo/MatchType", (key, value) => {
+  const match_types = {
+    0: "Non-Field Match : ",
+    1: "Practice : ",
+    2: "Qualification : ",
+    3: "Elimination : "
+  };
+  var el = document.getElementById("match-type");
+  el.textContent = match_types[value];
+});
 
-frontEndUpdate("/FMSInfo/EventName", "event-name")
-frontEndUpdate("/FMSInfo/MatchType", "match-type")
-frontEndUpdate("/FMSInfo/MatchNumber", "match-number")
-frontEndUpdate("/FMSInfo/GameSpecificData", "game-data")
-frontEndUpdate("/SmartDashboard/shooterOutput", "shooter-target-speed")
-frontEndUpdate("/SmartDashboard/shooterMotorSpeed", "shooter-speed")
+frontEndUpdate("/FMSInfo/EventName", "event-name");
+frontEndUpdate("/FMSInfo/MatchNumber", "match-number");
+frontEndUpdate("/FMSInfo/GameSpecificData", "game-data");
+frontEndUpdate("/SmartDashboard/shooterOutput", "shooter-target-speed");
+frontEndUpdate("/SmartDashboard/shooterMotorSpeed", "shooter-speed");

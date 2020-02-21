@@ -4,14 +4,37 @@
   --tertiary: #ff9f19;
   --background: #011627;
   --white: #fcfcfc;
+  --red-alliance: #ed1c24;
+  --blue-alliance: #0066b3;
 }
 
 body {
   color: var(--background);
 }
 
+div {
+  box-shadow: 0 0 1px black;
+}
+
 #timer {
   font-size: 5em;
   font-weight: bold;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.driver-station {
+  height: 200px;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: var(--background);
+  color: var(--white);
+  text-align: center;
+  line-height: 6em;
+  font-size: 2em;
+}
+
+#limelight {
+  background: url(https://10.7.3.11:5800);
 }

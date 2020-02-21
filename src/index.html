@@ -4,62 +4,66 @@
     <meta charset="utf-8" />
     <title>FRC Dashboard</title>
     <link href="../node_modules/bulma/css/bulma.min.css" rel="stylesheet" />
-    <link href="../node_modules/c3/c3.min.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="../node_modules/chart.js/dist/Chart.min.css" /> -->
     <link href="css/style.css" rel="stylesheet" />
   </head>
 
   <body>
-    <div class="container">
-      <div class="columns">
-        <div class="column">
-          <div id="timer">2:15</div>
-          <div id="event-name"></div>
-          <div id="match">
-            <span id="match-type"></span> : 
-            <span id="match-number"></span>
-          </div>
-        </div>
-        <div class="column">
-          <div id="robot-state">Unknown state</div>
-          <button class="button" id="connect-button">Connect</button>
-          <div id="game=data"></div>
+    <div class="columns">
+      <div class="column">
+        <div id="timer">2:15</div>
+        <div id="event-name"></div>
+        <div id="match">
+          <span id="match-type"></span>
+          <span id="match-number"></span>
         </div>
       </div>
-      <div class="columns">
-        <div id="shooter-speed"></div>
-        <div id="shooter-target-speed"></div>
-      </div>
-      <div id="camera"></div>
-      <div class="modal" id="connect-modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Connect to robot</p>
-          </header>
-          <section class="modal-card-body">
-            <input
-              class="input"
-              id="connect-address"
-              type="text"
-              value="localhost"
-              disabled
-            />
-          </section>
-          <footer class="modal-card-foot">
-            <button class="button is-primary" id="connect" disabled>
-              Connecting
-            </button>
-            <button class="button is-info" id="connect-localhost">
-              Localhost
-            </button>
-          </footer>
-        </div>
+      <div class="column">
+        <div id="robot-state">Unknown state</div>
+        <button class="button" id="connect-button">Connect</button>
+        <div id="game=data"></div>
       </div>
     </div>
+    <div class="columns">
+      <div id="shooter-speed"></div>
+      <div id="shooter-target-speed"></div>
+    </div>
+    <div id="camera"></div>
+    <div class="modal" id="connect-modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Connect to robot</p>
+        </header>
+        <section class="modal-card-body">
+          <input
+            class="input"
+            id="connect-address"
+            type="text"
+            value="localhost"
+            disabled
+          />
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-primary" id="connect" disabled>
+            Connecting
+          </button>
+          <button class="button is-info" id="connect-localhost">
+            Localhost
+          </button>
+        </footer>
+      </div>
+    </div>
+    <!-- <div>
+      <canvas id="armpos-chart"></canvas>
+    </div> -->
+    <div class="driver-station">
+      <h1>This area intentionally left empty for the driver station</h1>
+    </div>
     <script src="networktables/networktables.js"></script>
-    <script src="../node_modules/d3/dist/d3.min.js"></script>
-    <script src="../node_modules/c3/c3.min.js"></script>
+    <!-- <script src="../node_modules/chart.js/dist/Chart.min.js"></script> -->
     <script src="ui.js"></script>
     <script src="connection.js"></script>
+    <!-- <script src="charts.js"></script> -->
   </body>
 </html>
