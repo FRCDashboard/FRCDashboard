@@ -4,10 +4,10 @@ on: [push]
 
 jobs:
   release:
-    runs-on: [ubuntu-latest]
+    runs-on: [windows-latest]
     steps:
       - uses: actions/checkout@master
-      - run: npm i
+      - run: npm install
       - run: npm run package-win
       - name: Create Release
         uses: Roang-zero1/github-upload-release-artifacts-action@master 
