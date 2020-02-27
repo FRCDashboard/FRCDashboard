@@ -59,7 +59,7 @@ function setLogin() {
   address.setSelectionRange(8, 11);
 }
 localhostConnect.onclick = () => {
-  ipc.send("connect", "localhost");
+  ipc.send("connect", "127.0.0.1");
   address.disabled = connect.disabled = true;
   connect.textContent = "Connecting...";
 };

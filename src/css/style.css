@@ -46,4 +46,9 @@ body {
   background-repeat: no-repeat;
   background-size: 640px 480px;
   background-position: center;
+  background-color: black;
+}
+
+.progress::-webkit-progress-value {
+  transition: width 0.1s linear;
 }

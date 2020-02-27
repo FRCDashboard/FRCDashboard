@@ -78,6 +78,13 @@ NetworkTables.addKeyListener("/limelight/tv", (key, value) => {
   tag.classList.toggle("is-success", value == 1);
 });
 
+NetworkTables.addKeyListener("/SmartDashboard/armPosition", (key, value) => {
+  targetShooterSpeed = value;
+  var bar = document.getElementById("intake-arm-bar");
+  bar.value = value;
+  document.getElementById("arm-position").textContent = value;
+});
+
 frontEndUpdate("/FMSInfo/EventName", "event-name");
 frontEndUpdate("/FMSInfo/MatchNumber", "match-number");
 frontEndUpdate("/FMSInfo/GameSpecificData", "game-data");

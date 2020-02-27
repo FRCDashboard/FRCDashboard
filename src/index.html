@@ -2,8 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>FRC Dashboard</title>
+    <title>Phoenix Dash</title>
     <link href="../node_modules/bulma/css/bulma.min.css" rel="stylesheet" />
+    <link
+      href="../node_modules/bulma-extensions/dist/css/bulma-extensions.min.css"
+      rel="stylesheet"
+    />
     <!-- <link rel="stylesheet" href="../node_modules/chart.js/dist/Chart.min.css" /> -->
     <link href="css/style.css" rel="stylesheet" />
   </head>
@@ -23,6 +27,9 @@
           <div id="robot-state">Unknown state</div>
           <button class="button" id="connect-button">Connect</button>
           <div id="game-data"></div>
+        </div>
+        <div class="column">
+          <div></div>
         </div>
       </div>
       <div class="columns">
@@ -59,7 +66,16 @@
             <span class="tag is-black is-large">Limelight Target</span>
           </div>
         </div>
-        <div id="intake-data" class="column"></div>
+        <div id="intake-data" class="column">
+          <h1 class="is-size-3">Intake</h1>
+          <div>Arm Position: <span id="arm-position"></span></div>
+          <progress
+            id="intake-arm-bar"
+            class="progress is-primary"
+            value="0"
+            max="100"
+          ></progress>
+        </div>
       </div>
 
       <div class="modal" id="connect-modal">
@@ -86,6 +102,11 @@
             </button>
           </footer>
         </div>
+      </div>
+      <div class="modal" id="auton-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content"></div>
+        <button class="modal-close is-large" aria-label="close"></button>
       </div>
     </div>
     <div class="driver-station">

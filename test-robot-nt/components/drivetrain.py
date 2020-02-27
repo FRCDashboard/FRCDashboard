@@ -3,6 +3,8 @@ from wpilib import SmartDashboard as sd
 
 
 class Drivetrain:
+    sensitivity = tunable(1)
+
     forward_speed = will_reset_to(0)
     turn_speed = will_reset_to(0)
 
