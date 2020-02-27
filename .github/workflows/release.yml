@@ -28,8 +28,7 @@ jobs:
       - name: Create Release
         uses: Roang-zero1/github-upload-release-artifacts-action@master 
         with:
-          args: 
-          - dist/FRCDashboard-win32-x64/FRCDashboard.exe
+          args: dist/FRCDashboard-win32-x64/FRCDashboard.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
