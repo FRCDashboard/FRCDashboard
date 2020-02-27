@@ -61,3 +61,19 @@ dist/
 package-lock.json
 .DS_Store
 .vscode/
+
+# simulator
+imgui.ini
+__pycache__
+
+#venv
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json

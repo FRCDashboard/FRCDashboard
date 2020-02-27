@@ -9,54 +9,85 @@
   </head>
 
   <body>
-    <div class="columns">
-      <div class="column">
-        <div id="timer">2:15</div>
-        <div id="event-name"></div>
-        <div id="match">
-          <span id="match-type"></span>
-          <span id="match-number"></span>
+    <div class="dashboard">
+      <div class="columns">
+        <div id="match-data" class="column">
+          <div id="timer">2:15</div>
+          <div id="event-name"></div>
+          <div id="match">
+            <span id="match-type"></span>
+            <span id="match-number"></span>
+          </div>
+        </div>
+        <div id="connection-data" class="column">
+          <div id="robot-state">Unknown state</div>
+          <button class="button" id="connect-button">Connect</button>
+          <div id="game-data"></div>
         </div>
       </div>
-      <div class="column">
-        <div id="robot-state">Unknown state</div>
-        <button class="button" id="connect-button">Connect</button>
-        <div id="game=data"></div>
+      <div class="columns">
+        <div id="camera" class="column"></div>
+        <div class="column">
+          <div id="shooter-data">
+            <h1 class="is-size-3">Shooter</h1>
+            <div>
+              Shooter Current Speed:
+              <span id="shooter-speed"></span>
+            </div>
+            <progress
+              id="shooter-speed-bar"
+              class="progress is-success"
+              value="0"
+              max="6000"
+            ></progress>
+            <div>
+              Shooter Target Speed: <span id="shooter-target-speed"></span>
+            </div>
+            <progress
+              id="shooter-target-speed-bar"
+              class="progress is-info"
+              value="0"
+              max="6000"
+            ></progress>
+          </div>
+          <div id="limelight-data">
+            <h1 class="is-size-3">Limelight</h1>
+            <div class="subtitle">
+              Angle offset: <span id="ll-x-offset"></span>
+            </div>
+            <div class="subtitle">Y offset: <span id="ll-y-offset"></span></div>
+            <span class="tag is-black is-large">Limelight Target</span>
+          </div>
+        </div>
+        <div id="intake-data" class="column"></div>
+      </div>
+
+      <div class="modal" id="connect-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Connect to robot</p>
+          </header>
+          <section class="modal-card-body">
+            <input
+              class="input"
+              id="connect-address"
+              type="text"
+              value="localhost"
+              disabled
+            />
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-primary" id="connect" disabled>
+              Connecting
+            </button>
+            <button class="button is-info" id="connect-localhost">
+              Localhost
+            </button>
+          </footer>
+        </div>
       </div>
     </div>
-    <div class="columns">
-      <div id="shooter-speed"></div>
-      <div id="shooter-target-speed"></div>
-    </div>
-    <div id="camera"></div>
-    <div class="modal" id="connect-modal">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Connect to robot</p>
-        </header>
-        <section class="modal-card-body">
-          <input
-            class="input"
-            id="connect-address"
-            type="text"
-            value="localhost"
-            disabled
-          />
-        </section>
-        <footer class="modal-card-foot">
-          <button class="button is-primary" id="connect" disabled>
-            Connecting
-          </button>
-          <button class="button is-info" id="connect-localhost">
-            Localhost
-          </button>
-        </footer>
-      </div>
-    </div>
-    <!-- <div>
-      <canvas id="armpos-chart"></canvas>
-    </div> -->
     <div class="driver-station">
       <h1>This area intentionally left empty for the driver station</h1>
     </div>

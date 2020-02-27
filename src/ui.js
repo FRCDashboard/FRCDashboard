@@ -1,4 +1,6 @@
 var currentTime = 0;
+var targetShooterSpeed = 0;
+var rpmError = 300;
 
 NetworkTables.addKeyListener("/SmartDashboard/robot/time", (key, value) => {
   // This is an example of how a dashboard could display the remaining time in a match.
@@ -21,6 +23,12 @@ NetworkTables.addKeyListener("/SmartDashboard/robot/auton", (key, value) => {
 });
 
 const frontEndUpdate = (key, id) => {
+  console.log(
+    `Setting up NT Key: %c${key}%c to bind on element ID: %c${id}`,
+    "color: blue; font-weight: bold;",
+    "color: inherit; font-weight: normal;",
+    "color: red; font-weight: bold"
+  );
   NetworkTables.addKeyListener(key, (k, val) => {
     console.log(k, val);
     document.getElementById(id).textContent = "" + val;
@@ -37,8 +45,41 @@ NetworkTables.addKeyListener("/FMSInfo/MatchType", (key, value) => {
   el.textContent = match_types[value];
 });
 
+NetworkTables.addKeyListener(
+  "/SmartDashboard/shooterMotorSpeed",
+  (key, value) => {
+    document.getElementById("shooter-speed").textContent = value;
+    var bar = document.getElementById("shooter-speed-bar");
+    bar.value = value;
+    bar.classList.toggle(
+      "is-danger",
+      Math.abs(value + rpmError) < Math.abs(targetShooterSpeed)
+    );
+  }
+);
+
+NetworkTables.addKeyListener(
+  "/SmartDashboard/shooterSpeedTarget",
+  (key, value) => {
+    targetShooterSpeed = value;
+    var bar = document.getElementById("shooter-target-speed-bar");
+    bar.value = value;
+    document.getElementById("shooter-target-speed").textContent = value;
+  }
+);
+
+NetworkTables.addKeyListener("/components/shooter/rpm_error", (key, value) => {
+  rpmError = value;
+});
+
+NetworkTables.addKeyListener("/limelight/tv", (key, value) => {
+  var tag = document.getElementById("ll-targets-found");
+  tag.classList.toggle("is-black", value == 0);
+  tag.classList.toggle("is-success", value == 1);
+});
+
 frontEndUpdate("/FMSInfo/EventName", "event-name");
 frontEndUpdate("/FMSInfo/MatchNumber", "match-number");
 frontEndUpdate("/FMSInfo/GameSpecificData", "game-data");
-frontEndUpdate("/SmartDashboard/shooterOutput", "shooter-target-speed");
-frontEndUpdate("/SmartDashboard/shooterMotorSpeed", "shooter-speed");
+frontEndUpdate("/limelight/tx", "ll-x-offset");
+frontEndUpdate("/limelight/ty", "ll-y-offset");

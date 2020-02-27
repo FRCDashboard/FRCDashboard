@@ -81,3 +81,6 @@ address.onkeydown = ev => {
 // Show login when starting
 document.body.classList.toggle("login", true);
 setLogin();
+
+// Automatically attempt to connect to localhost NT server by default
+localhostConnect.click();

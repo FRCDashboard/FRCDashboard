@@ -114,6 +114,7 @@ function createWindow() {
     console.log("main window is ready to be shown");
     mainWindow.show();
     mainWindow.maximize();
+    mainWindow.webContents.openDevTools();
   });
 
   // Remove menu
