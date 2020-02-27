@@ -1,0 +1,35 @@
+name: Build Release Package
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+      env:
+        CI: true
+  release:
+    runs-on: [ubuntu-latest]
+    needs: [build]
+    steps:
+      - uses: actions/checkout@master
+      - name: Create Release
+        uses: Roang-zero1/github-upload-release-artifacts-action@master 
+        with:
+          args: 
+          - dist/FRCDashboard-win32-x64/FRCDashboard.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
