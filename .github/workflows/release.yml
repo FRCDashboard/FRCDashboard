@@ -25,6 +25,7 @@ jobs:
     needs: [build]
     steps:
       - uses: actions/checkout@master
+      - run: npm run package-win
       - name: Create Release
         uses: Roang-zero1/github-upload-release-artifacts-action@master 
         with:
