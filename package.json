@@ -1,7 +1,7 @@
 {
   "name": "FRCDashboard",
-  "version": "2.1.0",
-  "description": "Robot control dashboard boilerplate for FRC.",
+  "version": "1.0.0",
+  "description": "Robot control dashboard for FRC Team 703",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/FRCDashboard/FRCDashboard"
   },
-  "author": "Erik Boesen",
+  "author": "Josh Bacon",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/FRCDashboard/FRCDashboard/issues"
