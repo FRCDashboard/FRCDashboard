@@ -1,6 +1,6 @@
 name: Build Release Package
 
-on: [push]
+on: [release]
 
 jobs:
   release:
@@ -10,9 +10,8 @@ jobs:
       - run: npm install
       - run: npm run package-win
       - name: Create Release
-        uses: Roang-zero1/github-upload-release-artifacts-action@master 
+        uses: AButler/upload-release-assets@v2.0
         with:
-          args: dist/FRCDashboard-win32-x64/FRCDashboard.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: dist/**/FRCDashboard.*
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
         
