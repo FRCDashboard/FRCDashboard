@@ -66,7 +66,7 @@ localhostConnect.onclick = () => {
 
 // On click try to connect and disable the input and the button
 connect.onclick = () => {
-  ipc.send("connect", address.value);
+  ipc.send("connect", address.value, 1735);
   address.disabled = connect.disabled = true;
   connect.textContent = "Connecting...";
 };

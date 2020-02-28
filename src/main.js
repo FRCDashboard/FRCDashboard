@@ -75,6 +75,7 @@ function createWindow() {
     console.log(`Trying to connect to ${address}` + (port ? ":" + port : ""));
     let callback = (connected, err) => {
       console.log("Sending status");
+      client.connected = true;
       mainWindow.webContents.send("connected", connected);
     };
     if (port) {
