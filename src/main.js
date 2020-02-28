@@ -24,9 +24,13 @@ const ipc = electron.ipcMain;
  * @type {Electron.BrowserWindow}
  * */
 let mainWindow;
+let cameraWindow;
 
 let connectedFunc,
   ready = false;
+
+let simIP = "127.0.0.1";
+let robotIP = "10.7.3.2";
 
 let clientDataListener = (key, val, valType, mesgType, id, flags) => {
   if (val === "true" || val === "false") {
@@ -42,20 +46,21 @@ let clientDataListener = (key, val, valType, mesgType, id, flags) => {
 };
 function createWindow() {
   // Attempt to connect to the localhost
-  // client.start((con, err) => {
-  //   let connectFunc = () => {
-  //     console.log("Sending status");
-  //     mainWindow.webContents.send("connected", con);
+  if (process.platform !== "win32") {
+    console.log("Attempting to run on the simulator");
+    client.start((con, err) => {
+      let connectFunc = () => {
+        console.log("Sending status");
+        mainWindow.webContents.send("connected", con);
 
-  //     // Listens to the changes coming from the client
-  //   };
+        // Listens to the changes coming from the client
+      };
 
-  //   // If the Window is ready than send the connection status to it
-  //   if (ready) {
-  //     connectFunc();
-  //   }
-  //   connectedFunc = connectFunc;
-  // });
+      // If the Window is ready than send the connection status to it
+      if (ready) connectFunc();
+      if (con) connectedFunc = connectFunc;
+    }, simIP);
+  }
   // When the script starts running in the window set the ready variable
   ipc.on("ready", (ev, mesg) => {
     console.log("NetworkTables is ready");
@@ -68,14 +73,20 @@ function createWindow() {
     client.addListener(clientDataListener, true);
 
     // Send connection message to the window if if the message is ready
-    if (connectedFunc) connectedFunc();
+    if (connectedFunc) {
+      connectedFunc();
+    } else {
+      ipc.emit("connect", null, robotIP);
+    }
   });
-  // When the user chooses the address of the bot than try to connect
+  // When the user chooses the address of the bot then try to connect
   ipc.on("connect", (ev, address, port) => {
+    client.setReconnectDelay(1000);
     console.log(`Trying to connect to ${address}` + (port ? ":" + port : ""));
     let callback = (connected, err) => {
-      console.log("Sending status");
-      client.connected = true;
+      console.log("Sending status to " + address);
+      console.log(err);
+      // client.connected = true;
       mainWindow.webContents.send("connected", connected);
     };
     if (port) {
@@ -101,11 +112,27 @@ function createWindow() {
     // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
     // The window is closed until the python server is ready
     show: false,
-    icon: __dirname + "/../images/icon.png",
+    icon: __dirname + "/../images/Phoenix2020.png",
     webPreferences: {
       nodeIntegration: true
     }
   });
+
+  let displays = electron.screen.getAllDisplays();
+  let externalDisplay = displays.find(display => {
+    return display.bounds.x !== 0 || display.bounds.y !== 0;
+  });
+  if (externalDisplay) {
+    cameraWindow = new BrowserWindow({
+      width: 1366,
+      height: 570,
+      show: false,
+      icon: __dirname + "/../images/Phoenix2020.png",
+      x: externalDisplay.bounds.x + 50,
+      y: externalDisplay.bounds.y + 50
+    });
+    cameraWindow.loadURL(`file://${__dirname}/camerawindow.html`);
+  }
   // Move window to top (left) of screen.
   mainWindow.setPosition(0, 0);
   // Load window.
@@ -118,8 +145,17 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
   });
 
+  if (cameraWindow !== null) {
+    cameraWindow.once("ready-to-show", () => {
+      console.log("camera window is ready to be shown");
+      cameraWindow.show();
+      cameraWindow.maximize();
+      // cameraWindow.webContents.openDevTools();
+    });
+  }
+
   // Remove menu
-  mainWindow.setMenu(null);
+  // mainWindow.setMenu(null);
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
     console.log("main window closed");

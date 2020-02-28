@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phoenix Limelight</title>
+    <link href="../node_modules/bulma/css/bulma.min.css" rel="stylesheet" />
+    <style>
+      html {
+        background-color: black;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .limelight {
+        margin: auto;
+        width: 1280px;
+        height: 960px;
+        background-image: url(http://10.7.3.11:5800),
+          url(css/assets/limelight.svg);
+        background-position: center;
+        box-shadow: 0 0 8px 1px #7bff00;
+        border-radius: 8px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="limelight"></div>
+    <div>
+      <button class="button is-success" onclick="window.location.reload()">
+        Reload
+      </button>
+    </div>
+  </body>
+</html>

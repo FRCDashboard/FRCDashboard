@@ -85,8 +85,55 @@ NetworkTables.addKeyListener("/SmartDashboard/armPosition", (key, value) => {
   document.getElementById("arm-position").textContent = value;
 });
 
+NetworkTables.addKeyListener("/FMSInfo/GameSpecificMessage", (key, value) => {
+  console.log(key, value);
+  var tag = document.getElementById("game-data");
+  var gameData = value.toLowerCase();
+  tag.classList.toggle("is-danger", gameData == "r");
+  tag.classList.toggle("is-success", gameData == "g");
+  tag.classList.toggle("is-info", gameData == "b");
+  tag.classList.toggle("is-warning", gameData == "y");
+});
+
+document
+  .getElementById("drivetrain-forward-speed-target")
+  .addEventListener("input", function() {
+    var updated = NetworkTables.putValue(
+      "/components/drivetrain/drive_speed_multiplier",
+      this.value / 100.0
+    );
+    console.log(
+      `%c${
+        updated ? "Turn Speed Updated" : "Not updated. No Connection"
+      } : ${this.value / 100}`,
+      updated ? "color: blue" : "color: red"
+    );
+  });
+document
+  .getElementById("drivetrain-turn-speed-target")
+  .addEventListener("input", function() {
+    var updated = NetworkTables.putValue(
+      "/components/drivetrain/turn_speed_multiplier",
+      this.value / 100.0
+    );
+    console.log(
+      `%c${
+        updated ? "Turn Speed Updated" : "Not updated. No Connection"
+      } : ${this.value / 100}`,
+      updated ? "color: blue" : "color: red"
+    );
+  });
+
 frontEndUpdate("/FMSInfo/EventName", "event-name");
 frontEndUpdate("/FMSInfo/MatchNumber", "match-number");
-frontEndUpdate("/FMSInfo/GameSpecificData", "game-data");
+// frontEndUpdate("/FMSInfo/GameSpecificData", "game-data");
 frontEndUpdate("/limelight/tx", "ll-x-offset");
 frontEndUpdate("/limelight/ty", "ll-y-offset");
+frontEndUpdate(
+  "/components/drivetrain/drive_speed_multiplier",
+  "drivetrain-forward-speed"
+);
+frontEndUpdate(
+  "/components/drivetrain/turn_speed_multiplier",
+  "drivetrain-turn-speed"
+);

@@ -26,10 +26,33 @@
         <div id="connection-data" class="column">
           <div id="robot-state">Unknown state</div>
           <button class="button" id="connect-button">Connect</button>
-          <div id="game-data"></div>
+          <div id="game-data" class="tag">Game Data</div>
         </div>
         <div class="column">
-          <div></div>
+          <div>
+            Drivetrain Drive Speed: <span id="drivetrain-forward-speed"></span>
+          </div>
+          <input
+            id="drivetrain-forward-speed-target"
+            class="slider is-fullwidth"
+            step="1"
+            min="20"
+            max="100"
+            value="90"
+            type="range"
+          />
+          <div>
+            Drivetrain Turn Speed: <span id="drivetrain-turn-speed"></span>
+          </div>
+          <input
+            id="drivetrain-turn-speed-target"
+            class="slider is-fullwidth"
+            step="1"
+            min="20"
+            max="100"
+            value="90"
+            type="range"
+          />
         </div>
       </div>
       <div class="columns">
