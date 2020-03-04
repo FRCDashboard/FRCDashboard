@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 const electron = require("electron");
 const wpilib_NT = require("wpilib-nt-client");
+const { spawn } = require("child_process");
 const client = new wpilib_NT.Client();
 
 // The client will try to reconnect after 1 second
@@ -29,21 +30,30 @@ let cameraWindow;
 let connectedFunc,
   ready = false;
 
-let simIP = "127.0.0.1";
-let robotIP = "10.7.3.2";
+var debug = false;
 
-let clientDataListener = (key, val, valType, mesgType, id, flags) => {
-  if (val === "true" || val === "false") {
-    val = val === "true";
+for (var arg in process.argv) {
+  if (arg === "--debug") {
+    debug = true;
   }
-  mainWindow.webContents.send(mesgType, {
-    key,
-    val,
-    valType,
-    id,
-    flags
-  });
-};
+}
+
+// if (debug) {
+//   spawn("python", ["-m", "pynetworktables2js", debug ? "" : "--team 703"]);
+// }
+
+// let clientDataListener = (key, val, valType, mesgType, id, flags) => {
+//   if (val === "true" || val === "false") {
+//     val = val === "true";
+//   }
+//   mainWindow.webContents.send(mesgType, {
+//     key,
+//     val,
+//     valType,
+//     id,
+//     flags
+//   });
+// };
 function createWindow() {
   // Attempt to connect to the localhost
   if (process.platform !== "win32") {
@@ -62,45 +72,39 @@ function createWindow() {
     }, simIP);
   }
   // When the script starts running in the window set the ready variable
-  ipc.on("ready", (ev, mesg) => {
-    console.log("NetworkTables is ready");
-    ready = mainWindow != null;
+  // ipc.on("ready", (ev, mesg) => {
+  //   console.log("NetworkTables is ready");
+  //   ready = mainWindow != null;
 
-    // Remove old Listener
-    client.removeListener(clientDataListener);
+  //   // Remove old Listener
+  //   client.removeListener(clientDataListener);
 
-    // Add new listener with immediate callback
-    client.addListener(clientDataListener, true);
+  //   // Add new listener with immediate callback
+  //   client.addListener(clientDataListener, true);
 
-    // Send connection message to the window if if the message is ready
-    if (connectedFunc) {
-      connectedFunc();
-    } else {
-      ipc.emit("connect", null, robotIP);
-    }
-  });
-  // When the user chooses the address of the bot then try to connect
-  ipc.on("connect", (ev, address, port) => {
-    client.setReconnectDelay(1000);
-    console.log(`Trying to connect to ${address}` + (port ? ":" + port : ""));
-    let callback = (connected, err) => {
-      console.log("Sending status to " + address);
-      console.log(err);
-      // client.connected = true;
-      mainWindow.webContents.send("connected", connected);
-    };
-    if (port) {
-      client.start(callback, address, port);
-    } else {
-      client.start(callback, address);
-    }
-  });
-  ipc.on("add", (ev, mesg) => {
-    client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1);
-  });
-  ipc.on("update", (ev, mesg) => {
-    client.Update(mesg.id, mesg.val);
-  });
+  //   // Send connection message to the window if if the message is ready
+  //   if (connectedFunc) connectedFunc();
+  // });
+  // When the user chooses the address of the bot than try to connect
+  // ipc.on("connect", (ev, address, port) => {
+  //   console.log(`Trying to connect to ${address}` + (port ? ":" + port : ""));
+  //   let callback = (connected, err) => {
+  //     console.log("Sending status");
+  //     client.connected = true;
+  //     mainWindow.webContents.send("connected", connected);
+  //   };
+  //   if (port) {
+  //     client.start(callback, address, port);
+  //   } else {
+  //     client.start(callback, address);
+  //   }
+  // });
+  // ipc.on("add", (ev, mesg) => {
+  //   client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1);
+  // });
+  // ipc.on("update", (ev, mesg) => {
+  //   client.Update(mesg.id, mesg.val);
+  // });
   ipc.on("windowError", (ev, error) => {
     console.log(error);
   });
