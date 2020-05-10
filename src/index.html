@@ -65,6 +65,11 @@
     <script src="networktables/networktables.js"></script>
     <script src="ui.js"></script>
     <script src="connection.js"></script>
+    <script src="../node_modules/@frc-web-components/frc-web-components/build/frc-web-components.min.js"></script>
+    <script>
+        webbitStore.addSourceProvider('NetworkTables');
+        webbitStore.setDefaultSourceProvider('NetworkTables');
+    </script>
 </body>
 
 </html>
