@@ -20,6 +20,7 @@
   },
   "homepage": "http://frcdashboard.github.io",
   "dependencies": {
+    "@frc-web-components/frc-web-components": "^1.1.7",
     "wpilib-nt-client": "^1.7.1"
   },
   "devDependencies": {
