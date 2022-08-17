@@ -57,7 +57,7 @@ function setLogin() {
 }
 // On click try to connect and disable the input and the button
 connect.onclick = () => {
-  ipc.send('connect', address.value);
+  window.api.sendConnect(address.value);
   address.disabled = connect.disabled = true;
   connect.textContent = 'Connecting...';
 };
