@@ -106,6 +106,10 @@ ui.armPosition.oninput = function() {
     NetworkTables.putValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };
 
-addEventListener('error',(ev)=>{
-    window.api.sendWindowError({mesg:ev.message,file:ev.filename,lineNumber:ev.lineno})
-})
+addEventListener('error', (ev) => {
+    window.api.sendWindowError({
+		mesg :ev.message,
+		file: ev.filename,
+		lineNumber: ev.lineno
+	});
+});

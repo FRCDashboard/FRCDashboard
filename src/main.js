@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const path = require("path");
+const path = require('path');
 const electron = require('electron');
 const wpilib_NT = require('wpilib-nt-client');
 const client = new wpilib_NT.Client();
@@ -104,7 +104,7 @@ function createWindow() {
         show: false,
         icon: __dirname + '/../images/icon.png',
         webPreferences: {
-            preload: path.join(__dirname, "preload.js"),
+            preload: path.join(__dirname, 'preload.js'),
         }
     });
     // Move window to top (left) of screen.
