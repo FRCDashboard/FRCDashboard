@@ -108,7 +108,7 @@ ui.armPosition.oninput = function() {
 
 addEventListener('error', (ev) => {
     window.api.sendWindowError({
-		mesg :ev.message,
+		mesg: ev.message,
 		file: ev.filename,
 		lineNumber: ev.lineno
 	});
