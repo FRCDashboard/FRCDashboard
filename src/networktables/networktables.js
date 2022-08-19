@@ -1,14 +1,13 @@
-let ipc = require('electron').ipcRenderer;
 
 var NetworkTables =
     (() => {
         let keys = {}, connectionListeners = [], connected = false, globalListeners = [], keyListeners = {}, robotAddress = '127.0.0.1';
-        ipc.send('ready');
-        ipc.on('connected', (ev, con) => {
+        window.api.sendReady();
+        window.api.onConnected((ev, con) => {
             connected = con;
             connectionListeners.map(e => e(con));
         });
-        ipc.on('add', (ev, mesg) => {
+        window.api.onAdd((ev, mesg) => {
             keys[mesg.key] = { val: mesg.val, valType: mesg.valType, id: mesg.id, flags: mesg.flags, new: true };
             globalListeners.map(e => e(mesg.key, mesg.val, true));
             if (globalListeners.length > 0)
@@ -18,10 +17,10 @@ var NetworkTables =
                 keys[mesg.key].new = false;
             }
         });
-        ipc.on('delete', (ev, mesg) => {
+        window.api.onDelete((ev, mesg) => {
             delete keys[mesg.key];
         });
-        ipc.on('update', (ev, mesg) => {
+        window.api.onUpdate((ev, mesg) => {
             let temp = keys[mesg.key];
             temp.flags = mesg.flags;
             temp.val = mesg.val;
@@ -33,7 +32,7 @@ var NetworkTables =
                 temp.new = false;
             }
         });
-        ipc.on('flagChange', (ev, mesg) => {
+        window.api.onFlagChange((ev, mesg) => {
             keys[mesg.key].flags = mesg.flags;
         });
         var d3_map = function () {
@@ -183,10 +182,10 @@ var NetworkTables =
 
                 if (typeof keys[key] != 'undefined') {
                     keys[key].val = value;
-                    ipc.send('update', { key, val: value, id: keys[key].id, flags: keys[key].flags });
+                    window.api.sendUpdate({ key, val: value, id: keys[key].id, flags: keys[key].flags });
                 }
                 else {
-                    ipc.send('add', { key, val: value, flags: 0 });
+                    window.api.sendAdd({ key, val: value, flags: 0 });
                 }
                 return connected;
             },
